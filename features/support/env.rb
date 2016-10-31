@@ -71,21 +71,11 @@ Before do |scenario|
 
   # Set test to true and mock the OAuth response
   OmniAuth.config.test_mode = true
-  OmniAuth.config.mock_auth[:default] = {
-   "provider"=>"google_oauth2",
-   "uid"=>"100299566497892936264",
-   "info"=>
-   {"name"=>"john.doe@gmail.com",
-    "email"=>"john.doe@gmail.com",
-     "first_name"=>"John",
-     "last_name"=>"Doe",
-     "image"=>"https://example.com/photo.jpg"
-    }
-  }.with_indifferent_access
 end
 
 After do |scenario|
   Capybara.use_default_driver
+  OmniAuth.config.mock_auth[:default] = nil
   if scenario.failed?
     save_screenshot
   end
