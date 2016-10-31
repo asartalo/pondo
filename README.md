@@ -1,24 +1,8 @@
-# README
+# Pondo
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+[![CircleCI](https://circleci.com/gh/asartalo/pondo.svg?style=svg)](https://circleci.com/gh/asartalo/pondo)
+[![Code Climate](https://codeclimate.com/github/asartalo/pondo/badges/gpa.svg)](https://codeclimate.com/github/asartalo/pondo)
+[![Test Coverage](https://codeclimate.com/github/asartalo/pondo/badges/coverage.svg)](https://codeclimate.com/github/asartalo/pondo/coverage)
 
-Things you may want to cover:
+An experiment. A finance management web app.
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
