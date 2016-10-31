@@ -29,6 +29,7 @@ group :development do
   gem 'guard'
   gem 'guard-rspec', require: false
   gem 'guard-livereload', require: false
+  gem 'guard-cucumber', require: false
   gem 'listen', '~> 3.0.5'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
@@ -46,6 +47,9 @@ group :test do
   gem 'shoulda-matchers', '~> 3.1', require: false
   gem 'api_matchers'
   gem 'rspec-rails'
+  gem 'poltergeist'
+  gem 'selenium-webdriver'
+  gem 'cucumber-rails', require: false
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

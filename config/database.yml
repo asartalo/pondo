@@ -7,7 +7,7 @@ development:
   <<: *default
   database: pondo_development
 
-test:
+test: &test
   <<: *default
   database: pondo_test
 
@@ -16,3 +16,6 @@ production:
   database: <%= ENV['PONDO_DATABASE'] %>
   username: <%= ENV['PONDO_DATABASE_USERNAME'] %>
   password: <%= ENV['PONDO_DATABASE_PASSWORD'] %>
+
+cucumber:
+  <<: *test
