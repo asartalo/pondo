@@ -1,0 +1,18 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  <<: *default
+  database: pondo_development
+
+test:
+  <<: *default
+  database: pondo_test
+
+production:
+  <<: *default
+  database: <%= ENV['PONDO_DATABASE'] %>
+  username: <%= ENV['PONDO_DATABASE_USERNAME'] %>
+  password: <%= ENV['PONDO_DATABASE_PASSWORD'] %>
