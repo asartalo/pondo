@@ -16,5 +16,10 @@
 # Ignore dotenv files
 .env
 
+# Coverage files
+coverage
+
+.DS_Store
+
 # Ignore Byebug command history file.
 .byebug_history

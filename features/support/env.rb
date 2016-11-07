@@ -3,6 +3,7 @@
 # newer version of cucumber-rails. Consider adding your own code to a new file
 # instead of editing this one. Cucumber will automatically load all features/**/*.rb
 # files.
+require 'simplecov'
 
 require 'cucumber/rails'
 # require Rails.root.join('features', 'step_definitions', 'constants').to_s
