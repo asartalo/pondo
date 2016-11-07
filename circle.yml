@@ -1,4 +1,4 @@
 test:
   post:
-    bundle exec rails coveralls:push
+    - bundle exec rails coveralls:push
 
