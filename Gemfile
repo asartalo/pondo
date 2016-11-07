@@ -1,5 +1,9 @@
 source 'https://rubygems.org'
 
+def os_is(re)
+  RbConfig::CONFIG['host_os'] =~ re
+end
+
 gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
 gem 'pg', '~> 0.18'
 gem 'puma', '~> 3.0'
@@ -12,7 +16,10 @@ gem 'jbuilder', '~> 2.5'
 gem 'devise'
 gem 'omniauth-google-oauth2'
 gem 'slim-rails'
-gem 'bootstrap', '~> 4.0.0.alpha5'
+# gem 'bootstrap', '~> 4.0.0.alpha5'
+gem 'bourbon'
+gem 'neat'
+gem 'money'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
@@ -31,12 +38,14 @@ group :development do
   gem 'guard-livereload', require: false
   gem 'guard-cucumber', require: false
   gem 'listen', '~> 3.0.5'
+  gem 'rack-livereload'
+  gem 'terminal-notifier-guard', platforms: :ruby, install_if: os_is(/darwin/)
+  gem 'sextant'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'spring-commands-rspec'
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'web-console'
-  gem 'sextant'
 end
 
 group :test do

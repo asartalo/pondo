@@ -273,5 +273,8 @@ Devise.setup do |config|
   # config.omniauth_path_prefix = '/my_engine/users/auth'
   config.omniauth :google_oauth2,
                   Rails.application.secrets.google_key,
-                  Rails.application.secrets.google_secret, {  }
+                  Rails.application.secrets.google_secret,
+                  {
+                    access_type: "online"
+                  }
 end

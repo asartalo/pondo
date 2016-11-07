@@ -59,16 +59,6 @@ Cucumber::Rails::Database.javascript_strategy = :truncation
 
 # Hooks
 Before do |scenario|
-  # Create seed data
-  # User.create({
-  #   name: "John Doe",
-  #   email: "john.doe@gmail.com",
-  #   provider: "google_oauth2",
-  #   uid: "100299566497892936264",
-  #   uid: "999999999999999999999",
-  #   image: "https://example.com/photo.jpg"
-  # })
-
   # Set test to true and mock the OAuth response
   OmniAuth.config.test_mode = true
 end
