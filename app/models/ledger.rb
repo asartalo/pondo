@@ -22,6 +22,11 @@
 class Ledger < ApplicationRecord
   after_initialize :default_values
   belongs_to :owner, class_name: 'User', foreign_key: 'user_id'
+  has_many :ledger_subscribers
+  has_many :subscribers, through: :ledger_subscribers,
+                         source: 'user'
+
+  validates_presence_of :owner
 
   private
   def default_values

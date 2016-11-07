@@ -18,7 +18,12 @@
 
 class User < ApplicationRecord
   devise :omniauthable, omniauth_providers: [:google_oauth2]
-  has_many :owned_ledgers, class_name: 'Ledger', foreign_key: 'user_id', primary_key: 'id'
+  has_many :owned_ledgers, class_name: 'Ledger',
+                           foreign_key: 'user_id',
+                           primary_key: 'id'
+  has_many :ledger_subscribers
+  has_many :subscribed_ledgers, through: :ledger_subscribers,
+                                source: 'ledger'
 
   class << self
     def from_omniauth(auth)
