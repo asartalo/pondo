@@ -59,6 +59,7 @@ group :test do
   gem 'poltergeist'
   gem 'selenium-webdriver'
   gem 'cucumber-rails', require: false
+  gem 'coveralls', require: false
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
