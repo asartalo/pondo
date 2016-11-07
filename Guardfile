@@ -117,6 +117,13 @@ guard :rspec, cmd: "bundle exec rspec" do
     ]
   end
 
+  watch(%r{^app/services/(.+)\.rb$}) do |m|
+    puts m[0], m[1]
+    [
+      rspec.spec.call("services/#{m[1]}")
+    ]
+  end
+
   # Rails config changes
   watch(rails.spec_helper)     { rspec.spec_dir }
   watch(rails.routes)          { "#{rspec.spec_dir}/routing" }
