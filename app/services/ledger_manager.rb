@@ -5,8 +5,8 @@ class LedgerManager
     @user = user
   end
 
-  def createLedger
-    Ledger.create owner: user
+  def createLedger(params = {})
+    Ledger.create params.merge(owner: user)
   end
 
 end
