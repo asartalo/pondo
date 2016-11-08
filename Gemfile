@@ -21,6 +21,7 @@ gem 'slim-rails'
 gem 'bourbon'
 gem 'neat'
 gem 'money'
+gem 'coveralls', require: false
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
@@ -60,7 +61,6 @@ group :test do
   gem 'poltergeist'
   gem 'selenium-webdriver'
   gem 'cucumber-rails', require: false
-  gem 'coveralls', require: false
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
