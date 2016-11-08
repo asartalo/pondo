@@ -8,5 +8,4 @@ class LedgerManager
   def createLedger(params = {})
     Ledger.create params.merge(owner: user)
   end
-
 end

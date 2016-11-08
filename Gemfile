@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+ruby "2.3.1"
 
 def os_is(re)
   RbConfig::CONFIG['host_os'] =~ re
