@@ -13,9 +13,7 @@ test: &test
 
 production:
   <<: *default
-  database: <%= ENV['PONDO_DATABASE'] %>
-  username: <%= ENV['PONDO_DATABASE_USERNAME'] %>
-  password: <%= ENV['PONDO_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL'] %>
 
 cucumber:
   <<: *test
