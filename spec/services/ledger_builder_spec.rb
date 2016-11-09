@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-RSpec.describe LedgerManager do
+RSpec.describe LedgerBuilder do
   let(:user) { create(:user) }
-  subject(:manager) { LedgerManager.new(user) }
+  subject(:manager) { LedgerBuilder.new(user) }
 
   describe "#createLedger" do
     let(:params) { {} }

@@ -1,4 +1,4 @@
-class LedgerManager
+class LedgerBuilder
   attr_reader :user
 
   def initialize(user)
