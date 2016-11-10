@@ -1,0 +1,3 @@
+class Expense < MoneyMove
+end
+
