@@ -28,6 +28,18 @@ class Ledger < ApplicationRecord
 
   validates_presence_of :owner
 
+  has_many :incomes, class_name: 'Income'
+  has_many :expenses, class_name: 'Expense'
+
+  def allowed?(user, action)
+    return true if user == owner
+    if subscribers.include? user
+      [:record, :view].include? action
+    else
+      false
+    end
+  end
+
   private
   def default_values
     if self.new_record?

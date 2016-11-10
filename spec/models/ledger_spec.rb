@@ -3,6 +3,8 @@ require 'rails_helper'
 RSpec.describe Ledger, type: :model do
   let(:owner) { create(:user) }
   let(:ledger) { Ledger.new }
+  let(:subscriber) { create(:user) }
+  let(:other_user) { create(:user) }
 
   before do
     ledger.owner = owner
@@ -32,8 +34,6 @@ RSpec.describe Ledger, type: :model do
   end
 
   describe "Adding subscribers" do
-    let(:subscriber) { create(:user) }
-
     before do
       ledger.subscribers << subscriber
       ledger.save
@@ -43,5 +43,49 @@ RSpec.describe Ledger, type: :model do
     it "adds subscriber" do
       expect(ledger.subscribers.first.id).to eql(subscriber.id)
     end
+  end
+
+  describe "#allowed?" do
+    subject(:allowed) { ledger.allowed?(user, action) }
+    before do
+      ledger.subscribers << subscriber
+    end
+
+    # TEST DATA
+    {
+      "owner" => {
+        edit: true,
+        delete: true,
+        view: true,
+        record: true
+      },
+
+      "subscriber" => {
+        edit: false,
+        delete: false,
+        view: true,
+        record: true
+      },
+
+      "other_user" => {
+        edit: false,
+        delete: false,
+        view: false,
+        record: false
+      }
+
+    }.each do |the_user, data|
+      context "for #{the_user}" do
+        let(:user) { send(the_user) }
+
+        data.each do |the_action, the_result|
+          context "to :#{the_action}" do
+            let(:action) { the_action.to_sym }
+            it { is_expected.to be(the_result) }
+          end
+        end
+      end
+    end
+
   end
 end
