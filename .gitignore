@@ -13,6 +13,9 @@
 !/log/.keep
 !/tmp/.keep
 
+# Generated logfile
+/logfile
+
 # Ignore dotenv files
 .env
 
