@@ -10,11 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161110070906) do
+ActiveRecord::Schema.define(version: 20161113083153) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
+
+  create_table "categories", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.string   "type"
+    t.string   "name"
+    t.text     "description"
+    t.uuid     "ledger_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["ledger_id"], name: "index_categories_on_ledger_id", using: :btree
+  end
 
   create_table "ledger_subscribers", force: :cascade do |t|
     t.integer  "user_id"
@@ -59,6 +69,7 @@ ActiveRecord::Schema.define(version: 20161110070906) do
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
   end
 
+  add_foreign_key "categories", "ledgers"
   add_foreign_key "ledger_subscribers", "ledgers"
   add_foreign_key "ledger_subscribers", "users"
   add_foreign_key "ledgers", "users"

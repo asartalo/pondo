@@ -30,6 +30,8 @@ class Ledger < ApplicationRecord
 
   has_many :incomes, class_name: 'Income'
   has_many :expenses, class_name: 'Expense'
+  has_many :income_categories
+  has_many :expense_categories
 
   def allowed?(user, action)
     return true if user == owner
