@@ -20,5 +20,6 @@
 #
 
 class Category < ApplicationRecord
+  has_many :money_move_types, foreign_key: "category_id", dependent: :delete_all
   belongs_to :ledger
 end

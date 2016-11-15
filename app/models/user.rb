@@ -40,4 +40,12 @@ class User < ApplicationRecord
       user
     end
   end
+
+  def viewable_ledgers
+    owned_ledgers.to_a + subscribed_ledgers.to_a
+  end
+
+  def has_viewable_ledgers?
+    viewable_ledgers.length == 0
+  end
 end

@@ -22,16 +22,16 @@
 class Ledger < ApplicationRecord
   after_initialize :default_values
   belongs_to :owner, class_name: 'User', foreign_key: 'user_id'
-  has_many :ledger_subscribers
+  has_many :ledger_subscribers, dependent: :destroy
   has_many :subscribers, through: :ledger_subscribers,
                          source: 'user'
 
   validates_presence_of :owner
 
-  has_many :incomes, class_name: 'Income'
-  has_many :expenses, class_name: 'Expense'
-  has_many :income_categories
-  has_many :expense_categories
+  has_many :incomes, class_name: 'Income', dependent: :destroy
+  has_many :expenses, class_name: 'Expense', dependent: :destroy
+  has_many :income_categories, dependent: :destroy
+  has_many :expense_categories, dependent: :destroy
 
   def allowed?(user, action)
     return true if user == owner

@@ -9,5 +9,6 @@ Then(/^I should see the '([^"]*)' page$/) do |name|
 end
 
 Then(/^I should see '(.+)'$/) do |text|
+  sleep 0.2
   expect(page).to have_content(text)
 end

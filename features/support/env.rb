@@ -6,6 +6,7 @@
 require 'simplecov'
 
 require 'cucumber/rails'
+require 'capybara/poltergeist'
 # require Rails.root.join('features', 'step_definitions', 'constants').to_s
 
 # Capybara defaults to CSS3 selectors rather than XPath.
@@ -57,6 +58,32 @@ end
 # The :transaction strategy is faster, but might give you threading problems.
 # See https://github.com/cucumber/cucumber-rails/blob/master/features/choose_javascript_database_strategy.feature
 Cucumber::Rails::Database.javascript_strategy = :truncation
+
+Capybara.default_driver = :poltergeist
+
+# Change server port
+Capybara.app_host = 'http://localhost:3030'
+Capybara.server_port = 3030
+
+# Capybara.default_driver = :poltergeist
+# Capybara.register_driver :poltergeist do |app|
+#     options = {
+#         :js_errors => true,
+#         :timeout => 120,
+#         :debug => false,
+#         :phantomjs_options => ['--load-images=no', '--disk-cache=false'],
+#         :inspector => true,
+#     }
+#     Capybara::Poltergeist::Driver.new(app, options)
+# end
+# Capybara.default_driver = :selenium
+# Capybara.register_driver :selenium do |app|
+#   Capybara::Selenium::Driver.new(
+#     app,
+#     browser: :firefox,
+#     desired_capabilities: Selenium::WebDriver::Remote::Capabilities.firefox(marionette: false)
+#   )
+# end
 
 # Hooks
 Before do |scenario|

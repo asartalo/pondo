@@ -23,3 +23,9 @@ When(/^I log in$/) do
   find_link('Sign in With Google').click
 end
 
+When(/^I log in for the first time$/) do
+  step "I visit the 'home' page"
+  step "I have a google account"
+  step "I log in"
+end
+
