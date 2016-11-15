@@ -6,7 +6,6 @@ Feature: Logging in
   Background:
     Given I am not logged in
 
-  @javascript
   Scenario: I am able to log in
     Given I visit the 'home' page
     Given I have a google account
