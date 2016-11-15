@@ -20,4 +20,9 @@
 #
 
 class ExpenseCategory < Category
+  has_many :expense_types, foreign_key: "category_id"
+
+  def create_expense_type(name)
+    expense_types.create(name: name, ledger: ledger)
+  end
 end

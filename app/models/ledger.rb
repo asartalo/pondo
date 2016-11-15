@@ -42,6 +42,10 @@ class Ledger < ApplicationRecord
     end
   end
 
+  def create_category(type, options)
+    send("#{type}_categories").create(options)
+  end
+
   private
   def default_values
     if self.new_record?

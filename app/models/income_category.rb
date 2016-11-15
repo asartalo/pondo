@@ -20,4 +20,9 @@
 #
 
 class IncomeCategory < Category
+  has_many :income_types, foreign_key: "category_id"
+
+  def create_income_type(name)
+    income_types.create(name: name, ledger: ledger)
+  end
 end

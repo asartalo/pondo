@@ -23,24 +23,58 @@ RSpec.describe LedgerBuilder do
 
     it_behaves_like "creates ledger categories" do
       subject(:categories) { ledger.income_categories }
-      let(:expected_names) do
-        [
-          "Active Income",
-          "Passive Income",
-          "Others"
-        ]
+      let(:types) { :income_types }
+      let(:expected_categories) do
+        {
+          "Active Income" => {
+            description: "",
+            types: [
+              "Salary", "Side Jobs"
+            ]
+          },
+          "Passive Income" => {
+            types: [
+              "Dividends"
+            ]
+          },
+          "Others" => {
+            types: [
+              "Gifts / Donations"
+            ]
+          }
+        }
       end
     end
 
     it_behaves_like "creates ledger categories" do
       subject(:categories) { ledger.expense_categories }
-      let(:expected_names) do
-        [
-          "Living Expenses",
-          "Optional Expenses",
-          "Payments",
-          "Savings and Investments"
-        ]
+      let(:types) { :expense_types }
+      let(:expected_categories) do
+        {
+          "Living Expenses" => {
+            types: [
+              "Food", "Groceries", "Rent / Mortgage", "Fare", "Medicines",
+              "Other House Expenses", "Other Necessities"
+            ]
+          },
+          "Optional Expenses" => {
+            types: [
+              "Movies / Trips", "Personal", "Unplanned Expenses", "Sports",
+              "Dining Out", "Others"
+            ]
+          },
+          "Payments" => {
+            types: [
+              "Amortization", "Landline / Internet", "Water", "Electricity",
+              "Insurance", "Miscellaneous"
+            ]
+          },
+          "Savings and Investments" => {
+            types: [
+              "Savings", "Investments"
+            ]
+          }
+        }
       end
     end
   end

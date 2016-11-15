@@ -1,17 +1,40 @@
 class LedgerBuilder
   attr_reader :user
-  INCOME_CATEGORIES = [
-    "Active Income",
-    "Passive Income",
-    "Others"
-  ]
+  INCOME_CATEGORIES = {
+    "Active Income" => {
+      types: ["Salary", "Side Jobs"]
+    },
+    "Passive Income" => {
+      types: ["Dividends"]
+    },
+    "Others" => {
+      types: ["Gifts / Donations"]
+    }
+  }
 
-  EXPENSE_CATEGORIES = [
-    "Living Expenses",
-    "Optional Expenses",
-    "Payments",
-    "Savings and Investments"
-  ]
+  EXPENSE_CATEGORIES = {
+    "Living Expenses" => {
+      types: [
+        "Food", "Groceries", "Rent / Mortgage", "Fare", "Medicines",
+        "Other House Expenses", "Other Necessities"
+      ]
+    },
+    "Optional Expenses" => {
+      types: [
+        "Movies / Trips", "Personal", "Unplanned Expenses", "Sports",
+        "Dining Out", "Others"
+      ]
+    },
+    "Payments" => {
+      types: [
+        "Amortization", "Landline / Internet", "Water", "Electricity",
+        "Insurance", "Miscellaneous"
+      ]
+    },
+    "Savings and Investments" => {
+      types: ["Savings", "Investments"]
+    }
+  }
 
   def initialize(user)
     @user = user
@@ -27,8 +50,11 @@ class LedgerBuilder
   private
 
   def createCategories(ledger, type, names)
-    names.each do |category_name|
-      ledger.send(:"#{type}_categories").create(name: category_name)
+    names.each do |category_name, info|
+      category = ledger.create_category(type, name: category_name)
+      info[:types].each do |type_name|
+        category.send("create_#{type}_type", type_name)
+      end
     end
   end
 

@@ -27,6 +27,9 @@ module Pondo
       generate.helper false
       generate.view_specs false
       generate.controller_specs false
+
+      # Generate factories under spec/ directories
+      generate.fixture_replacement :factory_girl, dir: 'spec/factories'
     end
   end
 end
