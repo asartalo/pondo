@@ -12,6 +12,12 @@ Feature: Logging in
     When I log in
     Then I should see the 'dashboard' page
 
+  Scenario: I am able to log in two
+    Given I visit the 'home' page
+    Given I have a google account
+    When I log in
+    Then I should see the 'dashboard' page
+
   Scenario: I fail to log in
     Given I visit the 'home' page
     Given I don't have a google account

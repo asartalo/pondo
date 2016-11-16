@@ -19,7 +19,7 @@ cucumber_options = {
   # Below are examples overriding defaults
 
   # cmd: 'bin/cucumber',
-  # cmd_additional_args: '--profile guard',
+  cmd_additional_args: '--format pretty',
 
   # all_after_pass: false,
   # all_on_start: false,

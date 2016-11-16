@@ -59,8 +59,9 @@ group :test do
   gem 'shoulda-matchers', '~> 3.1', require: false
   gem 'api_matchers'
   gem 'rspec-rails'
-  gem 'poltergeist'
-  gem 'selenium-webdriver'
+  # gem 'poltergeist'
+  # gem 'selenium-webdriver'
+  gem "capybara-webkit"
   gem 'cucumber-rails', require: false
 end
 

@@ -13,5 +13,6 @@ end
 
 Then(/^I can save the ledger$/) do
   find_button('Create Ledger').click
-  expect(User.last.owned_ledgers.size).to eql(1)
+  sleep 0.1
+  expect(User.first.owned_ledgers.size).to eql(1)
 end

@@ -6,7 +6,8 @@
 require 'simplecov'
 
 require 'cucumber/rails'
-require 'capybara/poltergeist'
+# require 'capybara/poltergeist'
+require 'capybara-webkit'
 # require Rails.root.join('features', 'step_definitions', 'constants').to_s
 
 # Capybara defaults to CSS3 selectors rather than XPath.
@@ -59,7 +60,7 @@ end
 # See https://github.com/cucumber/cucumber-rails/blob/master/features/choose_javascript_database_strategy.feature
 Cucumber::Rails::Database.javascript_strategy = :truncation
 
-Capybara.default_driver = :poltergeist
+# Capybara.default_driver = :poltergeist
 
 # Change server port
 Capybara.app_host = 'http://localhost:3030'
@@ -76,7 +77,7 @@ Capybara.server_port = 3030
 #     }
 #     Capybara::Poltergeist::Driver.new(app, options)
 # end
-# Capybara.default_driver = :selenium
+Capybara.default_driver = :webkit
 # Capybara.register_driver :selenium do |app|
 #   Capybara::Selenium::Driver.new(
 #     app,
@@ -94,6 +95,7 @@ end
 After do |scenario|
   Capybara.use_default_driver
   OmniAuth.config.mock_auth[:default] = nil
+  OmniAuth.config.test_mode = false
   if scenario.failed?
     save_screenshot
   end
