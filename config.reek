@@ -1,0 +1,9 @@
+"app/helpers":
+  UtilityFunction:
+    enabled: false
+
+### Excluding directories
+
+# Directories below will not be scanned at all
+exclude_paths:
+  - lib/tasks/cucumber.rake
