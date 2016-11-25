@@ -1,0 +1,10 @@
+scss_files: 'app/assets/stylesheets/**/*.scss'
+exclude: 'app/assets/stylesheets/plugins/**'
+
+linters:
+  VendorPrefix:
+    enabled: false
+  StringQuotes:
+    enabled: true
+    style: double_quotes
+
