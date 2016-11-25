@@ -5,9 +5,9 @@ RSpec.describe LedgerBuilder do
   let(:user) { create(:user) }
   subject(:manager) { LedgerBuilder.new(user) }
 
-  describe "#createLedger" do
+  describe "#create_ledger" do
     let(:params) { {} }
-    subject(:ledger) { manager.createLedger(params) }
+    subject(:ledger) { manager.create_ledger(params) }
 
     it "sets owner to the user" do
       expect(ledger.owner.id).to eql(user.id)

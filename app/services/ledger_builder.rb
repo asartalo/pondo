@@ -40,29 +40,33 @@ class LedgerBuilder
     @user = user
   end
 
-  def createLedger(params = {})
+  def create_ledger(params = {})
     ledger = Ledger.create params.merge(owner: user)
-    createIncomeCategories(ledger)
-    createExpenseCategories(ledger)
+    create_income_categories(ledger)
+    create_expense_categories(ledger)
     ledger
   end
 
   private
 
-  def createCategories(ledger, type, names)
+  def create_categories(ledger, kind, names)
     names.each do |category_name, info|
-      category = ledger.create_category(type, name: category_name)
-      info[:types].each do |type_name|
-        category.send("create_#{type}_type", type_name)
-      end
+      create_category(ledger, kind, category_name, info[:types])
     end
   end
 
-  def createIncomeCategories(ledger)
-    createCategories(ledger, :income, INCOME_CATEGORIES)
+  def create_category(ledger, kind, category_name, types)
+    category = ledger.create_category(kind, name: category_name)
+    types.each do |type_name|
+      category.send("create_#{kind}_type", type_name)
+    end
   end
 
-  def createExpenseCategories(ledger)
-    createCategories(ledger, :expense, EXPENSE_CATEGORIES)
+  def create_income_categories(ledger)
+    create_categories(ledger, :income, INCOME_CATEGORIES)
+  end
+
+  def create_expense_categories(ledger)
+    create_categories(ledger, :expense, EXPENSE_CATEGORIES)
   end
 end

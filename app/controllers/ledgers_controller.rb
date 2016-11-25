@@ -1,6 +1,6 @@
 class LedgersController < ApplicationController
   def create
-    LedgerBuilder.new(current_user).createLedger(ledger_params)
+    LedgerBuilder.new(current_user).create_ledger(ledger_params)
   end
 
   private
