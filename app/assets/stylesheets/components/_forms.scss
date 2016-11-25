@@ -1,0 +1,10 @@
+.main-action {
+  width: 100%;
+
+  .button,
+  button,
+  input[type="button"] {
+    width: 100%;
+    display: block;
+  }
+}

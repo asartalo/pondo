@@ -4,13 +4,58 @@
   @include justify-content(center);
   min-height: 100%;
 
+  .logo {
+    text-indent: -700em;
+    line-height: 0;
+
+    &:after {
+      content: "P";
+      color: $action-color;
+      font-weight: 600;
+      font-size: rem(220px);
+      line-height: rem(190px);
+      text-indent: 0;
+      display: block;
+    }
+  }
+
   .sign-in {
-    @include flex(0);
+    @include display(flex);
+    @include align-items(center);
+    @include flex-direction(column);
+    max-width: 420px;
     background-color: $white;
-    width: 300px;
-    // margin: 80px auto 0;
-    margin-top: -20px;
-    padding: 32px 40px 40px;
+    padding: 30px;
     text-align: center;
+    width: 100%;
+
+    @include media('<tablet') {
+      min-height: 100vh;
+    }
+  }
+
+  .branding {
+    @include flex(2);
+
+    @include display(flex);
+    @include align-items(center);
+    @include justify-content(center);
+
+    > .branding-element {
+      @include flex(1);
+    }
+  }
+
+  .main-action {
+    @include flex(1);
+    position: relative;
+
+    .button {
+      @include media('<tablet') {
+        @include flex(1);
+        position: absolute;
+        bottom: 0;
+      }
+    }
   }
 }

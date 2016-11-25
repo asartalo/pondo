@@ -1,8 +1,11 @@
 .home-page
   section.sign-in
-    h1 Pondo
-    p An expense tracking app for the masses
+    .branding
+      .branding-element
+        h1.logo Pondo
+        p Expense tracking<br> for the masses
 
-    a.button(
-      href="#{user_google_oauth2_omniauth_authorize_path}"
-    ) Sign in With Google
+    .main-action
+      a.button(
+        href="#{user_google_oauth2_omniauth_authorize_path}"
+      ) Sign in With Google

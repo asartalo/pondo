@@ -1,0 +1,22 @@
+.notifications {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 200;
+
+  .notice, .alert {
+    padding: 30px;
+    text-align: center;
+  }
+
+  .notice {
+    background-color: $dark-green;
+    color: #fff;
+  }
+
+  .alert {
+    background-color: $red;
+    color: #fff;
+  }
+}
+
