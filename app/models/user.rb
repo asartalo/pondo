@@ -20,24 +20,19 @@ class User < ApplicationRecord
   devise :omniauthable, omniauth_providers: [:google_oauth2]
   has_many :owned_ledgers, class_name: 'Ledger',
                            foreign_key: 'user_id',
-                           primary_key: 'id'
-  has_many :ledger_subscribers
+                           primary_key: 'id',
+                           dependent: :destroy
+  has_many :ledger_subscribers, dependent: :destroy
   has_many :subscribed_ledgers, through: :ledger_subscribers,
                                 source: 'ledger'
 
   class << self
     def from_omniauth(auth)
-      user = find_by(provider: auth[:provider], uid: auth[:uid])
-      unless user
-        user = User.new
-        user.email = auth[:info][:email]
-        user.provider = auth[:provider]
-        user.uid = auth[:uid]
-        user.name = auth[:info][:name]   # assuming the user model has a name
-        user.image = auth[:info][:image]
-        user.save
+      where(provider: auth[:provider], uid: auth[:uid]).first_or_create do |user|
+        %i{email name image}.each do |attr|
+          user.send("#{attr}=", auth[:info][attr])
+        end
       end
-      user
     end
   end
 
