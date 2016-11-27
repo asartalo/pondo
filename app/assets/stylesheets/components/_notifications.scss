@@ -4,19 +4,20 @@
   width: 100%;
   z-index: 200;
 
-  .notice, .alert {
+  .notice,
+  .alert {
     padding: 30px;
     text-align: center;
   }
 
   .notice {
     background-color: $dark-green;
-    color: #fff;
+    color: $white;
   }
 
   .alert {
     background-color: $red;
-    color: #fff;
+    color: $white;
   }
 }
 

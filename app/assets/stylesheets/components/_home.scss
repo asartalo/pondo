@@ -1,44 +1,43 @@
 .home-page {
-  @include display(flex);
   @include align-items(center);
+  @include display(flex);
   @include justify-content(center);
   min-height: 100%;
 
   .logo {
-    text-indent: -700em;
     line-height: 0;
+    text-indent: -700em;
 
-    &:after {
-      content: "P";
+    &::after {
+      display: block;
       color: $action-color;
-      font-weight: 600;
+      content: "P";
       font-size: rem(220px);
+      font-weight: 600;
       line-height: rem(190px);
       text-indent: 0;
-      display: block;
     }
   }
 
   .sign-in {
-    @include display(flex);
     @include align-items(center);
+    @include display(flex);
     @include flex-direction(column);
-    max-width: 420px;
     background-color: $white;
+    max-width: 420px;
     padding: 30px;
     text-align: center;
     width: 100%;
 
-    @include media('<tablet') {
+    @include media("<tablet") {
       min-height: 100vh;
     }
   }
 
   .branding {
-    @include flex(2);
-
-    @include display(flex);
     @include align-items(center);
+    @include display(flex);
+    @include flex(2);
     @include justify-content(center);
 
     > .branding-element {
@@ -51,10 +50,9 @@
     position: relative;
 
     .button {
-      @include media('<tablet') {
-        @include flex(1);
-        position: absolute;
+      @include media("<tablet") {
         bottom: 0;
+        position: absolute;
       }
     }
   }

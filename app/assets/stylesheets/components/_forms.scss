@@ -1,10 +1,8 @@
 .main-action {
   width: 100%;
 
-  .button,
-  button,
-  input[type="button"] {
-    width: 100%;
+  $all-buttons {
     display: block;
+    width: 100%;
   }
 }
