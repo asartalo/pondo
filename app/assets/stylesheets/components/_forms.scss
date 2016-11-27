@@ -1,7 +1,7 @@
 .main-action {
   width: 100%;
 
-  $all-buttons {
+  #{$all-buttons} {
     display: block;
     width: 100%;
   }
