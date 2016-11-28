@@ -28,10 +28,9 @@ class User < ApplicationRecord
 
   class << self
     def from_omniauth(auth)
-      where(provider: auth[:provider], uid: auth[:uid]).first_or_create do |user|
-        %i{email name image}.each do |attr|
-          user.send("#{attr}=", auth[:info][attr])
-        end
+      params = auth.to_h.with_indifferent_access
+      where(params.slice(:provider, :uid)).first_or_create do |user|
+        user.assign_attributes(params[:info].slice(:email, :name, :image))
       end
     end
   end

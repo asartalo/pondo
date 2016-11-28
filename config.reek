@@ -1,6 +1,11 @@
 "app/helpers":
   UtilityFunction:
     enabled: false
+  IrresponsibleModule:
+    enabled: false
+"app/controllers":
+  IrresponsibleModule:
+    enabled: false
 
 ### Excluding directories
 
