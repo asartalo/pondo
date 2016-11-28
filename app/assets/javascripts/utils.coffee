@@ -35,8 +35,8 @@ dialogId = null
 
 getDialog = ->
   dialog = $('dialog')[0]
-  if !dialog.showModal
-    dialogPolyfill.registerDialog(dialog)
+  # if !dialog.showModal
+  #   dialogPolyfill.registerDialog(dialog)
   dialog
 
 showDialog = (options = {}) ->
@@ -48,6 +48,7 @@ showDialog = (options = {}) ->
 
 closeDialog = ->
   dialog = getDialog()
+  return unless dialog
   form = $(dialog).find('form')
   if form.length > 0
     form[0].reset()

@@ -18,17 +18,19 @@ $heading-line-height: 1.2;
 $base-border-radius: 0;
 $base-spacing: $base-line-height * 1em;
 $small-spacing: $base-spacing / 2;
+$medium-spacing: $base-spacing + $small-spacing;
 $base-z-index: 0;
 
 // Colors
 $white: #fff;
+$black: #1d1d1d;
 $blue: #1565c0;
 $medium-gray: #999;
 $light-gray: #eceded;
+$gray: #666;
 $green: #71b439;
 $dark-green: #007042;
 $dark-gray: #292929;
-$black: #1d1d1d;
 $red: #c44c27;
 $form-box-shadow-color: rgba(#000, 0.06);
 
