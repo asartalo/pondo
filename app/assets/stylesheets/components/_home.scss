@@ -19,26 +19,16 @@
     }
   }
 
-  .sign-in {
-    @include align-items(center);
-    @include display(flex);
-    @include flex-direction(column);
-    background-color: $white;
+  .container {
     max-width: 420px;
-    padding: 20px;
     text-align: center;
-    width: 100%;
-
-    @include media("<tablet") {
-      min-height: 100vh;
-    }
   }
 
-  .branding {
+  .body {
     @include align-items(center);
     @include display(flex);
-    @include flex(2);
     @include justify-content(center);
+    @include flex(2);
 
     > .branding-element {
       @include flex(1);
@@ -50,13 +40,6 @@
 
   .main-action {
     @include flex(1);
-    position: relative;
-
-    .button {
-      @include media("<tablet") {
-        bottom: 0;
-        position: absolute;
-      }
-    }
   }
+
 }

@@ -1,15 +1,18 @@
-h1 Dashboard
+- page('dashboard')
+.container
+  .body
+    h1 Dashboard
 
-a.button(href="#{destroy_user_session_path}") Sign Out
+    a.button(href="#{destroy_user_session_path}") Sign Out
 
-- if @first_time
-  #first-time
-    h2 Create Your First Ledger
+    - if @first_time
+      #first-time
+        h2 Create Your First Ledger
 
-    = simple_form_for @ledger do |f|
-      = f.input :name, label: "Ledger Name"
-      = f.input :currency, label: "Currency", collection: all_currencies,
-                           selected: 'USD', value_method: 'iso_code'
-      = f.submit "Create Ledger"
+        = simple_form_for @ledger do |f|
+          = f.input :name, label: "Ledger Name"
+          = f.input :currency, label: "Currency", collection: all_currencies,
+                               selected: 'USD', value_method: 'iso_code'
+          = f.submit "Create Ledger"
 
 

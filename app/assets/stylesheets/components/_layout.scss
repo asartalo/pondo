@@ -2,3 +2,29 @@
   min-height: 100vh;
   width: 100%;
 }
+
+.container {
+  @include align-items(center);
+  @include display(flex);
+  @include flex-direction(column);
+  padding: 20px;
+  width: 100%;
+
+  @include media("<tablet") {
+    min-height: 100vh;
+  }
+
+  .body {
+  }
+
+  .main-action {
+    position: relative;
+
+    .button {
+      @include media("<tablet") {
+        bottom: 0;
+        position: absolute;
+      }
+    }
+  }
+}
