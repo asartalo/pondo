@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161115062028) do
+ActiveRecord::Schema.define(version: 20170410071802) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,15 @@ ActiveRecord::Schema.define(version: 20161115062028) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.index ["ledger_id"], name: "index_categories_on_ledger_id", using: :btree
+  end
+
+  create_table "country_currencies", force: :cascade do |t|
+    t.string   "country_code"
+    t.string   "currency"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["country_code"], name: "index_country_currencies_on_country_code", using: :btree
+    t.index ["currency"], name: "index_country_currencies_on_currency", using: :btree
   end
 
   create_table "ledger_subscribers", force: :cascade do |t|

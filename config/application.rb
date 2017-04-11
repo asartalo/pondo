@@ -22,6 +22,9 @@ module Pondo
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
 
+    # Autoload workers
+    config.autoload_paths << Rails.root.join('app', 'workers')
+
     config.generators do |generate|
       generate.assets false
       generate.helper false

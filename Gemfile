@@ -23,6 +23,12 @@ gem 'neat'
 gem 'money'
 gem 'coveralls', require: false
 gem 'simple_form'
+gem 'typhoeus'
+gem 'restcountry'
+gem 'sidekiq'
+gem "sidekiq-cron", "~> 0.4.0"
+gem 'bcrypt'
+gem 'dalli'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
@@ -42,6 +48,7 @@ group :development do
   gem 'guard-cucumber', require: false
   gem 'listen', '~> 3.0.5'
   gem 'rack-livereload'
+  gem 'rack-timeout'
   gem 'terminal-notifier-guard', platforms: :ruby, install_if: os_is(/darwin/)
   gem 'sextant'
   gem 'spring'
@@ -60,8 +67,8 @@ group :test do
   gem 'api_matchers'
   gem 'rspec-rails'
   # gem 'poltergeist'
-  # gem 'selenium-webdriver'
-  gem "capybara-webkit"
+  gem 'selenium-webdriver'
+  gem 'chromedriver-helper'
   gem 'cucumber-rails', require: false
 end
 

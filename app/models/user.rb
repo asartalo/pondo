@@ -40,6 +40,11 @@ class User < ApplicationRecord
   end
 
   def has_viewable_ledgers?
-    viewable_ledgers.length == 0
+    viewable_ledgers.length > 0
+  end
+
+  def preferred_currency
+    ledger = viewable_ledgers.first
+    ledger ? ledger.currency : nil
   end
 end

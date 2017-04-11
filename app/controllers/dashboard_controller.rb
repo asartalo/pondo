@@ -2,7 +2,26 @@ class DashboardController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @first_time = current_user.has_viewable_ledgers?
-    @ledger = current_user.owned_ledgers.new
+    set_dashboard_data
+  end
+
+  protected
+
+  def set_dashboard_data
+    if current_user.has_viewable_ledgers?
+      @no_ledger = false
+      @ledger = current_user.viewable_ledgers.first
+    else
+      @no_ledger = true
+      @ledger = current_user.owned_ledgers.new(currency: current_user_currency)
+    end
+  end
+
+  def current_user_currency
+    current_user.preferred_currency || location_currency
+  end
+
+  def location_currency
+    IpToCurrency.make.get(request.remote_ip)
   end
 end

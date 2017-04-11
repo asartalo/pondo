@@ -1,0 +1,43 @@
+ledger:
+  income_categories:
+    Active Income:
+      types:
+        - Salary
+        - Side Jobs
+    Passive Income:
+      types:
+        - Dividends
+    Others:
+      types:
+        - Gifts / Donations
+
+  expense_categories:
+    Living Expenses:
+      types:
+        - Food
+        - Groceries
+        - Rent / Mortgage
+        - Fare
+        - Medicines
+        - Other House Expenses
+        - Other Necessities
+    Optional Expenses:
+      types:
+        - Movies / Trips
+        - Personal
+        - Unplanned Expenses
+        - Sports
+        - Dining Out
+        - Others
+    Payments:
+      types:
+        - Amortization
+        - Landline / Internet
+        - Water
+        - Electricity
+        - Insurance
+        - Miscellaneous
+    Savings and Investments:
+      types:
+        - Savings
+        - Investments

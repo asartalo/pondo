@@ -10,5 +10,7 @@ Rails.application.routes.draw do
   root to: 'home#index'
   get 'dashboard', to: 'dashboard#index'
 
-  resources :ledgers, only: [:create, :show]
+  resources :ledgers, only: [:create, :show] do
+    resources :incomes
+  end
 end

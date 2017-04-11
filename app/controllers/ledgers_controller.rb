@@ -1,4 +1,6 @@
 class LedgersController < ApplicationController
+  before_action :authenticate_user!
+
   def create
     LedgerBuilder.new(current_user).create_ledger(ledger_params)
   end

@@ -19,6 +19,7 @@ cucumber_options = {
   # Below are examples overriding defaults
 
   # cmd: 'bin/cucumber',
+  cmd: 'bundle exec cucumber',
   cmd_additional_args: '--format pretty',
 
   # all_after_pass: false,

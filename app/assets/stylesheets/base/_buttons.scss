@@ -1,36 +1,15 @@
-#{$all-buttons} {
-  appearance: none;
-  background-color: $action-color;
-  border: 0;
-  border-radius: $base-border-radius;
-  color: $white;
-  cursor: pointer;
-  display: inline-block;
-  font-family: $base-font-family;
-  font-size: $base-font-size;
-  -webkit-font-smoothing: antialiased;
-  font-weight: 400;
-  line-height: 1;
-  padding: $base-spacing $medium-spacing;
-  text-align: center;
-  text-decoration: none;
-  transition: background-color $base-duration $base-timing;
-  user-select: none;
-  vertical-align: middle;
-  white-space: nowrap;
+@import 'modules/buttons';
 
-  &:hover,
-  &:focus {
-    background-color: shade($action-color, 20%);
+#{$all-buttons} {
+  @extend %btn;
+
+  &.primary {
+    background-color: $dark-green;
     color: $white;
   }
 
-  &:disabled {
-    cursor: not-allowed;
-    opacity: 0.5;
-
-    &:hover {
-      background-color: $action-color;
-    }
+  &.secondary {
+    background-color: $medium-gray;
+    color: $white;
   }
 }

@@ -1,0 +1,2 @@
+class PondoSettingsError < StandardError
+end

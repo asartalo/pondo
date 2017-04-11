@@ -7,7 +7,7 @@ require 'simplecov'
 
 require 'cucumber/rails'
 # require 'capybara/poltergeist'
-require 'capybara-webkit'
+# require 'capybara-webkit'
 # require Rails.root.join('features', 'step_definitions', 'constants').to_s
 
 # Capybara defaults to CSS3 selectors rather than XPath.
@@ -77,7 +77,17 @@ Capybara.server_port = 3030
 #     }
 #     Capybara::Poltergeist::Driver.new(app, options)
 # end
-Capybara.default_driver = :webkit
+# Capybara.default_driver = :webkit
+# Capybara::Webkit.configure do |config|
+#   # config.allow_url("https://fonts.googleapis.com/*")
+#   # config.debug = true
+#   config.block_unknown_urls
+# end
+
+Capybara.default_driver = :selenium
+Capybara.register_driver :selenium do |app|
+  Capybara::Selenium::Driver.new(app, browser: :chrome)
+end
 # Capybara.register_driver :selenium do |app|
 #   Capybara::Selenium::Driver.new(
 #     app,

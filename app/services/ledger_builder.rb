@@ -1,40 +1,11 @@
 class LedgerBuilder
   attr_reader :user
-  INCOME_CATEGORIES = {
-    "Active Income" => {
-      types: ["Salary", "Side Jobs"]
-    },
-    "Passive Income" => {
-      types: ["Dividends"]
-    },
-    "Others" => {
-      types: ["Gifts / Donations"]
-    }
-  }
+  INCOME_CATEGORIES = PondoSettings.get(:ledger, :income_categories)
+  EXPENSE_CATEGORIES = PondoSettings.get(:ledger, :expense_categories)
 
-  EXPENSE_CATEGORIES = {
-    "Living Expenses" => {
-      types: [
-        "Food", "Groceries", "Rent / Mortgage", "Fare", "Medicines",
-        "Other House Expenses", "Other Necessities"
-      ]
-    },
-    "Optional Expenses" => {
-      types: [
-        "Movies / Trips", "Personal", "Unplanned Expenses", "Sports",
-        "Dining Out", "Others"
-      ]
-    },
-    "Payments" => {
-      types: [
-        "Amortization", "Landline / Internet", "Water", "Electricity",
-        "Insurance", "Miscellaneous"
-      ]
-    },
-    "Savings and Investments" => {
-      types: ["Savings", "Investments"]
-    }
-  }
+  def self.make(user)
+    new(user)
+  end
 
   def initialize(user)
     @user = user

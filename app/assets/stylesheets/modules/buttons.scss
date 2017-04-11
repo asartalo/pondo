@@ -1,0 +1,38 @@
+$button-disabled-background: #999;
+$button-disabled-color: #bbb;
+
+%btn {
+  border: none;
+  border-radius: 0;
+  display: inline-block;
+  // height: $button-height;
+  padding: 1rem 2rem;
+  text-transform: uppercase;
+  vertical-align: middle;
+  display: inline-block;
+  text-align: center;
+  letter-spacing: .5px;
+  // Gets rid of tap active state
+  -webkit-tap-highlight-color: transparent;
+
+  outline: 0;
+
+  &[disabled],
+  &:disabled {
+    pointer-events: none;
+    background-color: $button-disabled-background !important;
+    box-shadow: none;
+    color: $button-disabled-color !important;
+    cursor: default;
+
+    &:hover {
+      background-color: $button-disabled-background !important;
+      color: $button-disabled-color !important;
+    }
+  }
+
+  &:hover {
+    color: inherit;
+  }
+}
+

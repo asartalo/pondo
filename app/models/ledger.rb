@@ -33,6 +33,8 @@ class Ledger < ApplicationRecord
   has_many :income_categories, dependent: :destroy
   has_many :expense_categories, dependent: :destroy
 
+  default_scope { order(updated_at: 'DESC' ) }
+
   def allowed?(user, action)
     return true if user == owner
     if subscribers.include? user

@@ -1,4 +1,6 @@
 @import "bourbon";
 @import "neat";
-@import "base/base";
+
+@import 'base/variables';
+@import 'base/base';
 @import "components/components";
