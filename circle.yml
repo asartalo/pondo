@@ -8,8 +8,9 @@ general:
 
 machine:
   post:
+    - "mv ~/$CIRCLE_PROJECT_REPONAME/.ruby-version ~/$CIRCLE_PROJECT_REPONAME/.ruby-version.ci"
     - |
-      RUBY_VERSION=`cat $CIRCLE_PROJECT_REPONAME/.ruby-version`
+      RUBY_VERSION=`cat ~/$CIRCLE_PROJECT_REPONAME/.ruby-version.ci`
       if [[ -e ~/rvm_binaries/ruby-$RUBY_VERSION.tar.bz2 ]]
       then
         rvm mount ~/rvm_binaries/ruby-$RUBY_VERSION.tar.bz2
