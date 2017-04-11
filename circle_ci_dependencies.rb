@@ -11,7 +11,7 @@ end
 
 chrome_version = (`google-chrome --version`).match(/([\d\.]+)\s$/)[1]
 puts "Google Chrome Version: #{chrome_version}"
-if Gem::Version.new(chrome_version) > Gem::Version.new("57.0.0")
+if Gem::Version.new(chrome_version) < Gem::Version.new("57.0.0")
   puts "We need to update Google Chrome"
   `wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -`
   `sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'`
