@@ -6,14 +6,36 @@ general:
   artifacts:
     - "coverage"
 
+machine:
+  post:
+    - "echo Removing project .rvmrc, contents were: &&
+        cat $CIRCLE_PROJECT_REPONAME/.rvmrc"
+    - "rm $CIRCLE_PROJECT_REPONAME/.rvmrc"
+
+    - "echo Removing project .ruby-version, contents were: &&
+      cat $CIRCLE_PROJECT_REPONAME/.ruby-version"
+    - "rm $CIRCLE_PROJECT_REPONAME/.ruby-version"
+
+    - |
+      if [[ -e ~/rvm_binaries/ruby-2.3.1.tar.bz2 ]]
+      then
+        rvm mount ~/rvm_binaries/ruby-2.3.1.tar.bz2
+      else
+        mkdir -p ~/rvm_binaries
+        rvm install 2.3.1
+        cd ~/rvm_binaries && rvm prepare 2.3.1
+      fi
+    - rvm --default use 2.3.1
+
 dependencies:
+  cache_directories:
+    # We will store packages in this directory
+    - ~/deps
+    - ~/rvm_binaries
+
   pre:
-    - google-chrome --version
-    - wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-    - sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
-    - sudo apt-get update
-    - sudo apt-get --only-upgrade install google-chrome-stable
-    - google-chrome --version
+    - ruby circle_ci_dependencies.rb
+
   override:
     - gem install bundle
     - bundle install
