@@ -6,3 +6,7 @@ general:
   artifacts:
     - "coverage"
 
+dependencies:
+  override:
+    - gem install bundle
+    - bundle install
