@@ -13,8 +13,10 @@ machine:
       RUBY_VERSION=`cat ~/$CIRCLE_PROJECT_REPONAME/.ruby-version.ci`
       if [[ -e ~/rvm_binaries/ruby-$RUBY_VERSION.tar.bz2 ]]
       then
+        echo "YAS! We already have $RUBY_VERSION"
         rvm mount ~/rvm_binaries/ruby-$RUBY_VERSION.tar.bz2
       else
+        echo "Okay installing ruby"
         mkdir ~/rvm_binaries || true
         rvm install $RUBY_VERSION
         gem install bundler
