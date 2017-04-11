@@ -9,14 +9,6 @@ general:
 machine:
   post:
     - "mv ~/$CIRCLE_PROJECT_REPONAME/.ruby-version ~/$CIRCLE_PROJECT_REPONAME/.ruby-version.ci"
-
-dependencies:
-  cache_directories:
-    # We will store packages in this directory
-    - ~/deps
-    - ~/rvm_binaries
-
-  pre:
     - |
       RUBY_VERSION=`cat ~/$CIRCLE_PROJECT_REPONAME/.ruby-version.ci`
       if [[ -e ~/rvm_binaries/ruby-$RUBY_VERSION.tar.bz2 ]]
@@ -29,6 +21,14 @@ dependencies:
         cd ~/rvm_binaries && rvm prepare $RUBY_VERSION
         ls ~/rvm_binaries
       fi
+
+dependencies:
+  cache_directories:
+    # We will store packages in this directory
+    - ~/deps
+    - ~/rvm_binaries
+
+  pre:
     - ruby circle_ci_dependencies.rb
 
   override:
