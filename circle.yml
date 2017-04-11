@@ -17,9 +17,6 @@ dependencies:
     - ~/rvm_binaries
 
   pre:
-    - ruby circle_ci_dependencies.rb
-
-  override:
     - |
       RUBY_VERSION=`cat ~/$CIRCLE_PROJECT_REPONAME/.ruby-version.ci`
       if [[ -e ~/rvm_binaries/ruby-$RUBY_VERSION.tar.bz2 ]]
@@ -32,5 +29,8 @@ dependencies:
         cd ~/rvm_binaries && rvm prepare $RUBY_VERSION
         ls ~/rvm_binaries
       fi
+    - ruby circle_ci_dependencies.rb
+
+  override:
     - gem install bundle
     - bundle install
