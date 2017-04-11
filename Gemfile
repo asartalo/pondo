@@ -48,7 +48,7 @@ group :development do
   gem 'guard-cucumber', require: false
   gem 'listen', '~> 3.0.5'
   gem 'rack-livereload'
-  gem 'rack-timeout'
+  gem 'rack-timeout', require:"rack/timeout/base"
   gem 'terminal-notifier-guard', platforms: :ruby, install_if: os_is(/darwin/)
   gem 'sextant'
   gem 'spring'
