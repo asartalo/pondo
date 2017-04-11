@@ -1,4 +1,4 @@
+require "rack-timeout"
 if Rails.env == 'production'
-  Rails.application.middleware.use Rack::Timeout
-  Rack::Timeout.service_timeout = 30
+  Rails.application.config.middleware.insert_before Rack::Runtime, Rack::Timeout, service_timeout: 5
 end
