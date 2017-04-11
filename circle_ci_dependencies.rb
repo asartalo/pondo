@@ -9,7 +9,7 @@ cache_directories.each do |dir|
 end
 
 
-chrome_version = (`google-chrome --version`).match(/[\d\.]+$/)[0]
+chrome_version = (`google-chrome --version`).match(/([\d\.]+)\s$/)[1]
 puts "Google Chrome Version: #{chrome_version}"
 if Gem::Version.new(chrome_version) > Gem::Version.new("57.0.0")
   puts "We need to update Google Chrome"
