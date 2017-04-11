@@ -48,7 +48,6 @@ group :development do
   gem 'guard-cucumber', require: false
   gem 'listen', '~> 3.0.5'
   gem 'rack-livereload'
-  gem 'rack-timeout', require:"rack/timeout/base"
   gem 'terminal-notifier-guard', platforms: :ruby, install_if: os_is(/darwin/)
   gem 'sextant'
   gem 'spring'
@@ -75,6 +74,7 @@ end
 group :production do
   gem 'newrelic_rpm'
   gem 'scout_apm'
+  gem 'rack-timeout'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
