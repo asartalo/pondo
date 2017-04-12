@@ -1,5 +1,5 @@
 = simple_form_for ledger do |f|
   = f.input :name, label: "Ledger Name"
   = f.input :currency, label: "Currency", collection: all_currencies,
-                       selected: 'USD', value_method: 'iso_code'
+                       selected: ledger.currency || 'USD', value_method: 'iso_code'
   = f.submit "Create Ledger"
