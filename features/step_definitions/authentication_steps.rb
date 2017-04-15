@@ -16,6 +16,7 @@ Given(/^I am a user$/) do
 end
 
 Given(/^I have a google account$/) do
+  OmniAuth.config.test_mode = true
   OmniAuth.config.mock_auth[:default] = {
     "provider"=>"google_oauth2",
     "uid"=>"999999999999999999999",
@@ -31,6 +32,7 @@ end
 
 When(/^I log in$/) do
   find_link('Sign in With Google').click
+  wait_for_page_load
 end
 
 When(/^I log in for the first time$/) do
@@ -39,9 +41,7 @@ When(/^I log in for the first time$/) do
 end
 
 Given(/^I am logged in$/) do
-  step "I have a google account"
   step "I visit the 'home' page"
   step "I log in"
 end
-
 

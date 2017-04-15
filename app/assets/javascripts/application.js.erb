@@ -16,3 +16,7 @@
 //= require global
 //= require utils
 //= require_tree .
+//= stub 'testing'
+<% if Rails.env == 'test' %>
+<%= require_asset 'testing' %>
+<% end %>

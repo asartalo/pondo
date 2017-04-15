@@ -1,5 +1,4 @@
 Then(/^I should see the UI to create my first ledger$/) do
-  wait_for_ajax
   steps "Then I should see 'Create Your First Ledger'"
 end
 
@@ -13,6 +12,6 @@ end
 
 Then(/^I can save the ledger$/) do
   find_button('Create Ledger').click
-  sleep 0.1
+  wait_for_ajax
   expect(User.first.owned_ledgers.size).to eql(1)
 end

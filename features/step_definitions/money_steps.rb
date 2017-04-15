@@ -5,8 +5,8 @@ Given(/^I own a ledger$/) do
 end
 
 When(/^I select the add income section$/) do
-  sleep 3
   find_link('Add Income').click
+  wait_for_ajax
 end
 
 Then(/^I should see the add income section$/) do
