@@ -1,20 +1,21 @@
 source 'https://rubygems.org'
-ruby "2.3.1"
+ruby "2.3.4"
 
 def os_is(re)
   RbConfig::CONFIG['host_os'] =~ re
 end
 
-gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
+gem 'rails', '~> 5.1.0', '< 5.2'
 gem 'pg', '~> 0.18'
-gem 'puma', '~> 3.0'
+gem 'puma', '~> 3.7'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2'
 gem 'jquery-rails'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
-gem 'devise'
+# gem 'devise'
+gem 'devise', git: 'https://github.com/gogovan/devise.git', branch: 'rails-5.1'
 gem 'omniauth-google-oauth2'
 gem 'slim-rails'
 # gem 'bootstrap', '~> 4.0.0.alpha5'
@@ -22,7 +23,8 @@ gem 'bourbon'
 gem 'neat'
 gem 'money'
 gem 'coveralls', require: false
-gem 'simple_form'
+# gem 'simple_form'
+gem 'simple_form', git: 'https://github.com/elsurudo/simple_form.git', branch: 'rails-5.1.0'
 gem 'typhoeus'
 gem 'restcountry'
 gem 'sidekiq'
