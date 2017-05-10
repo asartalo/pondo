@@ -8,7 +8,7 @@ $(document).on 'click', ->
     ->
       if active
         $('body').removeClass('testing-visiting')
-    200
+    300
   )
 
 

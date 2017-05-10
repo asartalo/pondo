@@ -1,5 +1,6 @@
 Given(/^I own a ledger$/) do
   user = User.find_by(email: "john.doe@gmail.com")
+  puts "USER: #{user.id}"
   builder = LedgerBuilder.make(user)
   builder.create_ledger(currency: "USD")
 end

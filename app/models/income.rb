@@ -22,4 +22,5 @@
 #
 
 class Income < MoneyMove
+  belongs_to :ledger
 end

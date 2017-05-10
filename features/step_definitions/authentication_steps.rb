@@ -13,6 +13,7 @@ Given(/^I am a user$/) do
     email: "john.doe@gmail.com",
     image: "https://example.com/photo.jpg"
   )
+  step "I have a google account"
 end
 
 Given(/^I have a google account$/) do
@@ -28,6 +29,7 @@ Given(/^I have a google account$/) do
       "image"=>"https://example.com/photo.jpg"
     }
   }.with_indifferent_access
+  puts "I have a google account"
 end
 
 When(/^I log in$/) do

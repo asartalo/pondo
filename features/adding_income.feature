@@ -5,12 +5,11 @@ Feature: Adding Income
 
   Background:
     Given I am a user
-    Given I own a ledger
+    And I own a ledger
     And I am logged in
 
   Scenario: I am able to add income
-    # Then I should see the 'dashboard' page
-    # WIP
-    # When I select the add income section
+    Then I should see the 'dashboard' page
+    When I select the add income section
     # Then I should see the add income section
     # And I could set the income amount to 500

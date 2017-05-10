@@ -7,7 +7,7 @@
       ul.tabs
         - if @ledger.persisted?
           li.tab
-            a(href="#{new_ledger_income_path(ledger_id: @ledger.id)}") Add Income
+            a(href="#add-income-section") Add Income
           li.tab
             a(href="#") Deduct Expense
 
@@ -18,4 +18,9 @@
         h2 Create Your First Ledger
         = render partial: 'ledgers/ledger_form', locals: { ledger: @ledger }
 
+    - else
+      #add-income-section.add-income
+        = simple_form_for new_ledger_income_path(ledger_id: @ledger.id) do |f|
+          = f.input :amount, label: "Amount"
+          = f.input :date
 
