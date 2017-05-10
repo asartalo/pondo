@@ -13,4 +13,12 @@ Rails.application.routes.draw do
   resources :ledgers, only: [:create, :show] do
     resources :incomes
   end
+
+  if Rails.env != 'production'
+    resources :nitrolinks, only: [:index] do
+      collection do
+        get 'link1'
+      end
+    end
+  end
 end
