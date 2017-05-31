@@ -31,6 +31,9 @@ RSpec.describe Ledger, type: :model do
     ledger.owner = owner
   end
 
+  it { is_expected.to have_many(:incomes) }
+  it { is_expected.to have_many(:expenses) }
+
   it "sets name to 'My Ledger' by default" do
     expect(ledger.name).to eql('My Ledger')
   end

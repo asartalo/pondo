@@ -23,4 +23,5 @@
 
 class ExpenseType < MoneyMoveType
   belongs_to :expense_category, foreign_key: "category_id"
+  validates_presence_of :name
 end

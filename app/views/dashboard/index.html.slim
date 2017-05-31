@@ -1,15 +1,20 @@
 - page('dashboard')
 .container
   .body
-    h1 Dashboard
+    - unless @no_ledger
+      h1 = @ledger.name
 
     nav
-      ul.tabs
+      ul.tabs.main-tabs
         - if @ledger.persisted?
           li.tab
-            a(href="#add-income-section") Add Income
+            a(href="#add-income-section")
+              i> +
+              span Add Income
           li.tab
-            a(href="#") Deduct Expense
+            a(href="#")
+              i> ="-"
+              span Deduct Expense
 
     a.button(href="#{destroy_user_session_path}") Sign Out
 
@@ -23,4 +28,6 @@
         = simple_form_for new_ledger_income_path(ledger_id: @ledger.id) do |f|
           = f.input :amount, label: "Amount"
           = f.input :date
+          = f.input :notes, as: :text
+          = f.submit "Add Income"
 

@@ -23,7 +23,14 @@ require 'rails_helper'
 
 RSpec.describe IncomeCategory, type: :model do
   let(:ledger) { create(:ledger, owner: create(:user)) }
-  subject(:category) { IncomeCategory.create(ledger: ledger)  }
+  subject(:category) { IncomeCategory.create(ledger: ledger, name: "Foo")  }
+
+  it { is_expected.to have_many(:income_types) }
+  it { is_expected.to validate_presence_of(:name) }
+
+  it "has no errors on creation" do
+    expect(category.errors).to be_empty
+  end
 
   describe "#create_income_type" do
     before { category.create_income_type("Foo") }

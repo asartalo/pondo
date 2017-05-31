@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170410071802) do
+ActiveRecord::Schema.define(version: 20170516001553) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -68,14 +68,16 @@ ActiveRecord::Schema.define(version: 20170410071802) do
 
   create_table "money_moves", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.date     "date"
-    t.decimal  "amount",     precision: 14, scale: 4
+    t.decimal  "amount",             precision: 14, scale: 4
     t.text     "notes"
     t.string   "type"
     t.uuid     "ledger_id"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
+    t.uuid     "money_move_type_id"
     t.index ["date"], name: "index_money_moves_on_date", using: :btree
     t.index ["ledger_id"], name: "index_money_moves_on_ledger_id", using: :btree
+    t.index ["money_move_type_id"], name: "index_money_moves_on_money_move_type_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -96,4 +98,5 @@ ActiveRecord::Schema.define(version: 20170410071802) do
   add_foreign_key "money_move_types", "categories"
   add_foreign_key "money_move_types", "ledgers"
   add_foreign_key "money_moves", "ledgers"
+  add_foreign_key "money_moves", "money_move_types"
 end

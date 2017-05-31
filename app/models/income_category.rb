@@ -21,6 +21,7 @@
 
 class IncomeCategory < Category
   has_many :income_types, foreign_key: "category_id", dependent: :delete_all
+  validates_presence_of :name
 
   def create_income_type(name)
     income_types.create(name: name, ledger: ledger)

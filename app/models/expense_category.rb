@@ -21,6 +21,7 @@
 
 class ExpenseCategory < Category
   has_many :expense_types, foreign_key: "category_id", dependent: :delete_all
+  validates_presence_of :name
 
   def create_expense_type(name)
     expense_types.create(name: name, ledger: ledger)
