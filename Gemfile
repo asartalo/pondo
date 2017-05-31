@@ -62,13 +62,13 @@ group :test do
   gem 'simplecov', require:  false
   gem 'factory_girl_rails'
   gem 'database_cleaner'
-  gem 'shoulda-matchers', '~> 3.1', require: false
   gem 'api_matchers'
   gem 'rspec-rails'
   # gem 'poltergeist'
   gem 'selenium-webdriver'
   gem 'chromedriver-helper'
   gem 'cucumber-rails', require: false
+  gem 'shoulda-matchers', git: 'https://github.com/thoughtbot/shoulda-matchers.git', branch: 'rails-5'
 end
 
 group :production do
