@@ -2,7 +2,7 @@
 #   $('body').css backgroundColor: 'orange'
 active = false
 
-$(document).on 'click', ->
+$(document).on 'click', 'a, [type="submit"]', ->
   $('body').addClass('testing-visiting')
   setTimeout(
     ->
