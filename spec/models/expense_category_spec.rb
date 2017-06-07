@@ -20,34 +20,11 @@
 #
 
 require 'rails_helper'
+require_relative 'category_shared_examples'
 
 RSpec.describe ExpenseCategory, type: :model do
-  let(:ledger) { create(:ledger, owner: create(:user)) }
-  subject(:category) { ExpenseCategory.create(ledger: ledger, name: "Bar")  }
-
-  it { is_expected.to have_many(:expense_types) }
-  it { is_expected.to validate_presence_of(:name) }
-
-  it "has no errors on creation" do
-    expect(category.errors).to be_empty
-  end
-
-  describe "#create_expense_type" do
-    before { category.create_expense_type("Foo") }
-    subject(:added) { category.expense_types.first }
-
-    it "adds expense type" do
-      expect(category.expense_types.size).to eql(1)
-      expect(added.name).to eql("Foo")
-    end
-
-    it "persists expense type" do
-      expect(added).to be_persisted
-    end
-
-    it "sets the ledger to the category's ledger" do
-      expect(added.ledger_id).to eql(ledger.id)
-    end
+  it_behaves_like "a category", :expense do
+    let(:category_class) { ExpenseCategory }
   end
 end
 

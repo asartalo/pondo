@@ -112,4 +112,27 @@ RSpec.describe Ledger, type: :model do
     end
 
   end
+
+  context "built" do
+    subject(:ledger) { LedgerBuilder.make(owner).create_ledger }
+
+    describe "#income_type" do
+      let(:params) { ["Active Income", "Salary"] }
+      subject(:type) { ledger.income_type(*params) }
+
+      it "gets correct type" do
+        expect(type.name).to eql("Salary")
+      end
+
+      context "when the category is not valid" do
+        let(:params) { ["Foo", "Salary"] }
+        it { is_expected.to be_nil }
+      end
+
+      context "when the type name is not valid" do
+        let(:params) { ["Active Income", "Foo"] }
+        it { is_expected.to be_nil }
+      end
+    end
+  end
 end

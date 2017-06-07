@@ -48,6 +48,12 @@ class Ledger < ApplicationRecord
     send("#{type}_categories").create(options)
   end
 
+  def income_type(category_name, income_type_name)
+    category = income_categories.find_by(name: category_name)
+    return nil unless category
+    category.income_types.find_by(name: income_type_name)
+  end
+
   private
   def default_values
     if self.new_record?

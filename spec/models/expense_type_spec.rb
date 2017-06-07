@@ -1,14 +1,9 @@
 require 'rails_helper'
+require_relative 'money_move_type_shared_examples'
 
 RSpec.describe ExpenseType, type: :model do
-  let(:ledger) { create(:ledger, owner: create(:user)) }
-  let(:category) { create(:expense_category, ledger: ledger)  }
-  subject(:expense_type) { ExpenseType.create(name: "Foo", expense_category: category, ledger: ledger) }
-
-  it { is_expected.to belong_to(:expense_category) }
-  it { is_expected.to validate_presence_of(:name) }
-
-  it "has no errors on creation" do
-    expect(expense_type.errors).to be_empty
+  it_behaves_like "a move type" do
+    let(:money_move) { :expense }
+    let(:money_move_type_class) { ExpenseType }
   end
 end

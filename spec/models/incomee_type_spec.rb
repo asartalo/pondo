@@ -1,14 +1,9 @@
 require 'rails_helper'
+require_relative 'money_move_type_shared_examples'
 
 RSpec.describe IncomeType, type: :model do
-  let(:ledger) { create(:ledger, owner: create(:user)) }
-  let(:category) { create(:income_category, ledger: ledger)  }
-  subject(:income_type) { IncomeType.create(name: "Foo", income_category: category, ledger: ledger) }
-
-  it { is_expected.to belong_to(:income_category) }
-  it { is_expected.to validate_presence_of(:name) }
-
-  it "has no errors on creation" do
-    expect(income_type.errors).to be_empty
+  it_behaves_like "a move type" do
+    let(:money_move) { :income }
+    let(:money_move_type_class) { IncomeType }
   end
 end

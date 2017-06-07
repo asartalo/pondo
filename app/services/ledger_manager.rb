@@ -6,5 +6,9 @@ class LedgerManager
     @user = user
   end
 
-
+  def add_income(params)
+    if ledger.allowed? user, :record
+      ledger.incomes.create(params)
+    end
+  end
 end
