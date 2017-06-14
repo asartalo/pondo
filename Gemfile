@@ -38,6 +38,7 @@ gem 'dalli'
 group :development, :test do
   gem 'dotenv-rails'
   gem 'byebug', platform: :mri
+  gem 'nokogiri', "~> 1.7.1"
 end
 
 group :development do
