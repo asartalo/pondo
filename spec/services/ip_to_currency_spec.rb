@@ -11,23 +11,25 @@ RSpec.describe IpToCurrency do
     let(:currency) { nil }
     let(:country_code) { nil }
     let(:ip_address_key) { /ip2curr:.+/ }
+    let(:cache_exists) { false }
     subject(:get) { service.get(ip_address) }
 
     before do
+      allow(cache_store).to receive(:exist?).and_return(cache_exists)
       allow(cache_store).to receive(:read).with(ip_address_key).and_return(country_code_cache)
       allow(ip2cc).to receive(:get).with(ip_address).and_return(country_code)
       allow(cc_service).to receive(:get).with(country_code).and_return(currency)
     end
 
-    context "when the cached country_code is nil" do
+    context "when the ip is not cached" do
       let(:country_code_cache) { nil }
 
       context "and the country_code returned is nil" do
-        it { is_expected.to be_nil }
+        it { is_expected.not_to be_present }
 
-        it "stores false result in cache" do
+        it "stores nil result in cache" do
           get
-          expect(cache_store).to have_received(:write).with(ip_address_key, false)
+          expect(cache_store).to have_received(:write).with(ip_address_key, nil)
         end
       end
 
@@ -49,6 +51,7 @@ RSpec.describe IpToCurrency do
 
     context "when the cached is warmed" do
       let(:country_code_cache) { "USD" }
+      let(:cache_exists) { true }
 
       it { is_expected.to eql(country_code_cache) }
     end
