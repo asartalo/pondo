@@ -15,24 +15,22 @@
 #
 
 class CountryCurrency < ApplicationRecord
-
   class << self
     def get(country_code)
-      row = where(country_code: country_code).first
-      return nil unless row.present?
-      row.currency
+      find_by(country_code: country_code).try :currency
     end
 
     # Takes data from RestCountries and populates db
     def populate(countries)
-      countries.each do |country|
-        current = where(country_code: country.alpha2Code).first
-        if current.present?
-          current.update(currency: country.currencies.first)
-        else
-          create(country_code: country.alpha2Code, currency: country.currencies.first)
-        end
-      end
+      countries.each { |country| upsert_on_code(*rc_extract_data(country)) }
+    end
+
+    def rc_extract_data(country)
+      return country.alpha2Code, country.currencies.first
+    end
+
+    def upsert_on_code(code, currency)
+      where(country_code: code).first_or_create.update(currency: currency)
     end
   end
 end

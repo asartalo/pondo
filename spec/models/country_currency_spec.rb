@@ -12,6 +12,25 @@ end
 RSpec.describe CountryCurrency, type: :model do
   subject(:model) { CountryCurrency }
 
+  describe ".get" do
+    before do
+      CountryCurrency.create(country_code: 'PH', currency: 'PHP')
+    end
+
+    let(:country_code) { 'PH' }
+    subject(:currency) { model.get(country_code) }
+
+    it "finds currency by country code" do
+      expect(currency).to eql('PHP')
+    end
+
+    context "when no currency is available for country code" do
+      let(:country_code) { 'US' }
+
+      it { is_expected.to be_nil }
+    end
+  end
+
   describe ".populate" do
     let(:countries) do
       [
