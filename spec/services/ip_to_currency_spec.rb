@@ -25,9 +25,9 @@ RSpec.describe IpToCurrency do
       context "and the country_code returned is nil" do
         it { is_expected.to be_nil }
 
-        it "stores nil result in cache" do
+        it "stores false result in cache" do
           get
-          expect(cache_store).to have_received(:write).with(ip_address_key, nil)
+          expect(cache_store).to have_received(:write).with(ip_address_key, false)
         end
       end
 

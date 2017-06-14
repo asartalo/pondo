@@ -12,18 +12,14 @@ class IpToCurrency
   end
 
   def get(ip_address)
-    currency = nil
     cached = cache.read(ip_key(ip_address))
-    if cached
-      currency = cached
-    else
-      country_code = ip_to_country_code.get(ip_address)
-      if country_code
-        currency = country_currency.get country_code
+    if cached.nil?
+      country_currency.get(ip_to_country_code.get(ip_address)).tap do |currency|
+        cache.write(ip_key(ip_address), currency || false)
       end
-      cache.write(ip_key(ip_address), currency)
+    else
+      cached
     end
-    currency
   end
 
   private
@@ -32,8 +28,8 @@ class IpToCurrency
     "ip2curr:#{hash(ip_address)}"
   end
 
-  def hash(string)
+  def hash(ip_address)
     @digest ||= Digest::SHA256.new
-    @digest.hexdigest string
+    @digest.hexdigest ip_address + Rails.application.secrets.secret_key_base
   end
 end
