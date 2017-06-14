@@ -1,0 +1,41 @@
+.dashboard-page {
+  h1 {
+    text-align: center;
+  }
+}
+
+.main-tabs {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  li {
+    flex-grow: 1;
+    border: 1px solid $green;
+
+    &:first-child {
+      border-right-width: 0;
+    }
+  }
+
+  a {
+    display: block;
+    vertical-align: center;
+    text-align: center;
+
+    &:hover {
+      background-color: $green;
+      color: $white;
+    }
+
+    i {
+      font-size: 32px;
+      line-height: 64px;
+    }
+    span {
+      text-decoration: none;
+      text-indent: -9999em;
+      display: none;
+    }
+  }
+}
