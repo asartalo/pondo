@@ -23,5 +23,11 @@
 
 class ExpenseType < MoneyMoveType
   belongs_to :expense_category, foreign_key: "category_id"
+  has_many :expenses, foreign_key: "money_move_type_id", dependent: :delete_all
+
   validates_presence_of :name
+
+  def move_kind
+    :expense
+  end
 end

@@ -26,4 +26,8 @@
 
 class Income < MoneyMove
   belongs_to :income_type, foreign_key: "money_move_type_id"
+
+  def move_kind
+    :income
+  end
 end

@@ -26,5 +26,9 @@
 
 class Expense < MoneyMove
   belongs_to :expense_type, foreign_key: "money_move_type_id"
+
+  def move_kind
+    :expense
+  end
 end
 

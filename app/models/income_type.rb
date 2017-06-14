@@ -23,7 +23,11 @@
 
 class IncomeType < MoneyMoveType
   belongs_to :income_category, foreign_key: "category_id"
-  has_many :incomes, foreign_key: "money_move_id", dependent: :delete_all
+  has_many :incomes, foreign_key: "money_move_type_id", dependent: :delete_all
 
   validates_presence_of :name
+
+  def move_kind
+    :income
+  end
 end

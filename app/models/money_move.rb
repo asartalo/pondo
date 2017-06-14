@@ -26,4 +26,16 @@
 
 class MoneyMove < ApplicationRecord
   belongs_to :ledger
+
+  validate :move_type_ledger_must_be_the_same
+
+  def move_type_ledger_must_be_the_same
+    if money_move_type.ledger_id != ledger_id
+      errors.add(:"#{move_kind}_type", "must have the same ledger")
+    end
+  end
+
+  def money_move_type
+    send("#{move_kind}_type")
+  end
 end
