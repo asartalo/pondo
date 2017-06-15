@@ -7,8 +7,26 @@ class LedgerManager
   end
 
   def add_income(params)
+    for_recorders_only { incomes.create(params) }
+  end
+
+  def add_expense(params)
+    for_recorders_only { expenses.create(params) }
+  end
+
+  protected
+
+  def incomes
+    ledger.incomes
+  end
+
+  def expenses
+    ledger.expenses
+  end
+
+  def for_recorders_only
     if ledger.allowed? user, :record
-      ledger.incomes.create(params)
+      yield
     end
   end
 end

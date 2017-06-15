@@ -49,12 +49,21 @@ class Ledger < ApplicationRecord
   end
 
   def income_type(category_name, income_type_name)
-    category = income_categories.find_by(name: category_name)
+    get_type(:income, category_name, income_type_name)
+  end
+
+  def expense_type(category_name, expense_type_name)
+    get_type(:expense, category_name, expense_type_name)
+  end
+
+  def get_type(move, category_name, type_name)
+    category = send("#{move}_categories").find_by(name: category_name)
     return nil unless category
-    category.income_types.find_by(name: income_type_name)
+    category.send("#{move}_types").find_by(name: type_name)
   end
 
   private
+
   def default_values
     if self.new_record?
       self.name ||= "My Ledger"
