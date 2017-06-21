@@ -2,8 +2,9 @@
 .container
   .body
     .branding-element
-      h1.logo Pondo
-      p Expense tracking<br> for the masses
+      h1.logo
+        = image_tag 'logo.svg', alt: "Pondo Logo", title: "Pondo"
+      p Expense Tracking<br> for the Masses
 
   .main-action
     a.button.primary(

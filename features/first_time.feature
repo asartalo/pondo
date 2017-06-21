@@ -8,7 +8,8 @@ Feature: First time account setup
 
   Scenario: I am able to setup my ledger after logging in
     When I log in for the first time
-    Then I should see the UI to create my first ledger
-    And I can set my first ledger's name to 'Family'
-    And I can set the currency to 'PHP'
-    And I can save the ledger
+    Then I should be greeted with a welcome
+    # Then I should see the UI to create my first ledger
+    # And I can set my first ledger's name to 'Family'
+    # And I can set the currency to 'PHP'
+    # And I can save the ledger

@@ -15,3 +15,7 @@ Then(/^I can save the ledger$/) do
   wait_for_ajax
   expect(User.first.owned_ledgers.size).to eql(1)
 end
+
+Then(/^I should be greeted with a welcome$/) do
+  step "I should see 'Welcome to Pondo!'"
+end

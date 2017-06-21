@@ -3,7 +3,7 @@ $medium-screen: 600px;
 $large-screen: 900px;
 
 // Typography
-$font-stack-system: "Open Sans", Helvetica, Arial, sans-serif;
+$font-stack-system: "Roboto", Helvetica, Arial, sans-serif;
 $base-font-family: $font-stack-system;
 $heading-font-family: $base-font-family;
 
@@ -23,19 +23,19 @@ $base-z-index: 0;
 
 // Colors
 $white: #fff;
-$black: #1d1d1d;
-$blue: #1565c0;
+$black: #000;
+$blue: #2D9CDB;
 $medium-gray: #999;
 $light-gray: #eceded;
 $gray: #666;
-$green: #71b439;
+$green: #27AE60;
 $dark-green: #007042;
 $dark-gray: #292929;
 $red: #c44c27;
 $form-box-shadow-color: rgba(#000, 0.06);
 
 // Font Colors
-$base-font-color: $dark-gray;
+$base-font-color: $black;
 $action-color: $green;
 
 // Border

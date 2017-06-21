@@ -1,4 +1,18 @@
 - page('dashboard')
+header
+  .header-branding
+    a
+      = image_tag 'logo.svg', alt: "Pondo Logo", title: "Pondo", class: 'logo'
+  .header-title
+  nav.header-navigation
+    a.menu-button(href="#header-menu")
+      = image_tag 'menu.svg', alt: "Menu", title: "Menu", class: 'menu-button'
+    ul#header-menu.menu
+      li
+      a.button(href="#{destroy_user_session_path}") Sign Out
+
+
+
 .container
   .body
     - unless @no_ledger
@@ -16,12 +30,22 @@
               i> ="-"
               span Deduct Expense
 
-    a.button(href="#{destroy_user_session_path}") Sign Out
-
     - if @no_ledger
       #first-time
-        h2 Create Your First Ledger
-        = render partial: 'ledgers/ledger_form', locals: { ledger: @ledger }
+        .welcome
+          h1 Welcome to Pondo!
+          p You first need a Ledger to work with.
+        .first-time-actions
+          p
+            a.button.primary(href="#") Create a Ledger
+          p
+            | or
+          p
+            a.button(href="#") Subscribe to an Existing Ledger
+
+        .create-ledger
+          h2 Create Ledger
+          = render partial: 'ledgers/ledger_form', locals: { ledger: @ledger }
 
     - else
       #add-income-section.add-income

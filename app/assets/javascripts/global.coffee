@@ -1,4 +1,6 @@
-$(document).on 'ajax:complete', (e, response) ->
+$document = $(document)
+
+$document.on 'ajax:complete', (e, response) ->
   result = response.responseJSON
   if result && result.for && result.for.length > 0
     status = "error"

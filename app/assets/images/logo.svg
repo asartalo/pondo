@@ -1,0 +1,39 @@
+<svg width="199" height="199" viewBox="0 0 199 199" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<title>Logo</title>
+<desc>Created using Figma</desc>
+<g id="Canvas" transform="translate(99 230)">
+<g id="Logo">
+<g id="Ellipse">
+<use xlink:href="#path0_fill" transform="translate(-99 -230)" fill="#27AE60"/>
+</g>
+<g id="Peso">
+<g id="P">
+<use xlink:href="#path1_fill" transform="translate(-27.8314 -167)" fill="#333333" fill-opacity="0.2"/>
+</g>
+<g id="Rectangle 2">
+<use xlink:href="#path2_fill" transform="translate(-36 -144.566)" fill="#333333" fill-opacity="0.2"/>
+</g>
+<g id="Rectangle 2">
+<use xlink:href="#path3_fill" transform="translate(27.4912 -144.566)" fill="#333333" fill-opacity="0.2"/>
+</g>
+</g>
+<g id="Peso">
+<g id="P">
+<use xlink:href="#path1_fill" transform="translate(-22.8314 -172)" fill="#FFFFFF"/>
+</g>
+<g id="Rectangle 2">
+<use xlink:href="#path2_fill" transform="translate(-31 -149.566)" fill="#FFFFFF"/>
+</g>
+<g id="Rectangle 2">
+<use xlink:href="#path3_fill" transform="translate(32.4912 -149.566)" fill="#FFFFFF"/>
+</g>
+</g>
+</g>
+</g>
+<defs>
+<path id="path0_fill" d="M 199 99.5C 199 154.452 154.452 199 99.5 199C 44.5477 199 0 154.452 0 99.5C 0 44.5477 44.5477 0 99.5 0C 154.452 0 199 44.5477 199 99.5Z"/>
+<path id="path1_fill" d="M 61.2961 28.1163C 61.2961 37.8276 58.1299 45.2702 51.7977 50.4439C 45.4655 55.6176 36.4526 58.2045 24.759 58.2045L 15.134 58.2045L 15.134 93L 0 93L 0 0L 26.6587 0C 38.2256 0 46.8797 2.37483 52.6209 7.12449C 58.4043 11.8741 61.2961 18.8714 61.2961 28.1163ZM 15.134 45.4186L 23.176 45.4186C 30.9435 45.4186 36.6425 44.0616 40.273 41.3475C 43.9035 38.6334 45.7187 34.3926 45.7187 28.6252C 45.7187 23.2818 44.0935 19.2955 40.8429 16.6662C 37.5924 14.0369 32.5266 12.7223 25.6456 12.7223L 15.134 12.7223L 15.134 45.4186Z"/>
+<path id="path2_fill" d="M 0 0L 20.2632 0L 20.2632 14.9275L 0 14.9275L 0 0Z"/>
+<path id="path3_fill" d="M 0 0L 13.5088 0L 13.5088 14.9275L 0 14.9275L 0 0Z"/>
+</defs>
+</svg>

@@ -1,0 +1,62 @@
+header {
+  padding: 12px 0 0;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+
+  > .header-branding,
+  > .header-title,
+  > .header-navigation {
+    flex: 0 1 auto;
+  }
+
+  > .header-branding,
+  > .header-navigation {
+    flex-basis: initial;
+  }
+
+  > .header-title {
+    flex-grow: 1;
+  }
+
+  > .header-branding {
+    > a {
+      padding: 8px;
+      display: block;
+      line-height: 0;
+    }
+  }
+
+  .header-navigation {
+    > a {
+      padding: 8px;
+      display: block;
+      line-height: 0;
+
+      img {
+        padding: 13px;
+      }
+    }
+
+  }
+
+  .logo {
+    width: 50px;
+    height: 50px;
+  }
+
+  .menu {
+    position: fixed;
+    width: 100%;
+    max-width: 300px;
+    right: -300px;
+    top: 80px;
+    background-color: $white;
+    transition: 0.2s;
+    box-shadow: 0 2px 2px rgba(0,0,0,0.3);
+    height: 100vh;
+
+    &.active {
+      right: 0px;
+    }
+  }
+}

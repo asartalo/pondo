@@ -5,17 +5,11 @@
   min-height: 100%;
 
   .logo {
-    line-height: 0;
-    text-indent: -700em;
+  }
 
-    &::after {
-      display: block;
-      color: $action-color;
-      content: "P";
-      font-size: rem(220px);
-      font-weight: 600;
-      line-height: rem(190px);
-      text-indent: 0;
+  .branding-element {
+    p {
+      margin-top: 40px;
     }
   }
 

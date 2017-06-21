@@ -1,13 +1,18 @@
 @app ||= {}
 
+$document = $(document)
+
+# Mark that js is enabled
+$document.find('html').addClass 'js'
+
 # Load and unload depending if elements exist on the page
 app.load = (selector, loader, unloader) ->
-  $(document).on 'turbolinks:load', ->
+  $document.on 'turbolinks:load', ->
     elements = $(selector)
     if elements.length > 0 && loader
       loader(elements)
 
-  $(document).on 'turbolinks:unload', ->
+  $document.on 'turbolinks:unload', ->
     elements = $(selector)
     if elements.length > 0 && unloader
       unloader(elements)
@@ -20,9 +25,9 @@ app.afterLoad = (selector, loader) ->
         loader(elements)
     else
       loader(e.target)
-    $(document).off 'turbolinks:load', myLoader
+    $document.off 'turbolinks:load', myLoader
 
-  $(document).on 'turbolinks:load',  myLoader
+  $document.on 'turbolinks:load',  myLoader
 
 app.reload = ->
   Turbolinks.visit(window.location.toString())
@@ -44,7 +49,7 @@ showDialog = (options = {}) ->
   dialog.showModal()
   event = $.Event('dialog-load')
   event.target = dialog
-  $(document).trigger event
+  $document.trigger event
 
 closeDialog = ->
   dialog = getDialog()
@@ -64,13 +69,13 @@ closeDialog = ->
 app.showDialog = showDialog
 app.closeDialog = closeDialog
 
-$(document).on 'click', 'dialog .close', (e) ->
+$document.on 'click', 'dialog .close', (e) ->
   closeDialog()
 
-$(document).on 'turbolinks:unload', ->
+$document.on 'turbolinks:unload', ->
   closeDialog()
 
-$(document).on 'click', '.dialog-open', (e) ->
+$document.on 'click', '.dialog-open', (e) ->
   e.preventDefault()
   target = $(e.target)
   if target.is('.dialog-open')
@@ -85,7 +90,7 @@ $(document).on 'click', '.dialog-open', (e) ->
   $('dialog').css(width: width).find('.dialog-content').append(dialogElement)
   showDialog()
 
-$(document).on 'click', '.dialog-open-remote', (e) ->
+$document.on 'click', '.dialog-open-remote', (e) ->
   e.preventDefault()
   target = $(e.target)
   if target.is('.dialog-open-remote')
@@ -102,4 +107,5 @@ $(document).on 'click', '.dialog-open-remote', (e) ->
       showDialog()
   )
 
+$
 
