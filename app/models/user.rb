@@ -28,7 +28,6 @@ class User < ApplicationRecord
 
   class << self
     def from_omniauth(auth)
-      puts OmniAuth.config.mock_auth
       params = auth.to_h.with_indifferent_access
       where(params.slice(:provider, :uid)).first_or_create do |user|
         user.assign_attributes(params[:info].slice(:email, :name, :image))

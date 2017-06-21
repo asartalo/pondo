@@ -1,7 +1,7 @@
 .home-page {
-  @include align-items(center);
-  @include display(flex);
-  @include justify-content(center);
+  align-items: center;
+  display: flex;
+  justify-content: center;
   min-height: 100%;
 
   .logo {
@@ -19,13 +19,13 @@
   }
 
   .body {
-    @include align-items(center);
-    @include display(flex);
-    @include justify-content(center);
-    @include flex(2);
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    flex: 2;
 
     > .branding-element {
-      @include flex(1);
+      flex: 1;
       padding-bottom: 40px;
       color: $gray;
       font-size: 24px;
@@ -33,7 +33,7 @@
   }
 
   .main-action {
-    @include flex(1);
+    flex: 1;
   }
 
 }
