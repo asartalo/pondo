@@ -112,8 +112,8 @@ After do |scenario|
 end
 
 Before('@nitrolinks') do
-  visit PondoSpecs::Pages.send("nitrolinks_page")
-  page.evaluate_script('pondoTesting.clearDomLoads()')
-  @initial_page_loads = page.evaluate_script('pondoTesting.domLoadCount()').to_i
+  visit pondo_page("nitrolinks")
+  jscript('pondoTesting.clearDomLoads()')
+  @initial_page_loads = jscript('pondoTesting.domLoadCount()').to_i
 end
 

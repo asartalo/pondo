@@ -1,26 +1,43 @@
 module PondoSpecs
   module Pages
-    def self.home_page
-      '/'
-    end
-
-    def self.dashboard_page
-      '/dashboard'
-    end
+    module_function
 
 
-    # NITRONLINKS TESTING ONLY
-    def self.nitrolinks_page
-      '/nitrolinks'
+    {
+      home: {
+        path: '/'
+      },
+
+      dashboard: {
+        path: '/dashboard'
+      },
+
+      # NITRONLINKS TESTING ONLY
+      nitrolinks: {
+        path: '/nitrolinks',
+        content: 'Nitrolinks Testing Home'
+      },
+
+      nitrolinks_1: {
+        path: '/nitrolinks/link1',
+        content: 'Link 1'
+      },
+
+      redirected: {
+        path: '/nitrolinks/redirected',
+        content: 'Redirected'
+      },
+
+    }.each do |page_name, data|
+      define_method :"#{page_name}_page" do
+        data[:path]
+      end
+
+      define_method :"#{page_name}_page_content" do
+        data[:content]
+      end
     end
 
-    def self.nitrolinks_1_page
-      '/nitrolinks/link1'
-    end
-
-    def self.redirected_page
-      '/nitrolinks/redirected'
-    end
   end
 end
 
