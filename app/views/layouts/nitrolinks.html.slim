@@ -1,0 +1,8 @@
+- content_for :stylesheets do
+  = stylesheet_link_tag 'nitrolinks', media: 'all', 'data-turbolinks-track': 'reload'
+
+= render layout: 'layouts/common' do
+  = yield
+  #nitro-debugging
+    h2 Dom Loads:
+    ul.dom-loads

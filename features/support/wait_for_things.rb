@@ -20,6 +20,11 @@ module WaitForThings
   def finished_all_ajax_requests?
     page.evaluate_script('jQuery.active').zero?
   end
+
+  def pause_pls
+    $stderr.write 'Press enter to continue'
+    $stdin.gets
+  end
 end
 
 World(WaitForThings)

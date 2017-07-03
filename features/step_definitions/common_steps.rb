@@ -1,3 +1,7 @@
+Given(/^I am at the '([^']*)' page$/) do |name|
+  step "I visit the '#{name}' page"
+end
+
 Given(/^I visit the '([^']*)' page$/) do |name|
   visit PondoSpecs::Pages.send("#{ name }_page")
   wait_for_page_load

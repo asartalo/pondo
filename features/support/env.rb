@@ -111,3 +111,9 @@ After do |scenario|
   end
 end
 
+Before('@nitrolinks') do
+  visit PondoSpecs::Pages.send("nitrolinks_page")
+  page.evaluate_script('pondoTesting.clearDomLoads()')
+  @initial_page_loads = page.evaluate_script('pondoTesting.domLoadCount()').to_i
+end
+

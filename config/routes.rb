@@ -18,6 +18,8 @@ Rails.application.routes.draw do
     resources :nitrolinks, only: [:index] do
       collection do
         get 'link1'
+        get 'redirecting'
+        get 'redirected'
       end
     end
   end

@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  include Concerns::NitrolinksConcern
+
   protect_from_forgery with: :exception
   force_ssl if: :ssl_configured?
 

@@ -11,13 +11,8 @@
 // about supported directives.
 //
 //= require jquery
-// require jquery_ujs
 //= require nitrolinks
-// require turbolinks
 //= require global
 //= require utils
 //= require_tree .
 //= stub 'testing'
-<% if Rails.env == 'test' %>
-<%= require_asset 'testing' %>
-<% end %>

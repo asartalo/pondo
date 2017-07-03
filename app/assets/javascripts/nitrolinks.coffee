@@ -1,34 +1,57 @@
+$ ->
+  appHost = window.location.origin
+
 $(document).on 'click', 'a[href]', (e) ->
   link = $(e.currentTarget)
   url = link.attr('href')
   if urlIsInApp(url)
+    $(document).trigger 'nitrolinks:before-visit'
     e.preventDefault()
     requestUrl(url, 'GET')
     e.stopPropagation()
 
 urlIsInApp = (url) ->
-  true
+  url.match(/^\/.+/) || false
 
-xhrComplete = (url, method, pushState = true) ->
-  (xhr, status) ->
-    bodyCode = extractBodyCode(xhr.responseText)
-    state = saveState(url, method, bodyCode)
-    console.log '+', state
-    renderState(bodyCode)
-    window.history.pushState(state, null, url) if pushState
+fetchComplete = (url, method, pushState = true) ->
+  (response) ->
+    return unless response.ok
+    response.text().then (contents) ->
+      bodyCode = extractBodyCode(contents)
+      return unless bodyCode
+      if response.redirected && response.headers.has("nitrolinks-location")
+        location = response.headers.get("nitrolinks-location")
+      else
+        location = url
+
+      state = saveState(location, method, bodyCode)
+      renderState(bodyCode)
+      window.history.pushState(state, null, location) if pushState
+      $(document).trigger 'nitrolinks:load'
 
 extractBodyCode = (text) ->
   code = $.trim(text)
   match = code.match(/<body[^>]*>([\s\S]+)<\/body>/)
-  bodyCode = $.trim match[1]
+  return null unless match
+  $.trim match[1]
 
 requestUrl = (url, method, pushState = true) ->
-  $.ajax(
-    url: url
+  options =
     method: method
-    contentType: false
-    complete: xhrComplete(url, method, pushState)
+    redirect: 'follow'
+    credentials: 'include'
+    headers: customHeaders()
+
+  fetch(url, options).then(
+    fetchComplete(url, method, pushState)
+  ).catch( (error, a) ->
+    window.location = url
   )
+
+customHeaders = ->
+  {
+    "nitrolinks-referrer": window.location.href
+  }
 
 $(window).on 'popstate', (e) ->
   state = e.originalEvent.state
@@ -37,10 +60,9 @@ $(window).on 'popstate', (e) ->
   if stateObj.content
     renderState(stateObj.content)
   else if stateObj.url && stateObj.method
-    requestUrl(stateObj.url, stateObj.method)
+    requestUrl(stateObj.url, stateObj.method, false)
   else
-    location = window.location
-    requestUrl(location.pathname + location.search, 'GET', false)
+    requestUrl(stateObj.url, 'GET', false)
 
 renderState = (content) ->
   $('body').html $.parseHTML(content)
