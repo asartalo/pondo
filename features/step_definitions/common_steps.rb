@@ -8,9 +8,7 @@ Given(/^I visit the '([^']*)' page$/) do |name|
 end
 
 When(/^I go back$/) do
-  sleep 0.3
   page.go_back
-  sleep 0.3
 end
 
 When(/^I pause$/) do

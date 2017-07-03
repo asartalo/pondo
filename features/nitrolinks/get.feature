@@ -15,7 +15,7 @@ Feature: GET navigation
     Then I should see the 'redirected' page
     And the 'redirected' page should be loaded through ajax
 
-  @nitrolinks
+  @nitrolinks @focus
   Scenario: Going back
     When I click on the 'Link #1 - GET' hyperlink
     Then I should see the 'nitrolinks_1' page

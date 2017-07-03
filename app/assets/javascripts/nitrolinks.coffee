@@ -67,23 +67,35 @@
         interval
       )
 
+  getBodyElement = ->
+    document.getElementsByTagName('body')[0]
+
 
   # NITRO-SPECIFIC
   isUrlAllowed = (url) ->
     url.origin == nitro.appHost
 
+  pushTheState = (state, location) ->
+    console.log "PUSHING THE STATE #{state}"
+    window.history.pushState(state, null, location)
+    console.log "CURRENT STATE: #{window.history.state}"
+
   onPopState = (fn) ->
     window.addEventListener 'popstate',
       (e) ->
+        console.log 'POP!'
         state = e.state
+        console.log "STATE: #{state}"
         return unless state
         stateObj = getState(state)
         fn(stateObj)
 
 
-
   whenReady ->
-    appHost = window.location.origin
+    method = 'GET'
+    bodyCode = getBodyElement().innerHTML
+    state = saveState(location, method, bodyCode)
+    pushTheState(state, location)
 
   handleLinkClicks (url, e) ->
     if isUrlAllowed(url)
@@ -104,7 +116,8 @@
 
         state = saveState(location, method, bodyCode)
         renderState(bodyCode)
-        window.history.pushState(state, null, location) if pushState
+        pushTheState(state, location) if pushState
+
         triggerEvent 'nitrolinks:load-from-fetch', url: location
         triggerEvent 'nitrolinks:load', url: location
 
@@ -137,16 +150,15 @@
       "nitrolinks-referrer": window.location.href
 
   onPopState (stateObj) ->
-      if stateObj.content
-        debugger
-        visitCached(stateObj)
-      else if stateObj.url && stateObj.method
-        visit(stateObj.url, stateObj.method, false)
-      else
-        visit(stateObj.url, 'GET', false)
+    if stateObj.content
+      visitCached(stateObj)
+    else if stateObj.url && stateObj.method
+      visit(stateObj.url, stateObj.method, false)
+    else
+      visit(stateObj.url, 'GET', false)
 
   renderState = (content) ->
-    document.getElementsByTagName('body')[0].innerHTML = content
+    getBodyElement().innerHTML = content
 
   saveState = (url, method, value) ->
     key = "#{method}:#{url}"
