@@ -15,10 +15,35 @@ Feature: GET navigation
     Then I should see the 'redirected' page
     And the 'redirected' page should be loaded through ajax
 
-  @nitrolinks @focus
+  @nitrolinks
   Scenario: Going back
     When I click on the 'Link #1 - GET' hyperlink
     Then I should see the 'nitrolinks_1' page
     And I go back
     Then I should see the 'nitrolinks' page
     And the 'nitrolinks' page should be loaded from cache
+
+  @nitrolinks
+  Scenario: Going back and forward
+    When I click on the 'Link #1 - GET' hyperlink
+    Then I should see the 'nitrolinks_1' page
+    And I go back
+    And I go forward
+    Then I should see the 'nitrolinks_1' page
+    And the 'nitrolinks_1' page should be loaded from cache
+
+  @nitrolinks
+  Scenario: Going back before first load and forward
+    When I should see the 'nitrolinks' page
+    And I go back
+    And I go forward
+    Then I should see the 'nitrolinks' page
+    And the 'nitrolinks' page should be loaded from cache
+
+  @nitrolinks
+  Scenario: Managing change in content
+    When I enter 'Foo' on the 'Track GET' text field
+    And I hit the 'Changing GET Form' button
+    Then I should see the 'nitrolinks' page
+    And I should see 'Foo'
+

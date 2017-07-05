@@ -4,6 +4,7 @@ class PondoTesting
     @store = new PondoTestStore(@window.localStorage)
     @domLoadKey = 'pondoDomLoad'
     @fetchLoadKey = 'pondoFetchLoad'
+    @cacheLoadKey = 'pondoCacheLoad'
 
   init: ->
     @listen()
@@ -29,6 +30,9 @@ class PondoTesting
     @document.on 'nitrolinks:load-from-fetch', (e) =>
       @addToFetched(e.detail.url)
 
+    @document.on 'nitrolinks:load-from-cache', (e) =>
+      @addToCached(e.detail.url)
+
     $ =>
       return unless $('#nitro-debugging').is(':visible')
       @addToLoaded(@window.location.href)
@@ -45,6 +49,9 @@ class PondoTesting
   addToLoaded: (url) ->
     @addToArrayStored(@domLoadKey, url)
 
+  addToCached: (url) ->
+    @addToArrayStored(@cacheLoadKey, url)
+
   addToArrayStored: (key, input) ->
     loads = @store.get(key, [])
     loads.push input
@@ -53,6 +60,7 @@ class PondoTesting
   showLoads: ->
     @showDomLoads()
     @showFetchLoads()
+    @showCacheLoads()
 
   domEl: ->
     $('#nitro-debugging .dom-loads')
@@ -73,9 +81,19 @@ class PondoTesting
   showFetchLoads: ->
     @loadShower(@fetchEl(), @fetchLoadKey)
 
+  cacheEl: ->
+    $('#nitro-debugging .cache-loads')
+
+  showCacheLoads: ->
+    @loadShower(@cacheEl(), @cacheLoadKey)
+
   clearDomLoads: ->
     @store.remove(@domLoadKey)
+    @clearSessionLoads()
+
+  clearSessionLoads: ->
     @store.remove(@fetchLoadKey)
+    @store.remove(@cacheLoadKey)
 
   domLoadCount: ->
     @store.get(@domLoadKey, []).length
@@ -93,6 +111,14 @@ class PondoTesting
     lastItem = el.find('li').last()
     if lastItem.length == 1
       @urlPath(lastItem.text()) == path
+    else
+      false
+
+  isPageCacheRestored: (path) ->
+    el = @cacheEl()
+    lastItem = el.find('li').last()
+    if lastItem.length == 1
+      lastItem.text() == path
     else
       false
 

@@ -11,6 +11,10 @@ When(/^I go back$/) do
   page.go_back
 end
 
+When(/^I go forward$/) do
+  page.go_forward
+end
+
 When(/^I pause$/) do
   pause_pls
 end

@@ -1,9 +1,10 @@
 .container
   .body
     h1 Nitrolinks Testing Home
-
-    ul
-      li
-        a(href="#{link1_nitrolinks_path}") Link #1 - GET
-      li
-        a(href="#{redirecting_nitrolinks_path}") Redirecting Internal
+    = render partial: 'nitrolinks/links'
+    p#track-get
+      = @track_get
+    = form_with url: changing_nitrolinks_path, method: :get do |form|
+      label(for="track-get-field") Track GET
+      = form.text_field :track, value: '', id: "track-get-field"
+      = form.submit "Changing GET Form"

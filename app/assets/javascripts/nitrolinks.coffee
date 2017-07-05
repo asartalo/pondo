@@ -9,6 +9,9 @@
   ifFn = (test, fn) ->
     fn if test
 
+  merge = (a, b) ->
+    Object.assign(a, b)
+
   eventFactory = ifElseFn(
     window.CustomEvent,
     (event, data) ->
@@ -40,16 +43,19 @@
   handleLinkClicks = (fn) ->
     eventDelegate 'click', 'a[href]', (e) ->
       link = e.current
-      console.log 'click: ', link.href
       url = new URL(link.href)
       fn(url, e)
 
-  cacheStore = {}
+  handleFormSubmits = (fn) ->
+    eventDelegate 'submit', 'form', (e) ->
+      form = e.current
+      fn(form, e)
+
   cache = (key, value) ->
-    cacheStore[key] = value
+    window.sessionStorage.setItem(key, JSON.stringify(value))
 
   getCache = (key) ->
-    cacheStore[key]
+    JSON.parse(window.sessionStorage.getItem(key))
 
   urlPath = (urlStr) ->
     url = new URL(urlStr)
@@ -57,6 +63,12 @@
       url.pathname
     else
       url.toString().replace(url.origin, '')
+
+  fullPath = (urlStr) ->
+    if urlStr.indexOf(nitro.appHost) != 0
+      "#{nitro.appHost}/#{urlStr.match(/^\/?(.+$)/)[1]}"
+    else
+      urlStr
 
   async = (fn, interval = 0) ->
     ->
@@ -70,49 +82,80 @@
   getBodyElement = ->
     document.getElementsByTagName('body')[0]
 
+  # Stolen from Turbolinks
+  uuid = ->
+    result = ""
+    for i in [1..36]
+      if i in [9, 14, 19, 24]
+        result += "-"
+      else if i is 15
+        result += "4"
+      else if i is 20
+        result += (Math.floor(Math.random() * 4) + 8).toString(16)
+      else
+        result += Math.floor(Math.random() * 15).toString(16)
+    result
+
 
   # NITRO-SPECIFIC
   isUrlAllowed = (url) ->
     url.origin == nitro.appHost
 
   pushTheState = (state, location) ->
-    console.log "PUSHING THE STATE #{state}"
     window.history.pushState(state, null, location)
-    console.log "CURRENT STATE: #{window.history.state}"
+
+  replaceTheState = (state, location) ->
+    window.history.replaceState(state, null, location)
 
   onPopState = (fn) ->
     window.addEventListener 'popstate',
       (e) ->
-        console.log 'POP!'
         state = e.state
-        console.log "STATE: #{state}"
         return unless state
         stateObj = getState(state)
         fn(stateObj)
 
 
   whenReady ->
-    method = 'GET'
-    bodyCode = getBodyElement().innerHTML
-    state = saveState(location, method, bodyCode)
-    pushTheState(state, location)
+    state = window.history.state
+    if hasState(state)
+      loadState(getState(state))
+    else
+      location = urlPath(window.location)
+      method = 'get'
+      bodyCode = getBodyElement().innerHTML
+      state = saveState(location, method, bodyCode)
+      replaceTheState(state, location)
 
   handleLinkClicks (url, e) ->
     if isUrlAllowed(url)
       e.preventDefault()
-      visit(url.pathname, 'GET')
+      visit(url, method: 'get')
       e.stopPropagation()
 
-  fetchComplete = (url, method, pushState = true) ->
+  handleFormSubmits (form, e) ->
+    url = new URL(form.action)
+    method = form.method.toLowerCase()
+    if method == 'get'
+      url.search = $(form).serialize()
+    if isUrlAllowed(url)
+      e.preventDefault()
+      visit(url, method: form.method)
+      e.stopPropagation()
+
+  fetchComplete = (url, theOptions = {}) ->
+    options = merge({method: 'get', pushState: true}, theOptions)
     (response) ->
       return unless response.ok
+      method = options.method
+      pushState = options.pushState
       response.text().then (contents) ->
         bodyCode = extractBodyCode(contents)
         return unless bodyCode
         if response.redirected && response.headers.has("nitrolinks-location")
           location = urlPath(response.headers.get("nitrolinks-location"))
         else
-          location = url
+          location = urlPath(url)
 
         state = saveState(location, method, bodyCode)
         renderState(bodyCode)
@@ -127,11 +170,12 @@
     return null unless match
     (match[1]).trim()
 
-  visit = (url, method, pushState = true) ->
+  visit = (url, theOptions = {}) ->
+    options = merge({method: 'get', pushState: true}, theOptions)
     event = triggerEvent 'nitrolinks:before-visit'
     return if event.defaultPrevented
-    fetch(url, nitroFetchOptions(method)).then(
-      fetchComplete(url, method, pushState)
+    fetch(url, nitroFetchOptions(options)).then(
+      fetchComplete(url, options)
     ).catch( (error, a) ->
       window.location = url
     )
@@ -142,36 +186,46 @@
     triggerEvent 'nitrolinks:load-from-cache', url: stateObj.url
     triggerEvent 'nitrolinks:load', url: stateObj.url
 
-  nitroFetchOptions = (method) ->
-    method: method
+  nitroFetchOptions = (options) ->
+    method: options.method
     redirect: 'follow'
     credentials: 'include'
+    body: options.body
     headers:
       "nitrolinks-referrer": window.location.href
 
-  onPopState (stateObj) ->
+  loadState = (stateObj) ->
+    if stateObj.url
+      url = new URL(fullPath(stateObj.url))
+    else
+      url = false
     if stateObj.content
       visitCached(stateObj)
-    else if stateObj.url && stateObj.method
-      visit(stateObj.url, stateObj.method, false)
+    else if url && stateObj.method
+      visit(url, method: stateObj.method, pushState: false)
+    else if url
+      visit(url, method: 'get', pushState: false)
     else
-      visit(stateObj.url, 'GET', false)
+      visit(window.location.href, method: 'get', pushState: false)
+
+  onPopState loadState
 
   renderState = (content) ->
     getBodyElement().innerHTML = content
 
-  saveState = (url, method, value) ->
-    key = "#{method}:#{url}"
-    cache(key, value)
+  saveState = (url, method, body) ->
+    # key = "#{method}:#{url}:#{uuid()}"
+    key = uuid()
+    cache(key, url: url, method: method, body: body)
     return key
 
   getState = (state) ->
-    if state
-      parsedState = parseState(state)
+    savedState = getCache(state)
+    if state && savedState
       {
-        method: parsedState.method
-        url: parsedState.url
-        content: getCache(state)
+        method: savedState.method
+        url: savedState.url
+        content: savedState.body
       }
     else
       {
@@ -179,6 +233,10 @@
         url: null
         content: null
       }
+
+  hasState = (state) ->
+    savedState = getCache(state)
+    state && savedState
 
   parseState = (state) ->
     match = (state || '').match(/^(\w+):(.+)$/)

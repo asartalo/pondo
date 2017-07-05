@@ -11,13 +11,28 @@ When(/^I check the page loads$/) do
 end
 
 Then(/^the '([^']*)' page should be loaded through ajax$/) do |name|
+  wait_for_page_load
   expect_nitro_page_fetched(name).to eql(true)
   expect_nitro_page_loaded(name).not_to eql(true)
   expect_page_content_to_be_loaded(name)
 end
 
 Then(/^the '([^']*)' page should be loaded from cache$/) do |name|
-  expect_nitro_page_fetched(name).not_to eql(true)
-  expect_nitro_page_loaded(name).not_to eql(true)
+  wait_for_page_load
+  expect_nitro_page_restored(name).to eql(true), "Page #{name} (#{pondo_page(name)}) has not been restored from cache"
   expect_page_content_to_be_loaded(name)
+end
+
+Then(/^the '([^']*)' page should be loaded normally$/) do |name|
+  expect_nitro_page_loaded(name).to eql(true)
+  expect_page_content_to_be_loaded(name)
+end
+
+When(/^I enter '([^']*)' on the '([^']*)' text field$/) do |value, field|
+  fill_in(field, with: value)
+end
+
+When(/^I hit the '([^']*)' button$/) do |value|
+  find_button(value).click
+  sleep 0.2
 end

@@ -20,6 +20,7 @@ Rails.application.routes.draw do
         get 'link1'
         get 'redirecting'
         get 'redirected'
+        get 'changing'
       end
     end
   end

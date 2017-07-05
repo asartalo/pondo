@@ -23,6 +23,10 @@ module PondoTestingUtils
     expect_nitro_page(name, 'isPageNormallyLoaded')
   end
 
+  def expect_nitro_page_restored(name)
+    expect_nitro_page(name, 'isPageCacheRestored')
+  end
+
   def expect_page_content_to_be_loaded(name)
     expect(page).to have_text(pondo_page_content(name) || "")
   end
