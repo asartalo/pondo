@@ -1,4 +1,5 @@
-((document, window) ->
+# requires morphdom
+@nitro = ((document, window) ->
   getContentOfElement = (selector, defaultValue = null) ->
     node = document.querySelector(selector)
     if node then node.content else defaultValue
@@ -136,7 +137,7 @@
     else
       location = urlPath(window.location)
       method = 'get'
-      bodyCode = getBodyElement().innerHTML
+      bodyCode = getBodyElement().outerHTML
       state = saveState(location, method, bodyCode)
       replaceTheState(state, location)
 
@@ -184,7 +185,7 @@
     code = text.trim()
     match = code.match(/<body[^>]*>([\s\S]+)<\/body>/)
     return null unless match
-    (match[1]).trim()
+    (match[0]).trim()
 
   visit = (url, theOptions = {}) ->
     options = merge({method: 'get', pushState: true}, theOptions)
@@ -230,7 +231,8 @@
   onPopState loadState
 
   renderState = (content) ->
-    getBodyElement().innerHTML = content
+    # getBodyElement().innerHTML = content
+    morphdom(getBodyElement(), content, childrenOnly: true)
 
   saveState = (url, method, body) ->
     # key = "#{method}:#{url}:#{uuid()}"
@@ -261,4 +263,7 @@
     match = (state || '').match(/^(\w+):(.+)$/)
     method: match[1], url: match[2]
 
+  return {
+    renderState: renderState
+  }
 )(document, window)
