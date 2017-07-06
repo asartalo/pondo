@@ -1,8 +1,12 @@
 ((document, window) ->
+  getContentOfElement = (selector, defaultValue = null) ->
+    node = document.querySelector(selector)
+    if node then node.content else defaultValue
+
   getCsrfToken = ->
-    document.querySelector('meta[name="csrf-token"]').content
+    getContentOfElement('meta[name="csrf-token"]')
   getCsrfParam = ->
-    document.querySelector('meta[name="csrf-param"]').content
+    getContentOfElement('meta[name="csrf-param"]')
 
   nitro = {
     appHost: window.location.origin
