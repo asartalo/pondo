@@ -18,8 +18,8 @@
   justify-content: center;
 
   li {
-    flex-grow: 1;
     border: 1px solid $green;
+    flex-grow: 1;
 
     &:first-child {
       border-right-width: 0;
@@ -28,8 +28,8 @@
 
   a {
     display: block;
-    vertical-align: center;
     text-align: center;
+    vertical-align: center;
 
     &:hover {
       background-color: $green;
@@ -40,10 +40,11 @@
       font-size: 32px;
       line-height: 64px;
     }
+
     span {
+      display: none;
       text-decoration: none;
       text-indent: -9999em;
-      display: none;
     }
   }
 }

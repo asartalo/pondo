@@ -126,8 +126,7 @@
       (e) ->
         state = e.state
         return unless state
-        stateObj = getState(state)
-        fn(stateObj)
+        fn(getState(state))
 
 
   whenReady ->

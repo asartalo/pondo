@@ -22,13 +22,14 @@ class LedgerBuilder
 
   def create_categories(ledger, kind, names)
     names.each do |category_name, info|
-      create_category(ledger, kind, category_name, info[:types])
+      create_category(ledger, kind: kind, name: category_name, types: info[:types])
     end
   end
 
-  def create_category(ledger, kind, category_name, types)
-    category = ledger.create_category(kind, name: category_name)
-    types.each do |type_name|
+  def create_category(ledger, options)
+    kind = options[:kind]
+    category = ledger.create_category(kind, name: options[:name])
+    options[:types].each do |type_name|
       category.send("create_#{kind}_type", type_name)
     end
   end

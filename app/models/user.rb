@@ -28,10 +28,14 @@ class User < ApplicationRecord
 
   class << self
     def from_omniauth(auth)
-      params = auth.to_h.with_indifferent_access
-      where(params.slice(:provider, :uid)).first_or_create do |user|
-        user.assign_attributes(params[:info].slice(:email, :name, :image))
+      query, attributes = omni_auth_params(auth.to_h.with_indifferent_access)
+      where(query).first_or_create do |user|
+        user.assign_attributes(attributes)
       end
+    end
+
+    def omni_auth_params(params)
+      return params.slice(:provider, :uid), params[:info].slice(:email, :name, :image)
     end
   end
 
