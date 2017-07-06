@@ -38,7 +38,7 @@ Feature: GET navigation
     And I go back
     And I go forward
     Then I should see the 'nitrolinks' page
-    And the 'nitrolinks' page should be loaded from cache
+    And the 'nitrolinks' page should be loaded normally
 
   @nitrolinks
   Scenario: Managing change in content
@@ -46,4 +46,18 @@ Feature: GET navigation
     And I hit the 'Changing GET Form' button
     Then I should see the 'nitrolinks' page
     And I should see 'Foo'
+
+  @nitrolinks
+  Scenario: POST with redirects
+    When I enter 'FooPOST' on the 'Track POST' text field
+    And I hit the 'Changing POST Form' button
+    Then I should see the 'nitrolinks' page
+    And I should see 'FooPOST'
+
+  @nitrolinks
+  Scenario: Reloading
+    When I check the random uuid value on page
+    And I reload the page
+    Then I should see the 'nitrolinks' page
+    And I should see a new uuid value on page
 

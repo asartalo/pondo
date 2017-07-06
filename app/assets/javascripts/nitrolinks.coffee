@@ -1,6 +1,13 @@
 ((document, window) ->
+  getCsrfToken = ->
+    document.querySelector('meta[name="csrf-token"]').content
+  getCsrfParam = ->
+    document.querySelector('meta[name="csrf-param"]').content
+
   nitro = {
     appHost: window.location.origin
+    csrfToken: getCsrfToken()
+    csrfParam: getCsrfParam()
   }
 
   ifElseFn = (test, fn1, fn2) ->
@@ -82,6 +89,9 @@
   getBodyElement = ->
     document.getElementsByTagName('body')[0]
 
+  isCurrentPageReloaded = ->
+    window.performance.navigation.type = 1
+
   # Stolen from Turbolinks
   uuid = ->
     result = ""
@@ -118,7 +128,7 @@
 
   whenReady ->
     state = window.history.state
-    if hasState(state)
+    if hasState(state) && !isCurrentPageReloaded()
       loadState(getState(state))
     else
       location = urlPath(window.location)
@@ -135,12 +145,15 @@
 
   handleFormSubmits (form, e) ->
     url = new URL(form.action)
+    body = null
     method = form.method.toLowerCase()
     if method == 'get'
       url.search = $(form).serialize()
+    else if method == 'post'
+      body = new FormData(form)
     if isUrlAllowed(url)
       e.preventDefault()
-      visit(url, method: form.method)
+      visit(url, method: form.method, body: body)
       e.stopPropagation()
 
   fetchComplete = (url, theOptions = {}) ->
@@ -187,12 +200,15 @@
     triggerEvent 'nitrolinks:load', url: stateObj.url
 
   nitroFetchOptions = (options) ->
+    headers = {"nitrolinks-referrer": window.location.href}
+    if options.method == 'post'
+      headers["x-csrf-token"] = nitro.csrfToken
     method: options.method
     redirect: 'follow'
     credentials: 'include'
     body: options.body
-    headers:
-      "nitrolinks-referrer": window.location.href
+    headers: headers
+
 
   loadState = (stateObj) ->
     if stateObj.url

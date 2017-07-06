@@ -21,6 +21,7 @@ Rails.application.routes.draw do
         get 'redirecting'
         get 'redirected'
         get 'changing'
+        post 'changing_post'
       end
     end
   end

@@ -2,9 +2,18 @@
   .body
     h1 Nitrolinks Testing Home
     = render partial: 'nitrolinks/links'
+    p
+      strong> UUID:
+      span#unique
+        = @uuid
     p#track-get
       = @track_get
     = form_with url: changing_nitrolinks_path, method: :get do |form|
       label(for="track-get-field") Track GET
       = form.text_field :track, value: '', id: "track-get-field"
       = form.submit "Changing GET Form"
+
+    = form_with url: changing_post_nitrolinks_path, method: :post do |form|
+      label(for="track-post-field") Track POST
+      = form.text_field :track, value: '', id: "track-post-field"
+      = form.submit "Changing POST Form"

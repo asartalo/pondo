@@ -15,6 +15,10 @@ When(/^I go forward$/) do
   page.go_forward
 end
 
+When(/^I reload the page$/) do
+  jscript('window.location.reload()')
+end
+
 When(/^I pause$/) do
   pause_pls
 end
