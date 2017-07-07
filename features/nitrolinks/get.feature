@@ -61,3 +61,10 @@ Feature: GET navigation
     Then I should see the 'nitrolinks' page
     And I should see a new uuid value on page
 
+  @nitrolinks
+  Scenario: Clicking on hash links
+    When I check the random uuid value on page
+    And I click on the 'Nitro Debugging' hyperlink
+    Then I should not see a new uuid value on page
+    And The 'nitrolinks' page should not be loaded in anyway
+

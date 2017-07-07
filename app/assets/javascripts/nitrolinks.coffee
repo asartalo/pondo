@@ -23,7 +23,11 @@
     document.getElementsByTagName('html')[0]
 
   isUrlAllowed = (url) ->
-    url.origin == nitro.appHost
+    url.origin == nitro.appHost && !isHashChange(url)
+
+  isHashChange = (url) ->
+    current = window.location
+    url.hash != current.hash && url.pathname == current.pathname
 
   urlPath = (urlStr) ->
     url = new URL(urlStr)
@@ -126,7 +130,10 @@
     pu.triggerEvent 'nitrolinks:load', url: stateObj.url
 
   nitroFetchOptions = (options) ->
-    headers = {"nitrolinks-referrer": window.location.href}
+    headers = {
+      "nitrolinks-referrer": window.location.href
+      "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
+    }
     if options.method == 'post'
       headers["x-csrf-token"] = getCsrfToken()
     method: options.method
@@ -153,7 +160,11 @@
   onPopState(loadState)
 
   renderState = (content) ->
-    setDOM(getAppElement(), content)
+    setDOM(getAppElement(), preloadContent(content))
+
+  preloadContent = (content) ->
+    # TODO: Is there a better way to do this?
+    content.replace('<html', '<html class="js"')
 
   saveState = (url, method, body) ->
     key = pu.uuid()

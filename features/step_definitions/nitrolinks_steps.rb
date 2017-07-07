@@ -45,3 +45,12 @@ Then(/^I should see a new uuid value on page$/) do
   current_nitro_page_uuid = page.find_by_id("unique").text
   expect(current_nitro_page_uuid).not_to eql(@nitro_page_uuid)
 end
+
+Then(/^I should not see a new uuid value on page$/) do
+  current_nitro_page_uuid = page.find_by_id("unique").text
+  expect(current_nitro_page_uuid).to eql(@nitro_page_uuid)
+end
+
+Then(/^The '([^']*)' page should not be loaded in anyway$/) do |name|
+  expect_nitro_page_fetched(name).not_to eql(true)
+end
