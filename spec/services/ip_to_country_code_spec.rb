@@ -13,7 +13,11 @@ RSpec.describe IpToCountryCode do
   subject(:ip2cc) { IpToCountryCode.new(typhoeus) }
 
   describe "#get" do
-    subject(:code) { ip2cc.get('8.8.8.8') }
+    let(:ip_address) { '8.8.8.8' }
+    let(:body) do
+      ''
+    end
+    subject(:code) { ip2cc.get(ip_address) }
 
     before do
       allow(typhoeus).to receive(:get).with('http://ip-api.com/json/8.8.8.8').and_return(response)
@@ -49,8 +53,16 @@ RSpec.describe IpToCountryCode do
     end
 
     context "if body is unparseable" do
-      let(:body) do
-        ''
+      it "returns nil" do
+        expect(code).to be_nil
+      end
+    end
+
+    context "if passed with local ip" do
+      let(:ip_address) { '127.0.0.1' }
+
+      it "does not call typhoeus" do
+        expect(typhoeus).not_to have_received(:get)
       end
 
       it "returns nil" do

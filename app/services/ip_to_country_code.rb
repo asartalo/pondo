@@ -11,7 +11,9 @@ class IpToCountryCode
   end
 
   def get(ip_address)
-    return nil unless ip_address
+    if !ip_address || local?(ip_address)
+      return nil
+    end
     response = client.get("#{SERVICE_URL}/#{ip_address}")
     begin
       body = JSON.parse(response.body)
@@ -19,5 +21,9 @@ class IpToCountryCode
       return nil
     end
     body["countryCode"]
+  end
+
+  def local?(ip_address)
+    ip_address == '127.0.0.1'
   end
 end
