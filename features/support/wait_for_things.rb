@@ -1,6 +1,5 @@
 module WaitForThings
   def wait_for_page_load
-    puts "WAIT FOR PAGE LOAD: #{Capybara.default_max_wait_time}"
     Timeout.timeout(Capybara.default_max_wait_time) do
       loop until finished_loading?
     end
@@ -11,7 +10,6 @@ module WaitForThings
   end
 
   def wait_for_ajax
-    puts "WAIT: #{Capybara.default_max_wait_time}"
     Timeout.timeout(Capybara.default_max_wait_time) do
       loop until finished_all_ajax_requests?
     end

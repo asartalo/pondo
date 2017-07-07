@@ -39,7 +39,6 @@ end
 
 When(/^I check the random uuid value on page$/) do
   @nitro_page_uuid = page.find_by_id("unique").text
-  puts @nitro_page_uuid
 end
 
 Then(/^I should see a new uuid value on page$/) do

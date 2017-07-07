@@ -29,7 +29,6 @@ Given(/^I have a google account$/) do
       "image"=>"https://example.com/photo.jpg"
     }
   }.with_indifferent_access
-  puts "I have a google account"
 end
 
 When(/^I log in$/) do
