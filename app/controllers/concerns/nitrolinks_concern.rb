@@ -24,7 +24,6 @@ module Concerns::NitrolinksConcern
     end
 
     def set_nitrolinks_location_header_from_session
-      # byebug if nitrolinks_request?
       if session && session[:nitrolinks_location]
         response.headers["Nitrolinks-Location"] = session.delete(:nitrolinks_location)
       end

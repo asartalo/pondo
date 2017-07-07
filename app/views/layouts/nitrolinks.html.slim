@@ -2,16 +2,15 @@
   = stylesheet_link_tag 'nitrolinks', media: 'all', 'data-turbolinks-track': 'reload'
 
 = render layout: 'layouts/common' do
-  div
-    = yield
-    #nitro-debugging
-      h2 Dom Loads:
-      ul.dom-loads
+  = yield
+  #nitro-debugging
+    h2 Dom Loads:
+    ul.dom-loads
 
-      h2 Fetch Loads:
-      ul.fetch-loads
+    h2 Fetch Loads:
+    ul.fetch-loads
 
-      h2 Cache Loads:
-      ul.cache-loads
+    h2 Cache Loads:
+    ul.cache-loads
 
-      a(href='#') Foo
+    a(href='#') Foo

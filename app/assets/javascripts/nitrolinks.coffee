@@ -1,5 +1,5 @@
-# requires morphdom
-@nitro = ((document, window) ->
+# requires set-dom
+@nitro = ((document, window, setDOM) ->
   getContentOfElement = (selector, defaultValue = null) ->
     node = document.querySelector(selector)
     if node then node.content else defaultValue
@@ -91,8 +91,8 @@
         interval
       )
 
-  getBodyElement = ->
-    document.getElementsByTagName('body')[0]
+  getAppElement = ->
+    document.getElementsByTagName('html')[0]
 
   isCurrentPageReloaded = ->
     window.performance.navigation.type = 1
@@ -137,8 +137,8 @@
     else
       location = urlPath(window.location)
       method = 'get'
-      bodyCode = getBodyElement().outerHTML
-      state = saveState(location, method, bodyCode)
+      appCode = getAppElement().outerHTML
+      state = saveState(location, method, appCode)
       replaceTheState(state, location)
 
   handleLinkClicks (url, e) ->
@@ -149,15 +149,15 @@
 
   handleFormSubmits (form, e) ->
     url = new URL(form.action)
-    body = null
+    data = null
     method = form.method.toLowerCase()
     if method == 'get'
       url.search = $(form).serialize()
     else if method == 'post'
-      body = new FormData(form)
+      data = new FormData(form)
     if isUrlAllowed(url)
       e.preventDefault()
-      visit(url, method: form.method, body: body)
+      visit(url, method: form.method, body: data)
       e.stopPropagation()
 
   fetchComplete = (url, theOptions = {}) ->
@@ -167,23 +167,23 @@
       method = options.method
       pushState = options.pushState
       response.text().then (contents) ->
-        bodyCode = extractBodyCode(contents)
-        return unless bodyCode
+        pageSource = extractPageSource(contents)
+        return unless pageSource
         if response.redirected && response.headers.has("nitrolinks-location")
           location = urlPath(response.headers.get("nitrolinks-location"))
         else
           location = urlPath(url)
 
-        state = saveState(location, method, bodyCode)
-        renderState(bodyCode)
+        state = saveState(location, method, pageSource)
+        renderState(pageSource)
         pushTheState(state, location) if pushState
 
         triggerEvent 'nitrolinks:load-from-fetch', url: location
         triggerEvent 'nitrolinks:load', url: location
 
-  extractBodyCode = (text) ->
+  extractPageSource = (text) ->
     code = text.trim()
-    match = code.match(/<body[^>]*>([\s\S]+)<\/body>/)
+    match = code.match(/<html[^>]*>([\s\S]+)<\/html>/)
     return null unless match
     (match[0]).trim()
 
@@ -206,7 +206,7 @@
   nitroFetchOptions = (options) ->
     headers = {"nitrolinks-referrer": window.location.href}
     if options.method == 'post'
-      headers["x-csrf-token"] = nitro.csrfToken
+      headers["x-csrf-token"] = getCsrfToken()
     method: options.method
     redirect: 'follow'
     credentials: 'include'
@@ -228,14 +228,12 @@
     else
       visit(window.location.href, method: 'get', pushState: false)
 
-  onPopState loadState
+  onPopState(loadState)
 
   renderState = (content) ->
-    # getBodyElement().innerHTML = content
-    morphdom(getBodyElement(), content, childrenOnly: true)
+    setDOM(getAppElement(), content)
 
   saveState = (url, method, body) ->
-    # key = "#{method}:#{url}:#{uuid()}"
     key = uuid()
     cache(key, url: url, method: method, body: body)
     return key
@@ -264,6 +262,5 @@
     method: match[1], url: match[2]
 
   return {
-    renderState: renderState
   }
-)(document, window)
+)(document, window, setDOM)
