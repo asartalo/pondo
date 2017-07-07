@@ -1,13 +1,10 @@
 # requires set-dom
-@nitro = ((document, window, setDOM) ->
-  getContentOfElement = (selector, defaultValue = null) ->
-    node = document.querySelector(selector)
-    if node then node.content else defaultValue
-
+@nitro = ((document, window, pu, setDOM) ->
   getCsrfToken = ->
-    getContentOfElement('meta[name="csrf-token"]')
+    pu.getContentOfElement('meta[name="csrf-token"]')
+
   getCsrfParam = ->
-    getContentOfElement('meta[name="csrf-param"]')
+    pu.getContentOfElement('meta[name="csrf-param"]')
 
   nitro = {
     appHost: window.location.origin
@@ -15,59 +12,18 @@
     csrfParam: getCsrfParam()
   }
 
-  ifElseFn = (test, fn1, fn2) ->
-    if test then fn1 else fn2
-
-  ifFn = (test, fn) ->
-    fn if test
-
-  merge = (a, b) ->
-    Object.assign(a, b)
-
-  eventFactory = ifElseFn(
-    window.CustomEvent,
-    (event, data) ->
-      new CustomEvent(event, detail: data, bubbles: true, cancelable: true)
-    (event, data) ->
-      theEvent = document.createEvent('CustomEvent')
-      theEvent.initCustomEvent event, true, true, data
-      theEvent
-  )
-
-  whenReady = (fn) ->
-    document.addEventListener("DOMContentLoaded", fn)
-
-  eventDelegate = (event, selector, handler) ->
-    document.addEventListener event, (e) ->
-      target = e.target
-      while target and target != this
-        if target.matches(selector)
-          e.current = target
-          handler.call target, e
-          break
-        target = target.parentNode
-      return
-
-  triggerEvent = (event, data = {}) ->
-    document.dispatchEvent eventFactory(event, data)
-    event
-
-  handleLinkClicks = (fn) ->
-    eventDelegate 'click', 'a[href]', (e) ->
-      link = e.current
-      url = new URL(link.href)
-      fn(url, e)
-
-  handleFormSubmits = (fn) ->
-    eventDelegate 'submit', 'form', (e) ->
-      form = e.current
-      fn(form, e)
-
+  # TODO: This holds too much information to just store in sessionStorage
   cache = (key, value) ->
     window.sessionStorage.setItem(key, JSON.stringify(value))
 
   getCache = (key) ->
     JSON.parse(window.sessionStorage.getItem(key))
+
+  getAppElement = ->
+    document.getElementsByTagName('html')[0]
+
+  isUrlAllowed = (url) ->
+    url.origin == nitro.appHost
 
   urlPath = (urlStr) ->
     url = new URL(urlStr)
@@ -81,40 +37,6 @@
       "#{nitro.appHost}/#{urlStr.match(/^\/?(.+$)/)[1]}"
     else
       urlStr
-
-  async = (fn, interval = 0) ->
-    ->
-      args = arguments
-      setTimeout(
-        ->
-          fn.apply(fn, args)
-        interval
-      )
-
-  getAppElement = ->
-    document.getElementsByTagName('html')[0]
-
-  isCurrentPageReloaded = ->
-    window.performance.navigation.type = 1
-
-  # Stolen from Turbolinks
-  uuid = ->
-    result = ""
-    for i in [1..36]
-      if i in [9, 14, 19, 24]
-        result += "-"
-      else if i is 15
-        result += "4"
-      else if i is 20
-        result += (Math.floor(Math.random() * 4) + 8).toString(16)
-      else
-        result += Math.floor(Math.random() * 15).toString(16)
-    result
-
-
-  # NITRO-SPECIFIC
-  isUrlAllowed = (url) ->
-    url.origin == nitro.appHost
 
   pushTheState = (state, location) ->
     window.history.pushState(state, null, location)
@@ -130,9 +52,9 @@
         fn(getState(state))
 
 
-  whenReady ->
+  pu.whenReady ->
     state = window.history.state
-    if hasState(state) && !isCurrentPageReloaded()
+    if hasState(state) && !pu.isCurrentPageReloaded()
       loadState(getState(state))
     else
       location = urlPath(window.location)
@@ -141,13 +63,13 @@
       state = saveState(location, method, appCode)
       replaceTheState(state, location)
 
-  handleLinkClicks (url, e) ->
+  pu.handleLinkClicks (url, e) ->
     if isUrlAllowed(url)
       e.preventDefault()
       visit(url, method: 'get')
       e.stopPropagation()
 
-  handleFormSubmits (form, e) ->
+  pu.handleFormSubmits (form, e) ->
     url = new URL(form.action)
     data = null
     method = form.method.toLowerCase()
@@ -161,7 +83,7 @@
       e.stopPropagation()
 
   fetchComplete = (url, theOptions = {}) ->
-    options = merge({method: 'get', pushState: true}, theOptions)
+    options = pu.merge({method: 'get', pushState: true}, theOptions)
     (response) ->
       return unless response.ok
       method = options.method
@@ -178,8 +100,8 @@
         renderState(pageSource)
         pushTheState(state, location) if pushState
 
-        triggerEvent 'nitrolinks:load-from-fetch', url: location
-        triggerEvent 'nitrolinks:load', url: location
+        pu.triggerEvent 'nitrolinks:load-from-fetch', url: location
+        pu.triggerEvent 'nitrolinks:load', url: location
 
   extractPageSource = (text) ->
     code = text.trim()
@@ -188,8 +110,8 @@
     (match[0]).trim()
 
   visit = (url, theOptions = {}) ->
-    options = merge({method: 'get', pushState: true}, theOptions)
-    event = triggerEvent 'nitrolinks:before-visit'
+    options = pu.merge({method: 'get', pushState: true}, theOptions)
+    event = pu.triggerEvent 'nitrolinks:before-visit'
     return if event.defaultPrevented
     fetch(url, nitroFetchOptions(options)).then(
       fetchComplete(url, options)
@@ -198,10 +120,10 @@
     )
 
   visitCached = (stateObj) ->
-    triggerEvent 'nitrolinks:before-visit'
+    pu.triggerEvent 'nitrolinks:before-visit'
     renderState(stateObj.content)
-    triggerEvent 'nitrolinks:load-from-cache', url: stateObj.url
-    triggerEvent 'nitrolinks:load', url: stateObj.url
+    pu.triggerEvent 'nitrolinks:load-from-cache', url: stateObj.url
+    pu.triggerEvent 'nitrolinks:load', url: stateObj.url
 
   nitroFetchOptions = (options) ->
     headers = {"nitrolinks-referrer": window.location.href}
@@ -234,7 +156,7 @@
     setDOM(getAppElement(), content)
 
   saveState = (url, method, body) ->
-    key = uuid()
+    key = pu.uuid()
     cache(key, url: url, method: method, body: body)
     return key
 
@@ -263,4 +185,4 @@
 
   return {
   }
-)(document, window, setDOM)
+)(document, window, pu, setDOM)
