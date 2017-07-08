@@ -62,7 +62,7 @@
     if node then node.content else defaultValue
 
   isCurrentPageReloaded = ->
-    window.performance.navigation.type = 1
+    window.performance.navigation.type == 1
 
   # Stolen from Turbolinks
   uuid = ->
