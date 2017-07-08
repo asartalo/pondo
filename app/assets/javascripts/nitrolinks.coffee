@@ -23,18 +23,26 @@
     document.getElementsByTagName('html')[0]
 
   isUrlAllowed = (url) ->
-    url.origin == nitro.appHost && !isHashChange(url)
+    from = window.location
+    url.origin == nitro.appHost && !isHashChange(from, url)
 
-  isHashChange = (url) ->
-    current = window.location
-    url.hash != current.hash && url.pathname == current.pathname
+  isHashChange = (fromUrl, toUrl) ->
+    if toUrl.pathname != fromUrl.pathname || toUrl.search != fromUrl.search
+      false
+    else
+      toUrl.hash != fromUrl.hash && !toUrl.toString().match(/#/) || !fromUrl.toString().match(/#/)
 
   urlPath = (urlStr) ->
-    url = new URL(urlStr)
+    urlPathFromUrl(new URL(urlStr))
+
+  urlPathFromUrl = (url) ->
     if url.origin == url.toString()
       url.pathname
     else
       url.toString().replace(url.origin, '')
+
+  hasEmptyHash = (url) ->
+    url.toString().match(/#/) && url.hash == ""
 
   fullPath = (urlStr) ->
     if urlStr.indexOf(nitro.appHost) != 0
@@ -115,7 +123,7 @@
 
   visit = (url, theOptions = {}) ->
     options = pu.merge({method: 'get', pushState: true}, theOptions)
-    event = pu.triggerEvent 'nitrolinks:before-visit'
+    event = pu.triggerEvent 'nitrolinks:visit'
     return if event.defaultPrevented
     fetch(url, nitroFetchOptions(options)).then(
       fetchComplete(url, options)
@@ -124,7 +132,7 @@
     )
 
   visitCached = (stateObj) ->
-    pu.triggerEvent 'nitrolinks:before-visit'
+    pu.triggerEvent 'nitrolinks:visit'
     renderState(stateObj.content)
     pu.triggerEvent 'nitrolinks:load-from-cache', url: stateObj.url
     pu.triggerEvent 'nitrolinks:load', url: stateObj.url

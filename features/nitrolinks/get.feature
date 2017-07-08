@@ -38,7 +38,7 @@ Feature: GET navigation
     And I go back
     And I go forward
     Then I should see the 'nitrolinks' page
-    And the 'nitrolinks' page should be loaded normally
+    And the 'nitrolinks' page should be loaded from cache
 
   @nitrolinks
   Scenario: Managing change in content
@@ -66,5 +66,14 @@ Feature: GET navigation
     When I check the random uuid value on page
     And I click on the 'Nitro Debugging' hyperlink
     Then I should not see a new uuid value on page
-    And The 'nitrolinks' page should not be loaded in anyway
+    And The 'nitrolinks_debugging' page should not be loaded in anyway
+    And There should not be any javascript errors
+
+  @nitrolinks
+  Scenario: Clicking on empty hash
+    When I check the random uuid value on page
+    And I click on the 'Nitro Hash' hyperlink
+    Then I should not see a new uuid value on page
+    And The 'nitrolinks_hash' page should not be loaded in anyway
+    And There should not be any javascript errors
 

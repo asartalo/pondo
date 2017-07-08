@@ -2,17 +2,16 @@
 
 $document = $(document)
 
-# Mark that js is enabled
-$document.find('html').addClass 'js'
-
 # Load and unload depending if elements exist on the page
 app.load = (selector, loader, unloader) ->
-  $document.on 'turbolinks:load', ->
+  $document.on 'nitrolinks:load', ->
+    console.log 'app load'
     elements = $(selector)
     if elements.length > 0 && loader
       loader(elements)
 
-  $document.on 'turbolinks:unload', ->
+  $document.on 'nitrolinks:visit', ->
+    console.log 'app unload'
     elements = $(selector)
     if elements.length > 0 && unloader
       unloader(elements)
@@ -25,12 +24,12 @@ app.afterLoad = (selector, loader) ->
         loader(elements)
     else
       loader(e.target)
-    $document.off 'turbolinks:load', myLoader
+    $document.off 'nitrolinks:load', myLoader
 
-  $document.on 'turbolinks:load',  myLoader
+  $document.on 'nitrolinks:load',  myLoader
 
 app.reload = ->
-  Turbolinks.visit(window.location.toString())
+  nitrolinks.visit(window.location.toString())
 
 app.delay = (seconds, callback) ->
   window.setTimeout callback, seconds * 1000
@@ -72,7 +71,7 @@ app.closeDialog = closeDialog
 $document.on 'click', 'dialog .close', (e) ->
   closeDialog()
 
-$document.on 'turbolinks:unload', ->
+$document.on 'nitrolinks:visit', ->
   closeDialog()
 
 $document.on 'click', '.dialog-open', (e) ->

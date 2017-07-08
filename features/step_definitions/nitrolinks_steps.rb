@@ -54,3 +54,7 @@ end
 Then(/^The '([^']*)' page should not be loaded in anyway$/) do |name|
   expect_nitro_page_fetched(name).not_to eql(true)
 end
+
+Then(/^There should not be any javascript errors$/) do
+  expect_no_js_errors
+end

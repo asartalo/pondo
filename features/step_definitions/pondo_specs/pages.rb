@@ -18,6 +18,16 @@ module PondoSpecs
         content: 'Nitrolinks Testing Home'
       },
 
+      nitrolinks_debugging: {
+        path: '/nitrolinks#nitro-debugging',
+        content: 'Nitrolinks Testing Home'
+      },
+
+      nitrolinks_hash: {
+        path: '/nitrolinks#',
+        content: 'Nitrolinks Testing Home'
+      },
+
       nitrolinks_1: {
         path: '/nitrolinks/link1',
         content: 'Link 1'

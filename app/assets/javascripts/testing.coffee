@@ -5,6 +5,7 @@ class PondoTesting
     @domLoadKey = 'pondoDomLoad'
     @fetchLoadKey = 'pondoFetchLoad'
     @cacheLoadKey = 'pondoCacheLoad'
+    @errors = []
 
   init: ->
     @listen()
@@ -20,8 +21,8 @@ class PondoTesting
     @body.removeClass('testing-visiting')
 
   listen: ->
-    @document.on 'nitrolinks:before-visit', =>
-      @markAsLoading('nitrolinks:before-visit')
+    @document.on 'nitrolinks:visit', =>
+      @markAsLoading('nitrolinks:visit')
 
     @document.on 'nitrolinks:load', (e) =>
       @markAsDoneLoading()
@@ -32,6 +33,9 @@ class PondoTesting
 
     @document.on 'nitrolinks:load-from-cache', (e) =>
       @addToCached(e.detail.url)
+
+    @window.addEventListener 'error', (e) =>
+      @addToErrors(e)
 
     $ =>
       return unless $('#nitro-debugging').is(':visible')
@@ -57,19 +61,32 @@ class PondoTesting
     loads.push input
     @store.set(key, loads)
 
+  addToErrors: (e) ->
+    if e.error
+      @errors.push e.error.message
+    else
+      @errors.push e
+    console.log e
+    @loadShowerFromCollection(@errorsEl(), @errors)
+
   showLoads: ->
     @showDomLoads()
     @showFetchLoads()
     @showCacheLoads()
 
+  errorsEl: ->
+    $('#nitro-debugging .javascript-errors')
+
   domEl: ->
     $('#nitro-debugging .dom-loads')
 
   showDomLoads: ->
-    @loadShower(@domEl(), @domLoadKey)
+    @loadShowerFromCollection(@domEl(), @errors)
 
   loadShower: ($el, storeKey) ->
-    loads = @store.get(storeKey, [])
+    @loadShowerFromCollection($el, @store.get(storeKey, []))
+
+  loadShowerFromCollection: ($el, loads) ->
     htmlStr = ''
     for load in loads
       htmlStr += "<li>#{load}</li>"
@@ -129,9 +146,11 @@ class PondoTesting
     else
       url.toString().replace(url.origin, '')
 
+  hasJavascriptErrors: ->
+    @errorsEl().find('li').length > 0
+
 class PondoTestStore
   constructor: (@localStore) ->
-    console.log @localStore
 
   set: (key, value) ->
     @localStore.setItem(key, JSON.stringify(value))

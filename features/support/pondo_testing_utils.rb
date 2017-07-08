@@ -31,6 +31,10 @@ module PondoTestingUtils
     expect(page).to have_text(pondo_page_content(name) || "")
   end
 
+  def expect_no_js_errors
+    expect_script("pondoTesting.hasJavascriptErrors()").to eql(false)
+  end
+
   private
 
   def expect_nitro_page(name, function)
