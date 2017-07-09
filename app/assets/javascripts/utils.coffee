@@ -5,13 +5,11 @@ $document = $(document)
 # Load and unload depending if elements exist on the page
 app.load = (selector, loader, unloader) ->
   $document.on 'nitrolinks:load', ->
-    console.log 'app load'
     elements = $(selector)
     if elements.length > 0 && loader
       loader(elements)
 
   $document.on 'nitrolinks:visit', ->
-    console.log 'app unload'
     elements = $(selector)
     if elements.length > 0 && unloader
       unloader(elements)

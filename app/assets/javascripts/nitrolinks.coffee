@@ -72,6 +72,7 @@
       location = urlPath(window.location)
       method = 'get'
       appCode = getAppElement().outerHTML
+      renderState(preloadContent(appCode))
       state = saveState(location, method, appCode)
       replaceTheState(state, location)
 
@@ -109,7 +110,7 @@
           location = urlPath(url)
 
         state = saveState(location, method, pageSource)
-        renderState(pageSource)
+        renderState(preloadContent(pageSource))
         pushTheState(state, location) if pushState
 
         pu.triggerEvent 'nitrolinks:load-from-fetch', url: location
@@ -133,7 +134,7 @@
 
   visitCached = (stateObj) ->
     pu.triggerEvent 'nitrolinks:visit'
-    renderState(stateObj.content)
+    renderState(preloadContent(stateObj.content))
     pu.triggerEvent 'nitrolinks:load-from-cache', url: stateObj.url
     pu.triggerEvent 'nitrolinks:load', url: stateObj.url
 
@@ -168,7 +169,7 @@
   onPopState(loadState)
 
   renderState = (content) ->
-    setDOM(getAppElement(), preloadContent(content))
+    setDOM(getAppElement(), content)
 
   preloadContent = (content) ->
     # TODO: Is there a better way to do this?
