@@ -41,6 +41,7 @@ group :development, :test do
   gem 'dotenv-rails'
   gem 'byebug', platform: :mri
   gem 'nokogiri', "~> 1.7.1"
+  gem 'jasmine-rails'
 end
 
 group :development do

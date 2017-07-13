@@ -3,9 +3,6 @@
   ifElseFn = (test, fn1, fn2) ->
     if test then fn1 else fn2
 
-  ifFn = (test, fn) ->
-    fn if test
-
   merge = (a, b) ->
     Object.assign(a, b)
 
@@ -81,7 +78,6 @@
   return {
     getContentOfElement: getContentOfElement
     ifElseFn: ifElseFn
-    ifFn: ifFn
     merge: merge
     eventFactory: eventFactory
     whenReady: whenReady

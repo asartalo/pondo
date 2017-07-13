@@ -9,10 +9,11 @@ app.load = (selector, loader, unloader) ->
     if elements.length > 0 && loader
       loader(elements)
 
-  $document.on 'nitrolinks:visit', ->
-    elements = $(selector)
-    if elements.length > 0 && unloader
-      unloader(elements)
+  if unloader
+    $document.on 'nitrolinks:visit', ->
+      elements = $(selector)
+      if elements.length > 0
+        unloader(elements)
 
 app.afterLoad = (selector, loader) ->
   myLoader = (e) ->
