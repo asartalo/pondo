@@ -27,6 +27,8 @@
 
   whenReady = (fn) ->
     document.addEventListener("DOMContentLoaded", fn)
+    ->
+      document.removeEventListener("DOMContentLoaded", fn)
 
   eventDelegate = (event, selector, handler) ->
     document.addEventListener event, (e) ->
@@ -79,7 +81,6 @@
     getContentOfElement: getContentOfElement
     ifElseFn: ifElseFn
     merge: merge
-    eventFactory: eventFactory
     whenReady: whenReady
     eventDelegate: eventDelegate
     triggerEvent: triggerEvent
