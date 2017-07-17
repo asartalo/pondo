@@ -3,8 +3,12 @@ module PondoTestingUtils
     page.evaluate_script(code)
   end
 
-  def expect_script(code)
-    expect(jscript(code))
+  def expect_script(code, filter = nil)
+    result = jscript(code)
+    if filter
+      result = result.send(filter)
+    end
+    expect(result)
   end
 
   def pondo_page(name)
@@ -33,6 +37,10 @@ module PondoTestingUtils
 
   def expect_no_js_errors
     expect_script("pondoTesting.hasJavascriptErrors()").to eql(false)
+  end
+
+  def expect_nitro_load_count
+    expect_script("pondoTesting.loadCount", :to_i)
   end
 
   private

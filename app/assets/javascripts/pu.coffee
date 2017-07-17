@@ -25,6 +25,31 @@
       theEvent
   )
 
+  animateCss = (el, animation, fn) ->
+    classList = el.classList
+    classList.add('animated')
+    classList.add(animation)
+    animationEndEvents = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend'
+    listenOnce el, animationEndEvents, ->
+      fn() if fn
+      classList.remove('animated')
+      classList.remove(animation)
+
+  listenOnce = (el, eventsStr, fn) ->
+    events = eventsStr.split(/\s/)
+    unloader = ->
+      for event in events
+        el.removeEventListener(event, handler)
+
+    handler = (e) ->
+      fn.call el, e
+      unloader()
+
+    for event in events
+      el.addEventListener event, handler
+
+    unloader
+
   whenReady = (fn) ->
     document.addEventListener("DOMContentLoaded", fn)
     ->
@@ -41,8 +66,15 @@
         target = target.parentNode
       return
 
+  eventListen = (event, handler) ->
+    document.addEventListener event, (e) ->
+      handler.call document, e
+
   triggerEvent = (event, data = {}) ->
-    document.dispatchEvent eventFactory(event, data)
+    triggerElementEvent(document, event, data)
+
+  triggerElementEvent = (el, event, data = {}) ->
+    el.dispatchEvent eventFactory(event, data)
     event
 
   handleLinkClicks = (fn) ->
@@ -63,6 +95,12 @@
   isCurrentPageReloaded = ->
     window.performance.navigation.type == 1
 
+  select = (selector) ->
+    document.querySelectorAll(selector)
+
+  hide = (el) ->
+    el.style.display = 'none'
+
   # Stolen from Turbolinks
   uuid = ->
     result = ""
@@ -81,14 +119,21 @@
     getContentOfElement: getContentOfElement
     ifElseFn: ifElseFn
     merge: merge
+    listenOnce: listenOnce
+    createEvent: eventFactory
     whenReady: whenReady
     eventDelegate: eventDelegate
+    eventListen: eventListen
     triggerEvent: triggerEvent
+    triggerElementEvent: triggerElementEvent
     handleLinkClicks: handleLinkClicks
     handleFormSubmits: handleFormSubmits
     async: async
     isCurrentPageReloaded: isCurrentPageReloaded
     uuid: uuid
+    animateCss: animateCss
+    select: select
+    hide: hide
   }
 )(document, window)
 

@@ -4,6 +4,9 @@
 = render layout: 'layouts/common' do
   = yield
   #nitro-debugging
+    h2 Nitro Load Count:
+    p.nitro-load-count
+
     h2 Dom Loads:
     ul.dom-loads
 

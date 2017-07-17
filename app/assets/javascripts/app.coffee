@@ -4,28 +4,31 @@ $document = $(document)
 
 # Load and unload depending if elements exist on the page
 app.load = (selector, loader, unloader) ->
-  $document.on 'nitrolinks:load', ->
-    elements = $(selector)
+  loadListener = ->
+    elements = pu.select(selector)
     if elements.length > 0 && loader
       loader(elements)
 
+  pu.eventListen 'nitrolinks:load', loadListener
+
   if unloader
-    $document.on 'nitrolinks:visit', ->
+    unloadListener = ->
       elements = $(selector)
       if elements.length > 0
         unloader(elements)
+    pu.eventListen 'nitrolinks:visit', unloadListener
 
-app.afterLoad = (selector, loader) ->
-  myLoader = (e) ->
-    if selector
-      elements = $(selector)
-      if elements.length > 0 && loader
-        loader(elements)
-    else
-      loader(e.target)
-    $document.off 'nitrolinks:load', myLoader
-
-  $document.on 'nitrolinks:load',  myLoader
+# app.afterLoad = (selector, loader) ->
+#   myLoader = (e) ->
+#     if selector
+#       elements = $(selector)
+#       if elements.length > 0 && loader
+#         loader(elements)
+#     else
+#       loader(e.target)
+#     $document.off 'nitrolinks:load', myLoader
+#
+#   $document.on 'nitrolinks:load',  myLoader
 
 app.reload = ->
   nitrolinks.visit(window.location.toString())

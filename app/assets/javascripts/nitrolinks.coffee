@@ -24,13 +24,22 @@
 
   isUrlAllowed = (url) ->
     from = window.location
-    url.origin == nitro.appHost && !isHashChange(from, url)
+    url.origin == nitro.appHost && isNewNavigation(from, url)
 
-  isHashChange = (fromUrl, toUrl) ->
+  isNewNavigation = (fromUrl, toUrl) ->
     if toUrl.pathname != fromUrl.pathname || toUrl.search != fromUrl.search
-      false
+      true
     else
-      toUrl.hash != fromUrl.hash && !toUrl.toString().match(/#/) || !fromUrl.toString().match(/#/)
+      !isHashChanged(fromUrl, toUrl)
+
+  isHashChanged = (fromUrl, toUrl) ->
+    if toUrl.hash != fromUrl.hash
+      true
+    else
+      urlIsHashed(toUrl) || urlIsHashed(fromUrl)
+
+  urlIsHashed = (url) ->
+    url.toString().match(/#/)
 
   urlPath = (urlStr) ->
     urlPathFromUrl(new URL(urlStr))
@@ -75,6 +84,7 @@
       renderState(preloadContent(appCode))
       state = saveState(location, method, appCode)
       replaceTheState(state, location)
+      pu.triggerEvent 'nitrolinks:load', url: location
 
   pu.handleLinkClicks (url, e) ->
     if isUrlAllowed(url)

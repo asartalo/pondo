@@ -5,6 +5,7 @@ class PondoTesting
     @domLoadKey = 'pondoDomLoad'
     @fetchLoadKey = 'pondoFetchLoad'
     @cacheLoadKey = 'pondoCacheLoad'
+    @loadCount = 0
     @errors = []
 
   init: ->
@@ -25,6 +26,7 @@ class PondoTesting
       @markAsLoading('nitrolinks:visit')
 
     @document.on 'nitrolinks:load', (e) =>
+      @loadCount += 1
       @markAsDoneLoading()
       @showLoads()
 
@@ -70,9 +72,13 @@ class PondoTesting
     @loadShowerFromCollection(@errorsEl(), @errors)
 
   showLoads: ->
+    @showNitroLoadCount()
     @showDomLoads()
     @showFetchLoads()
     @showCacheLoads()
+
+  showNitroLoadCount: ->
+    $('#nitro-debugging .nitro-load-count').text(@loadCount)
 
   errorsEl: ->
     $('#nitro-debugging .javascript-errors')

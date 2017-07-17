@@ -58,3 +58,7 @@ end
 Then(/^There should not be any javascript errors$/) do
   expect_no_js_errors
 end
+
+Then(/^the nitro load event should fire (\d+) times?$/) do |times|
+  expect_nitro_load_count.to eql(times.to_i)
+end
