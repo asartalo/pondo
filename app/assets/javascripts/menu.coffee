@@ -1,11 +1,24 @@
 $document = $(document)
 
-$document.on 'click', '.menu-button', (e) ->
-  e.preventDefault()
-  $button = $(e.currentTarget)
-  $menu = $($button.attr('href'))
-  if $menu.is('.active')
-    $menu.removeClass('active')
-  else
-    $menu.addClass('active')
+button = null
+app.hashChange "header-menu",
+  ->
+    pu.selectAndEach '#header-menu', (el) ->
+      el.classList.add('active')
+
+    pu.selectAndEach 'a[href="#header-menu"]', (el) ->
+      button = el
+      button.href = "#"
+
+    app.showOverlay ->
+      button.click() if button
+
+  ->
+    pu.selectAndEach '#header-menu', (el) ->
+      el.classList.remove('active')
+
+    if button
+      button.href="#header-menu"
+
+    app.hideOverlay()
 

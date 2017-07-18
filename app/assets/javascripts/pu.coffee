@@ -1,5 +1,10 @@
 # Pondo Utilities
 @pu = ((document, window) ->
+  whenReady = (fn) ->
+    document.addEventListener("DOMContentLoaded", fn)
+    ->
+      document.removeEventListener("DOMContentLoaded", fn)
+
   ifElseFn = (test, fn1, fn2) ->
     if test then fn1 else fn2
 
@@ -50,11 +55,6 @@
 
     unloader
 
-  whenReady = (fn) ->
-    document.addEventListener("DOMContentLoaded", fn)
-    ->
-      document.removeEventListener("DOMContentLoaded", fn)
-
   eventDelegate = (event, selector, handler) ->
     document.addEventListener event, (e) ->
       target = e.target
@@ -98,6 +98,15 @@
   select = (selector) ->
     document.querySelectorAll(selector)
 
+  selectAnd = (selector, fn) ->
+    found = select(selector)
+    fn.call(fn, found)
+
+  selectAndEach = (selector, fn) ->
+    selectAnd selector, (elements) ->
+      for element in elements
+        fn.call(fn, element)
+
   hide = (el) ->
     el.style.display = 'none'
 
@@ -133,6 +142,8 @@
     uuid: uuid
     animateCss: animateCss
     select: select
+    selectAnd: selectAnd
+    selectAndEach: selectAndEach
     hide: hide
   }
 )(document, window)

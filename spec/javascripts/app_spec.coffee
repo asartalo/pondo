@@ -1,6 +1,11 @@
 #= require jquery
 #= require app
 
+sleep = (ms) ->
+  new Promise (resolve) ->
+    setTimeout(resolve, ms)
+    return
+
 describe 'app', ->
   describe 'load', ->
     beforeEach =>
@@ -61,5 +66,37 @@ describe 'app', ->
         it "passes matching elements to loader", =>
           expect(@matched.length).toEqual(1)
           expect(@matched[0]).toEqual(@el)
+
+  describe 'app.hashChange', ->
+    beforeEach =>
+      @subject = false
+      app.hashChange(
+        'foo',
+        =>
+          @subject = 'bar'
+        =>
+          @subject = 'baz'
+      )
+
+    # describe 'when a non-matching hash change is triggered', =>
+    #   beforeEach =>
+    #     window.history.pushState('1', null, '#zoo')
+
+    #   afterEach =>
+    #     window.history.back()
+
+    #   it 'does not do anything', =>
+    #     expect(@subject).toEqual(false)
+
+    describe 'when a matching hash change is triggered', =>
+      beforeEach =>
+        # window.location.hash = "foo"
+
+      afterEach =>
+        # window.history.back()
+
+      it 'executes in func', =>
+        pending("Unable to properly test this")
+        expect(@subject).toEqual('bar')
 
 

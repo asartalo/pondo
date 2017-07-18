@@ -18,6 +18,27 @@ app.load = (selector, loader, unloader) ->
         unloader(elements)
     pu.eventListen 'nitrolinks:visit', unloadListener
 
+funcKeyExec = (hash, key, args...) ->
+  if key
+    func = hash[key]
+    if func
+      func.apply(func, args)
+
+hashChangeLoaders = {}
+hashChangeUnloaders = {}
+
+window.addEventListener "hashchange", (e) ->
+  funcKeyExec hashChangeUnloaders, (new URL(e.oldURL)).hash
+  funcKeyExec hashChangeLoaders, (new URL(e.newURL)).hash
+
+app.hashChange = (hash, loader, unloader) ->
+  hashChangeLoaders["##{hash}"] = loader
+  hashChangeUnloaders["##{hash}"] = unloader
+
+pu.eventListen 'nitrolinks:load', ->
+  funcKeyExec(hashChangeLoaders, window.location.hash)
+
+
 # app.afterLoad = (selector, loader) ->
 #   myLoader = (e) ->
 #     if selector
