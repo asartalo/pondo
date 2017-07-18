@@ -38,7 +38,6 @@ header {
         padding: 13px;
       }
     }
-
   }
 
   .logo {
@@ -48,6 +47,7 @@ header {
 
   .menu {
     position: fixed;
+    padding-top: 80px;
     width: 100%;
     max-width: 300px;
     transform: translate3d(100%, 0, 0);
@@ -61,6 +61,15 @@ header {
 
     &.active {
       transform: translate3d(0, 0, 0);
+    }
+
+    a {
+      display: block;
+      text-align: left;
+
+      &:hover {
+        background-color: #efefef;
+      }
     }
   }
 }
