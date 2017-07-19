@@ -12,9 +12,9 @@ Feature: Logging in
     When I log in
     Then I should see the 'dashboard' page
 
-  # Scenario: I fail to log in
-    # ScGiven I visit the 'home' page
-    # ScGiven I don't have a google account
-    # ScWhen I log in
-    # ScThen I should see the 'home' page
+  Scenario: I fail to log in
+    Given I visit the 'home' page
+    Given I don't have a google account
+    When I log in
+    Then I should see the 'home' page
 
