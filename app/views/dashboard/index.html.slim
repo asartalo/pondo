@@ -8,7 +8,7 @@
 
     nav
       ul.tabs.main-tabs
-        - if @ledger.persisted?
+        - if @ledger
           li.tab
             a(href="#add-income-section")
               i> +
@@ -42,5 +42,5 @@
     #create-ledger.create-ledger.modal-form
       .modal-content
         h2 Create Ledger
-        = render partial: 'ledgers/ledger_form', locals: { ledger: @ledger }
+        = render partial: 'ledgers/ledger_form', locals: { ledger: @new_ledger }
 

@@ -13,8 +13,8 @@ class DashboardController < ApplicationController
       @ledger = current_user.viewable_ledgers.first
     else
       @no_ledger = true
-      @ledger = current_user.owned_ledgers.new(currency: current_user_currency)
     end
+    @new_ledger = current_user.owned_ledgers.new(currency: current_user_currency)
   end
 
   def current_user_currency

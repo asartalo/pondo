@@ -6,7 +6,7 @@ end
 
 When(/^I select the add income section$/) do
   find_link('Add Income').click
-  wait_for_ajax
+  wait_for_remote_request
 end
 
 Then(/^I should see the add income section$/) do

@@ -3,6 +3,7 @@ class LedgersController < ApplicationController
 
   def create
     LedgerBuilder.new(current_user).create_ledger(ledger_params)
+    redirect_to dashboard_url
   end
 
   private

@@ -17,3 +17,6 @@
       label(for="track-post-field") Track POST
       = form.text_field :track, value: '', id: "track-post-field"
       = form.submit "Changing POST Form"
+
+    = form_with url: blank_nitrolinks_path, method: :post do |form|
+      = form.submit "Blank POST"

@@ -6,13 +6,11 @@ module WaitForThings
   end
 
   def finished_loading?
-    page.evaluate_script('jQuery(".testing-visiting").length').zero?
+    jscript('document.getElementsByClassName("testing-visiting").length').zero?
   end
 
-  def wait_for_ajax
-    Timeout.timeout(Capybara.default_max_wait_time) do
-      loop until finished_all_ajax_requests?
-    end
+  def wait_for_remote_request
+    wait_for_page_load
   end
 
   def finished_all_ajax_requests?

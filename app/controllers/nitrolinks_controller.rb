@@ -25,5 +25,8 @@ class NitrolinksController < ApplicationController
     session[:track_get] = params[:track]
     redirect_to action: 'index'
   end
+
+  def blank
+  end
 end
 

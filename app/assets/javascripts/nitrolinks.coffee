@@ -113,7 +113,9 @@
       pushState = options.pushState
       response.text().then (contents) ->
         pageSource = extractPageSource(contents)
-        return unless pageSource
+        unless pageSource
+          pu.triggerEvent 'nitrolinks:load-blank'
+          return
         if response.redirected && response.headers.has("nitrolinks-location")
           location = urlPath(response.headers.get("nitrolinks-location"))
         else

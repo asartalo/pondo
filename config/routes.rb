@@ -23,6 +23,7 @@ Rails.application.routes.draw do
         get 'redirected'
         get 'changing'
         post 'changing_post'
+        post 'blank'
       end
     end
   end

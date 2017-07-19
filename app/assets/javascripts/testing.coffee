@@ -25,7 +25,7 @@ class PondoTesting
     @document.on 'nitrolinks:visit', =>
       @markAsLoading('nitrolinks:visit')
 
-    @document.on 'nitrolinks:load', (e) =>
+    @document.on 'nitrolinks:load nitrolinks:load-blank', (e) =>
       @loadCount += 1
       @markAsDoneLoading()
       @showLoads()
@@ -171,6 +171,7 @@ class PondoTestStore
   remove: (key) ->
     @localStore.removeItem(key)
 
-@pondoTesting = new PondoTesting(window, $(document), $('body'))
-@pondoTesting.init()
+$ =>
+  @pondoTesting = new PondoTesting(window, $(document), $('body'))
+  @pondoTesting.init()
 
