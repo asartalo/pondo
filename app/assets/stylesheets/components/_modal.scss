@@ -5,14 +5,14 @@
     top: 50vh;
     left: 50vw;
     transform: translate3d(-50%, -50%, 0);
-    position: absolute;
+    position: fixed;
     max-width: 600px;
     width: -o-calc(100% - 60px); /* opera */
     width: -webkit-calc(100% - 60px); /* google, safari */
     width: -moz-calc(100% - 60px); /* firefox */
     width: calc(100% - 60px);
     max-height: 100vh;
-    overflow-height: auto;
+    overflow-y: auto;
 
     .modal-content {
       padding: 40px;
