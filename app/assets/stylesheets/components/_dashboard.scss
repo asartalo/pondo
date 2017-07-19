@@ -1,6 +1,17 @@
 .dashboard-page {
+  #first-time {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
   .welcome {
     text-align: center;
+    align-self: center;
+
+    p {
+      margin: 60px 0;
+    }
   }
 
   p {

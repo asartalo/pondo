@@ -1,42 +1,65 @@
+%menu-hover {
+  &:hover {
+    background-color: #efefef;
+  }
+}
+
+%header-button {
+  display: block;
+  line-height: 0;
+  padding: 8px;
+  position: relative;
+  z-index: 300;
+  &:hover {
+    background-color: transparent;
+  }
+
+  img {
+    @extend %menu-hover;
+    padding: 13px;
+    border-radius: 100%;
+  }
+}
+
 header {
-  padding: 12px 0 0;
-  border-bottom: 1px solid #ddd;
-  display: flex;
+  .header-content {
+    padding: 12px 0 0;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
 
-  > .header-branding,
-  > .header-title,
-  > .header-navigation {
-    flex: 0 1 auto;
-  }
-
-  > .header-branding,
-  > .header-navigation {
-    flex-basis: initial;
-  }
-
-  > .header-title {
-    flex-grow: 1;
-  }
-
-  > .header-branding {
-    > a {
-      padding: 8px;
-      display: block;
-      line-height: 0;
+    > .header-branding,
+    > .header-title,
+    > .header-navigation {
+      flex: 0 1 auto;
     }
+
+    > .header-branding,
+    > .header-navigation {
+      flex-basis: initial;
+    }
+
+    > .header-title {
+      flex-grow: 1;
+    }
+
+    > .header-branding {
+      > a {
+        padding: 8px;
+        display: block;
+        line-height: 0;
+      }
+    }
+
   }
+
 
   .header-navigation {
     > a {
-      display: block;
-      line-height: 0;
-      padding: 8px;
-      position: relative;
-      z-index: 300;
-
-      img {
-        padding: 13px;
-      }
+      @extend %header-button;
     }
   }
 
@@ -47,7 +70,7 @@ header {
 
   .menu {
     position: fixed;
-    padding-top: 80px;
+    padding-top: 10px;
     width: 100%;
     max-width: 300px;
     transform: translate3d(100%, 0, 0);
@@ -64,12 +87,18 @@ header {
     }
 
     a {
+      @extend %menu-hover;
       display: block;
       text-align: left;
+    }
 
-      &:hover {
-        background-color: #efefef;
-      }
+    > ul {
+      margin-top: 60px;
+    }
+
+    .menu-button {
+      @extend %header-button;
+      float: right;
     }
   }
 }

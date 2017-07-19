@@ -30,11 +30,11 @@
       theEvent
   )
 
+  animationEndEvents = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend'
   animateCss = (el, animation, fn) ->
     classList = el.classList
     classList.add('animated')
     classList.add(animation)
-    animationEndEvents = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend'
     listenOnce el, animationEndEvents, ->
       fn() if fn
       classList.remove('animated')

@@ -1,0 +1,16 @@
+header
+  .header-content
+    .header-branding
+      a
+        = image_tag 'logo.svg', alt: "Pondo Logo", title: "Pondo", class: 'logo'
+    .header-title
+    nav.header-navigation
+      a.menu-button(href="#header-menu")
+        = image_tag 'menu.svg', alt: "Menu", title: "Menu", class: 'menu-button'
+  #header-menu.menu
+    a.menu-button(href="#")
+      = image_tag 'arrow_forward.svg', alt: "Back", title: "Back", class: 'menu-button'
+    ul
+      li
+        a.button(href="#{destroy_user_session_path}") Sign Out
+

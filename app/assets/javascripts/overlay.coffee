@@ -8,6 +8,9 @@ app.showOverlay = (callback) ->
       callback.call overlay, e
 
 app.hideOverlay = (callback) ->
-  pu.selectAndEach 'body', (body) ->
-    body.classList.remove('disable-interaction')
+  pu.selectAndEach '.disable-overlay', (overlay) ->
+    pu.animateCss overlay, 'fade-out', ->
+      pu.selectAndEach 'body', (body) ->
+        body.classList.remove('disable-interaction')
+
   unloader()
