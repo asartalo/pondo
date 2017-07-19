@@ -1,0 +1,41 @@
+.js {
+  .modal-form {
+    display: none;
+    z-index: 300;
+    top: 50vh;
+    left: 50vw;
+    transform: translate3d(-50%, -50%, 0);
+    position: absolute;
+    max-width: 600px;
+    width: -o-calc(100% - 60px); /* opera */
+    width: -webkit-calc(100% - 60px); /* google, safari */
+    width: -moz-calc(100% - 60px); /* firefox */
+    width: calc(100% - 60px);
+    max-height: 100vh;
+    overflow-height: auto;
+
+    .modal-content {
+      padding: 40px;
+      background-color: $white;
+
+      @include media("<tablet") {
+        padding: 30px;
+      }
+    }
+
+    &.active {
+      display: block;
+    }
+
+    .close-button {
+      position: absolute;
+      top: 0;
+      right: 0;
+
+      > a {
+        @extend %icon-button;
+      }
+    }
+  }
+}
+

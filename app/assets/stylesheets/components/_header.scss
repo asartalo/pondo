@@ -1,18 +1,7 @@
 %header-button {
-  display: block;
-  line-height: 0;
-  padding: 8px;
+  @extend %icon-button;
   position: relative;
   z-index: 300;
-  &:hover {
-    background-color: transparent;
-  }
-
-  img {
-    @extend %btn-normal-hover;
-    padding: 13px;
-    border-radius: 100%;
-  }
 }
 
 header {
