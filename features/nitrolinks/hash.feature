@@ -27,4 +27,3 @@ Feature: Hash navigation
     Then I should not see a new uuid value on page
     And The 'nitrolinks_hash' page should not be loaded in anyway
     And There should not be any javascript errors
-
