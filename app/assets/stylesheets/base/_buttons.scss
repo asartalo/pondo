@@ -2,14 +2,25 @@
 
 #{$all-buttons} {
   @extend %btn;
+  @extend %btn-normal-hover;
 
   &.primary {
     background-color: $blue;
     color: $white;
+
+    &:hover {
+      background-color: tint($blue, 8%);
+    }
   }
 
   &.secondary {
     background-color: $medium-gray;
     color: $white;
+
+    &:hover {
+      background-color: tint($medium-gray, 8%);
+    }
   }
+
+
 }
