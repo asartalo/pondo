@@ -1,20 +1,23 @@
 $document = $(document)
 
-app.hashChange "create-ledger",
-  ->
-    pu.selectAndEach '#create-ledger', (el) ->
-      el.classList.add('active')
-      pu.animateCss el, 'zoom-in'
+app.modal "create-ledger"
 
-    pu.selectAndEach '#create-ledger a[href="#"]', (el) ->
-      cancel = el
-      app.showOverlay ->
-        cancel.click() if cancel
-
-
-  ->
-    pu.selectAndEach '#create-ledger', (el) ->
-      pu.animateCss el, 'zoom-out', ->
-        el.classList.remove('active')
-
-    app.hideOverlay()
+# app.hashChange "create-ledger",
+#   ->
+#     pu.selectAndEach '#create-ledger', (wrapper) ->
+#       wrapper.classList.add('active')
+#       pu.selectAndEach '#create-ledger .modal-content', (el) ->
+#         pu.animateCss el, 'zoom-in'
+#
+#     pu.selectAndEach '#create-ledger a[href="#"]', (el) ->
+#       cancel = el
+#       app.showOverlay ->
+#         cancel.click() if cancel
+#
+#
+#   ->
+#     pu.selectAndEach '#create-ledger .modal-content', (el) ->
+#       pu.animateCss el, 'zoom-out', ->
+#         el.parentElement.classList.remove('active')
+#
+#     app.hideOverlay()

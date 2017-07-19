@@ -39,7 +39,8 @@
           = f.input :notes, as: :text
           = f.submit "Add Income"
 
-    #create-ledger.create-ledger
-      h2 Create Ledger
-      = render partial: 'ledgers/ledger_form', locals: { ledger: @ledger }
+    #create-ledger.create-ledger.modal-form
+      .modal-content
+        h2 Create Ledger
+        = render partial: 'ledgers/ledger_form', locals: { ledger: @ledger }
 
