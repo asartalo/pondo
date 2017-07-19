@@ -210,3 +210,57 @@
   animation-name: fade-out-down;
 }
 
+@mixin kf-zoom-in {
+  from {
+    opacity: 0;
+    -webkit-transform: scale3d(0, 0, 0);
+    transform: scale3d(0, 0, 0);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+@keyframes zoom-in {
+  @include kf-zoom-in;
+}
+
+@-webkit-keyframes zoom-in {
+  @include kf-zoom-in;
+}
+
+.zoom-in {
+  -webkit-animation-name: zoom-in;
+  animation-name: zoom-in;
+}
+
+
+@mixin kf-zoom-out {
+  from {
+    opacity: 1;
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+
+  to {
+    opacity: 0;
+    -webkit-transform: scale3d(0, 0, 0);
+    transform: scale3d(0, 0, 0);
+  }
+}
+
+@keyframes zoom-out {
+  @include kf-zoom-out;
+}
+
+@-webkit-keyframes zoom-out {
+  @include kf-zoom-in;
+}
+
+.zoom-out {
+  -webkit-animation-name: zoom-out;
+  animation-name: zoom-out;
+}
