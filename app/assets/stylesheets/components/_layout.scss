@@ -24,11 +24,8 @@
 
     .button {
       line-height: 1.3em;
-
-      @include media("<tablet") {
-        bottom: 0;
-        position: absolute;
-      }
+      bottom: 0;
+      position: absolute;
     }
   }
 }
