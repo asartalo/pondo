@@ -1,9 +1,12 @@
+- header_title ||= nil
 header
   .header-content
     .header-branding
       a
         = image_tag 'logo.svg', alt: "Pondo Logo", title: "Pondo", class: 'logo'
     .header-title
+      - if header_title
+        h1 = header_title
     nav.header-navigation
       a.menu-button(href="#header-menu")
         = image_tag 'menu.svg', alt: "Menu", title: "Menu", class: 'menu-button'

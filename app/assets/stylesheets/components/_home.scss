@@ -25,6 +25,11 @@
     display: flex;
     justify-content: center;
     flex: 2;
+    min-height: 500px;
+
+    @media only screen and (max-height: 736px) {
+      height: calc(100vh - 40px);
+    }
 
     > .branding-element {
       flex: 1;

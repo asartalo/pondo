@@ -1,11 +1,9 @@
 - page('dashboard')
-= render partial: 'components/header'
+- title = @ledger ? @ledger.name : nil
+= render partial: 'components/header', locals: { header_title: title }
 
 .container
   .body
-    - unless @no_ledger
-      h1 = @ledger.name
-
     nav
       ul.tabs.main-tabs
         - if @ledger

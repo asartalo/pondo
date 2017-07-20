@@ -27,5 +27,5 @@ Then(/^I should be greeted with a welcome$/) do
 end
 
 Then(/^I can see the "([^"]*)" ledger on the dashboard$/) do |name|
-  expect(find('.body h1').text).to include(name)
+  expect(find('.header-title h1').text).to include(name)
 end
