@@ -1,0 +1,13 @@
+= render partial: 'components/header', locals: { header_title: title }
+
+.container
+  .body
+    = yield
+
+    #create-ledger.create-ledger.modal-form
+      .modal-content
+        h2 Create Ledger
+        = render partial: 'ledgers/ledger_form', locals: { ledger: new_ledger }
+
+
+

@@ -20,7 +20,12 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def sign_in_user(user)
     flash[:notice] = I18n.t "devise.omniauth_callbacks.success", kind: "Google"
     sign_in user
-    redirect_to welcome_url
+    ledger = user.owned_ledgers.first
+    if ledger
+      redirect_to ledger_url(id: ledger.id)
+    else
+      redirect_to welcome_url
+    end
   end
 
   def auth_fail

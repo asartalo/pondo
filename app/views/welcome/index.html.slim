@@ -1,44 +1,13 @@
 - page('welcome')
-- title = @ledger ? @ledger.name : nil
-= render partial: 'components/header', locals: { header_title: title }
-
-.container
-  .body
-    nav
-      ul.tabs.main-tabs
-        - if @ledger
-          li.tab
-            a(href="#add-income-section")
-              i> +
-              span Add Income
-          li.tab
-            a(href="#")
-              i> ="-"
-              span Deduct Expense
-
-    - if @no_ledger
-      #first-time
-        .welcome
-          h1 Welcome to Pondo!
-          p You first need a Ledger<br> to work with.
-        .first-time-actions
-          p
-            a.button.primary(href="#create-ledger") Create a Ledger
-          p
-            | or
-          p
-            a.button(href="#") Subscribe<br> to an Existing Ledger
-
-    - else
-      #add-income-section.add-income
-        = simple_form_for new_ledger_income_path(ledger_id: @ledger.id) do |f|
-          = f.input :amount, label: "Amount"
-          = f.input :date, as: :date, html5: true
-          = f.input :notes, as: :text
-          = f.submit "Add Income"
-
-    #create-ledger.create-ledger.modal-form
-      .modal-content
-        h2 Create Ledger
-        = render partial: 'ledgers/ledger_form', locals: { ledger: @new_ledger }
-
+= render layout: 'layouts/main_pages', locals: { title: "Welcome" } do
+  #first-time
+    .welcome
+      h1 Welcome to Pondo!
+      p You first need a Ledger<br> to work with.
+    .first-time-actions
+      p
+        a.button.primary(href="#create-ledger") Create a Ledger
+      p
+        | or
+      p
+        a.button(href="#") Subscribe<br> to an Existing Ledger

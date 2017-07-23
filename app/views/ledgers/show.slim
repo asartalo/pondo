@@ -1,0 +1,20 @@
+- page('ledger')
+= render layout: 'layouts/main_pages', locals: { title: @ledger.name } do
+  nav
+    ul.tabs.main-tabs
+      - if @ledger
+        li.tab
+          a(href="#add-income-section")
+            i> +
+            span Add Income
+        li.tab
+          a(href="#")
+            i> ="-"
+            span Deduct Expense
+
+    #add-income-section.add-income
+      = simple_form_for new_ledger_income_path(ledger_id: @ledger.id) do |f|
+        = f.input :amount, label: "Amount"
+        = f.input :date, as: :date, html5: true
+        = f.input :notes, as: :text
+        = f.submit "Add Income"

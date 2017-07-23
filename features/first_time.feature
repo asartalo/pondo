@@ -18,4 +18,4 @@ Feature: First time account setup
     And I can set my first ledger's name to 'Family'
     And I can set the currency to 'PHP'
     And I can save the ledger
-    And I can see the "Family" ledger on the dashboard
+    And I can see the "Family" ledger on the header

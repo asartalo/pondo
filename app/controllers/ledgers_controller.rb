@@ -1,9 +1,11 @@
-class LedgersController < ApplicationController
-  before_action :authenticate_user!
-
+class LedgersController < MainPagesController
   def create
-    LedgerBuilder.new(current_user).create_ledger(ledger_params)
-    redirect_to welcome_url
+    ledger = LedgerBuilder.new(current_user).create_ledger(ledger_params)
+    redirect_to ledger_url(id: ledger.id)
+  end
+
+  def show
+    @ledger = Ledger.find(params[:id])
   end
 
   private

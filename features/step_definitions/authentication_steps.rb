@@ -46,3 +46,7 @@ Given(/^I am logged in$/) do
   step "I log in"
 end
 
+When(/^I log in from home$/) do
+  step 'I am logged in'
+end
+

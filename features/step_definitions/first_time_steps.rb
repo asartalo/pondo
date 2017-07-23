@@ -26,6 +26,6 @@ Then(/^I should be greeted with a welcome$/) do
   step "I should see 'Welcome to Pondo!'"
 end
 
-Then(/^I can see the "([^"]*)" ledger on the dashboard$/) do |name|
+Then(/^I can see the "([^"]*)" ledger on the header$/) do |name|
   expect(find('.header-title h1').text).to include(name)
 end

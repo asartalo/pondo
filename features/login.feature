@@ -23,3 +23,9 @@ Feature: Logging in
     When I visit the 'welcome' page
     Then I should see the 'home' page
 
+  Scenario: I login and I already have a ledger
+    Given I am a user
+    And I own a ledger
+    When I log in from home
+    Then I should see my owned ledger page
+
