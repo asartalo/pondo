@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   end
 
   root to: 'home#index'
-  get 'dashboard', to: 'dashboard#index'
+  get 'welcome', to: 'welcome#index'
 
   resources :ledgers, only: [:create, :show] do
     resources :incomes

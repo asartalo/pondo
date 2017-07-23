@@ -20,7 +20,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def sign_in_user(user)
     flash[:notice] = I18n.t "devise.omniauth_callbacks.success", kind: "Google"
     sign_in user
-    redirect_to dashboard_url
+    redirect_to welcome_url
   end
 
   def auth_fail

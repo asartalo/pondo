@@ -10,4 +10,6 @@ Feature: Adding Income
 
   Scenario: I am able to add income
     When I select the add income section
-    Then I could set the income amount to 500
+    And I set the income amount to 500
+    # And I set the income date
+

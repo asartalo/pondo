@@ -1,13 +1,13 @@
-class DashboardController < ApplicationController
+class WelcomeController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    set_dashboard_data
+    set_welcome_data
   end
 
   protected
 
-  def set_dashboard_data
+  def set_welcome_data
     if current_user.has_viewable_ledgers?
       @no_ledger = false
       @ledger = current_user.viewable_ledgers.first

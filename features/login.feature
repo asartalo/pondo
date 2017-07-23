@@ -10,7 +10,7 @@ Feature: Logging in
     Given I have a google account
     Given I visit the 'home' page
     When I log in
-    Then I should see the 'dashboard' page
+    Then I should see the 'welcome' page
 
   Scenario: I fail to log in
     Given I visit the 'home' page

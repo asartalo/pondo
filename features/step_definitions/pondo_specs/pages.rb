@@ -8,8 +8,8 @@ module PondoSpecs
         path: '/'
       },
 
-      dashboard: {
-        path: '/dashboard'
+      welcome: {
+        path: '/welcome'
       },
 
       # NITRONLINKS TESTING ONLY
