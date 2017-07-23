@@ -8,13 +8,18 @@ Feature: Logging in
 
   Scenario: I am able to log in
     Given I have a google account
-    Given I visit the 'home' page
+    And I visit the 'home' page
     When I log in
     Then I should see the 'welcome' page
 
   Scenario: I fail to log in
     Given I visit the 'home' page
-    Given I don't have a google account
+    And I don't have a google account
     When I log in
+    Then I should see the 'home' page
+
+  Scenario: I access a page that needs authentication
+    Given I have a google account
+    When I visit the 'welcome' page
     Then I should see the 'home' page
 
