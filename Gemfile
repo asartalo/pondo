@@ -53,7 +53,6 @@ group :development do
   gem 'listen', '~> 3.0.5'
   gem 'rack-livereload'
   gem 'terminal-notifier-guard', platforms: :ruby, install_if: os_is(/darwin/)
-  gem 'sextant'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'spring-commands-rspec'
