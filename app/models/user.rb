@@ -40,7 +40,7 @@ class User < ApplicationRecord
   end
 
   def viewable_ledgers
-    owned_ledgers.to_a + subscribed_ledgers.to_a
+    Ledger.where(id: owned_ledgers.select(:id)).or(Ledger.where(id: subscribed_ledgers.select(:id)))
   end
 
   def has_viewable_ledgers?

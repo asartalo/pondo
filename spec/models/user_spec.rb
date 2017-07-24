@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  subject(:user) { User.new }
+  subject(:user) { create(:user) }
 
   describe "#preferred_currency" do
     subject(:preferred_currency) { user.preferred_currency }
@@ -11,8 +11,11 @@ RSpec.describe User, type: :model do
     end
 
     context "when it has subscribed ledgers" do
+      let(:owner) { create(:user) }
+
       before do
-        user.subscribed_ledgers << Ledger.new(currency: "USD")
+        user.subscribed_ledgers << create(:ledger, owner: owner)
+        user.save
       end
 
       it "uses that ledger's currency" do
@@ -21,7 +24,9 @@ RSpec.describe User, type: :model do
 
       context "when it also has owned ledgers" do
         before do
-          user.owned_ledgers << Ledger.new(currency: "EUR")
+          ledger = create(:ledger, currency: "EUR", owner: user)
+          ledger.save
+          user.reload
         end
 
         it "uses owned ledger instead" do
