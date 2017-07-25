@@ -126,6 +126,19 @@ guard :rspec, cmd: "bundle exec rspec", all_after_pass: true do
     ]
   end
 
+  # Shared Examples
+  watch(%r{^.+[/\\]([^/\\]+_shared_examples)\.rb$})  do |m|
+    share_file = m[1]
+    dir = File.dirname(m[0])
+    targets = []
+    Dir.glob("#{dir}/*_spec.rb") do |spec_file|
+      if File.readlines(spec_file).grep(/#{share_file}/).size > 0
+        targets << spec_file
+      end
+    end
+    targets
+  end
+
   # Rails config changes
   watch(rails.spec_helper)     { rspec.spec_dir }
   watch(rails.routes)          { "#{rspec.spec_dir}/routing" }
