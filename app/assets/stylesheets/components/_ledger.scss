@@ -7,6 +7,7 @@
   bottom: 0;
   right: 0;
   left: 0;
+  z-index: 1;
 
   li {
     border: 1px solid $light-gray;
@@ -58,7 +59,7 @@
 }
 
 .moves-list {
-  margin: 10px 0;
+  margin: 0 0 20px;
 
   td, th {
     vertical-align: baseline;
@@ -83,5 +84,42 @@
 
   .amount {
     // text-align: right;
+  }
+}
+
+.js {
+  #add-income-section {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 60px;
+    padding: 30px 20px 20px;
+    background-color: $white;
+    // border-top: 2px solid $green;
+    box-shadow: 0 0 4px $medium-gray;
+    transition: 0.3s;
+    -webkit-transform: translate3d(0, 100%, 0);
+    transform: translate3d(0, 100%, 0);
+
+    &.active {
+      -webkit-transform: translate3d(0, 0, 0);
+      transform: translate3d(0, 0, 0);
+    }
+
+    .close-button {
+      position: absolute;
+      top: -10px;
+      right: 0;
+
+      > a {
+        @extend %icon-button;
+      }
+    }
+  }
+}
+
+#add-income-section {
+  .action-group {
+    margin-top: 0;
   }
 }

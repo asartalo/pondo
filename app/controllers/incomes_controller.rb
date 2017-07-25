@@ -13,6 +13,7 @@ class IncomesController < MainPagesController
     if @income.errors.empty?
       redirect_to ledger_url(id: @ledger.id)
     else
+      response.headers["Nitrolinks-Location"] = ledger_url(id: @ledger.id) + "#add-income-section"
       render template: 'ledgers/show'
     end
   end

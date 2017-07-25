@@ -44,6 +44,10 @@ end
 Given(/^I am logged in$/) do
   step "I visit the 'home' page"
   step "I log in"
+  el = page.find(:css, '.notice')
+  if el
+    el.click
+  end
 end
 
 When(/^I log in from home$/) do

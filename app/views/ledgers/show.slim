@@ -16,7 +16,7 @@
       h2 Latest Entries
       table.moves-list
         tbody
-          - @ledger.money_moves.limit(5).each do |move|
+          - @ledger.money_moves.limit(10).each do |move|
             tr(id="moves-list-#{move.id}" class="#{move.class.to_s.downcase}")
               td.move = move.move_char
               td.amount = move.amount_display
@@ -35,4 +35,5 @@
                                         label: "Source"
 
         = f.input :notes, as: :text
-        = f.submit "Add Income"
+        .main-action
+          = f.submit "Add Income", class: "primary"

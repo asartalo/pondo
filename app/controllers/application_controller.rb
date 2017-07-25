@@ -7,8 +7,4 @@ class ApplicationController < ActionController::Base
   def ssl_configured?
     Rails.env.production?
   end
-
-  def current_ledger
-    current_user.current_ledger
-  end
 end

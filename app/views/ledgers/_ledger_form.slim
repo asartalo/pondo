@@ -2,7 +2,5 @@
   = f.input :name, label: "Ledger Name"
   = f.input :currency, label: "Currency", collection: all_currencies,
                        selected: ledger.currency || 'USD', value_method: 'iso_code'
-  .action-group
-    a.button(href="#") Cancel
-    = " "
+  .main-action
     = f.submit "Save Ledger", class: "primary"

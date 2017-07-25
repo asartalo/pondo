@@ -24,6 +24,7 @@ When(/^I submit the income$/) do
   within ('#add-income-section') do
     click_button "Add Income"
   end
+  wait_for_page_load
 end
 
 When(/^I select the add income section$/) do

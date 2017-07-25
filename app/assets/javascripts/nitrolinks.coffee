@@ -116,7 +116,7 @@
         unless pageSource
           pu.triggerEvent 'nitrolinks:load-blank'
           return
-        if response.redirected && response.headers.has("nitrolinks-location")
+        if response.headers.has("nitrolinks-location")
           location = urlPath(response.headers.get("nitrolinks-location"))
         else
           location = urlPath(url)

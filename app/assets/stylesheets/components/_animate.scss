@@ -237,7 +237,6 @@
   animation-name: zoom-in;
 }
 
-
 @mixin kf-zoom-out {
   from {
     opacity: 1;
@@ -264,3 +263,54 @@
   -webkit-animation-name: zoom-out;
   animation-name: zoom-out;
 }
+
+@mixin kf-slide-up {
+  from {
+    -webkit-transform: translate3d(0, 100%, 0);
+    transform: translate3d(0, 100%, 0);
+  }
+
+  to {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes slide-up {
+  @include kf-slide-up;
+}
+
+@-webkit-keyframes slide-up {
+  @include kf-slide-up;
+}
+
+.slide-up {
+  -webkit-animation-name: slide-up;
+  animation-name: slide-up;
+}
+
+@mixin kf-slide-down {
+  from {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    -webkit-transform: translate3d(0, 100%, 0);
+    transform: translate3d(0, 100%, 0);
+  }
+}
+
+@keyframes slide-down {
+  @include kf-slide-down;
+}
+
+@-webkit-keyframes slide-down {
+  @include kf-slide-down;
+}
+
+.slide-down {
+  -webkit-animation-name: slide-down;
+  animation-name: slide-down;
+}
+
