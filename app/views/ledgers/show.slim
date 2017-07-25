@@ -13,24 +13,26 @@
             span Deduct Expense
 
     #money-moves
+      h2 Latest Entries
       table.moves-list
         tbody
           - @ledger.money_moves.limit(5).each do |move|
             tr(id="moves-list-#{move.id}" class="#{move.class.to_s.downcase}")
-              td = move.move_char
-              td = move.date.strftime("%D")
-              td = move.notes
+              td.move = move.move_char
               td.amount = move.amount_display
+              td.type = move.move_type.name
+              td.date = move.date.strftime("%D")
 
     #add-income-section.add-income
       = simple_form_for (@income || @ledger.incomes.new), url: ledger_incomes_path(ledger_id: @ledger.id) do |f|
         = f.input :amount, label: "Amount", html5: true, input_html: { step: "1.00", min: "0.00" }
-        = f.input :money_move_type_id, collection: @ledger.income_categories,
-                                      as: :grouped_select,
-                                      group_method: :income_types,
-                                      prompt: " -- Choose --",
-                                      label: "Source"
+        .form-row
+          = f.input :date, as: :date, html5: true, input_html: { max: Date.current }
+          = f.input :money_move_type_id, collection: @ledger.income_categories,
+                                        as: :grouped_select,
+                                        group_method: :income_types,
+                                        prompt: " -- Choose --",
+                                        label: "Source"
 
-        = f.input :date, as: :date, html5: true, input_html: { max: Date.current }
         = f.input :notes, as: :text
         = f.submit "Add Income"

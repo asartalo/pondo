@@ -85,3 +85,46 @@ select {
 abbr[title="required"] {
   text-decoration: none;
 }
+
+.simple_form {
+  .form-row {
+    display: flex;
+    margin: 0 -10px;
+
+    > .input {
+      flex-grow: 1;
+      padding: 0 10px;
+    }
+  }
+
+  abbr[title="required"] {
+    float: left;
+    width: 0.7em;
+    margin-left: -0.7em;
+    color: $red;
+    opacity: 0.8;
+  }
+
+  .field_with_errors {
+    input, select, textarea {
+      border-color: $red;
+
+      &:focus {
+        outline-color: $red;
+        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.06), 0 0 5px rgba(196, 76, 39, 0.7)
+      }
+    }
+
+    .error {
+      color: $red;
+      display: inline-block;
+      position: relative;
+      top: -10px;
+      font-size: 14px;
+    }
+
+    label {
+      color: $red;
+    }
+  }
+}

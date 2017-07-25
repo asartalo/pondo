@@ -34,5 +34,9 @@ class Expense < MoneyMove
   def move_char
     "-"
   end
+
+  def move_type
+    expense_type
+  end
 end
 

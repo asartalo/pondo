@@ -2,13 +2,19 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
+  position: fixed;
+  background-color: $white;
+  bottom: 0;
+  right: 0;
+  left: 0;
 
   li {
-    border: 1px solid $green;
+    border: 1px solid $light-gray;
+    border-width: 1px 0 0 0;
     flex-grow: 1;
 
     &:first-child {
-      border-right-width: 0;
+      border-right-width: 1px;
     }
   }
 
@@ -16,6 +22,8 @@
     display: block;
     text-align: center;
     vertical-align: center;
+    background-color: $light-gray;
+    color: $gray;
 
     &:hover {
       background-color: $green;
@@ -35,8 +43,45 @@
   }
 }
 
+#money-moves {
+  padding-top: 10px;
+  margin-left: -20px;
+  margin-right: -20px;
+
+  h2 {
+    text-align: center;
+    margin: 0;
+    border-bottom: 1px solid $gray;
+    font-size: 18px;
+    padding: 10px 0;
+  }
+}
+
 .moves-list {
-  .amount {
+  margin: 10px 0;
+
+  td, th {
+    vertical-align: baseline;
+  }
+
+  .move {
+    width: 40px;
+    padding-left: 20px;
+    color: $gray;
+  }
+
+  .date {
+    max-width: 25%;
     text-align: right;
+    padding-right: 20px;
+  }
+
+  .date, .type {
+    font-size: 13px;
+    color: $gray;
+  }
+
+  .amount {
+    // text-align: right;
   }
 }

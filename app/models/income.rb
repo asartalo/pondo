@@ -34,4 +34,8 @@ class Income < MoneyMove
   def move_char
     "+"
   end
+
+  def move_type
+    income_type
+  end
 end
