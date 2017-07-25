@@ -20,6 +20,13 @@ GIT
       warden (~> 1.2.3)
 
 GIT
+  remote: https://github.com/mpakus/sextant.git
+  revision: 0393ad74c75889c60f695a0d32ad837ad2b77e35
+  specs:
+    sextant (0.2.4)
+      rails (>= 3.2)
+
+GIT
   remote: https://github.com/thoughtbot/shoulda-matchers.git
   revision: 0b2e0da6035b9c45b0430bc6eb9a8bab4aeba50e
   branch: rails-5
@@ -454,6 +461,7 @@ DEPENDENCIES
   sass-rails (~> 5.0)
   scout_apm
   selenium-webdriver
+  sextant!
   shoulda-matchers!
   sidekiq
   sidekiq-cron (~> 0.4.0)
@@ -474,4 +482,4 @@ RUBY VERSION
    ruby 2.3.4p301
 
 BUNDLED WITH
-   1.15.1
+   1.15.3
