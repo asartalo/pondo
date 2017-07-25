@@ -11,5 +11,10 @@ Feature: Adding Income
   Scenario: I am able to add income
     When I select the add income section
     And I set the income amount to 500
-    # And I set the income date
+    And I set the income source to "Salary"
+    And I set the income date to 15/07/2017
+    And I add an income note to say "Work"
+    And I submit the income
+    Then I should see the income added to my own ledger
+
 

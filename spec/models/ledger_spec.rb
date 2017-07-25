@@ -140,5 +140,31 @@ RSpec.describe Ledger, type: :model do
       end
     end
 
+    describe "#money_moves" do
+      before do
+        ledger.incomes.create(
+          amount: 300, date: "12/01/2017",
+          income_type: ledger.income_type("Active Income", "Salary")
+        )
+        ledger.incomes.create(
+          amount: 200, date: "15/01/2017",
+          income_type: ledger.income_type("Active Income", "Salary")
+        )
+        ledger.expenses.create(
+          amount: 100, date: "14/01/2017",
+          expense_type: ledger.expense_type("Living Expenses", "Groceries")
+        )
+      end
+
+      subject(:money_moves) { ledger.money_moves }
+
+      it "returns list of all money moves" do
+        expect(money_moves.size).to eql(3)
+      end
+
+      it "orders them by date descending" do
+        expect(money_moves.collect { |m| m.amount.to_i }).to eql([200, 100, 300])
+      end
+    end
   end
 end

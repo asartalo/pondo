@@ -5,7 +5,9 @@ class LedgersController < MainPagesController
   end
 
   def show
+    # TODO: Make sure this is only visible to viewables
     @ledger = Ledger.find(params[:id])
+    @income = @ledger.incomes.new
   end
 
   private

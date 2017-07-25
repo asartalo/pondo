@@ -35,6 +35,10 @@ class Ledger < ApplicationRecord
 
   default_scope { order(updated_at: 'DESC' ) }
 
+  def money_moves
+    MoneyMove.where(ledger_id: id).order(date: 'DESC')
+  end
+
   def allowed?(user, action)
     return true if user == owner
     if subscribers.include? user

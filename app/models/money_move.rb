@@ -27,15 +27,24 @@
 class MoneyMove < ApplicationRecord
   belongs_to :ledger
 
+  validates_presence_of :amount
+  validates_presence_of :date
+  validates_presence_of :money_move_type_id
   validate :move_type_ledger_must_be_the_same
-
-  def move_type_ledger_must_be_the_same
-    if money_move_type.ledger_id != ledger_id
-      errors.add(:"#{move_kind}_type", "must have the same ledger")
-    end
-  end
 
   def money_move_type
     send("#{move_kind}_type")
+  end
+
+  def amount_display
+    Money.new(amount * 100, ledger.currency).format
+  end
+
+  protected
+
+  def move_type_ledger_must_be_the_same
+    unless money_move_type && money_move_type.ledger_id == ledger_id
+      errors.add(:"#{move_kind}_type", "must have the same ledger")
+    end
   end
 end

@@ -39,39 +39,4 @@
   }
 }
 
-.main-tabs {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
 
-  li {
-    border: 1px solid $green;
-    flex-grow: 1;
-
-    &:first-child {
-      border-right-width: 0;
-    }
-  }
-
-  a {
-    display: block;
-    text-align: center;
-    vertical-align: center;
-
-    &:hover {
-      background-color: $green;
-      color: $white;
-    }
-
-    i {
-      font-size: 32px;
-      line-height: 64px;
-    }
-
-    span {
-      display: none;
-      text-decoration: none;
-      text-indent: -9999em;
-    }
-  }
-}

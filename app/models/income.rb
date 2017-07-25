@@ -30,4 +30,8 @@ class Income < MoneyMove
   def move_kind
     :income
   end
+
+  def move_char
+    "+"
+  end
 end

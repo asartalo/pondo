@@ -30,5 +30,9 @@ class Expense < MoneyMove
   def move_kind
     :expense
   end
+
+  def move_char
+    "-"
+  end
 end
 
