@@ -6,10 +6,13 @@ html
     meta name="apple-mobile-web-app-capable" content="yes"
     meta name="mobile-web-app-capable" content="yes"
     meta name="apple-mobile-web-app-status-bar-style" content="white"
+    meta name="theme-color" content="#27ae60"
+    link rel="manifest" href="/manifest.json"
     = csrf_meta_tags
     link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,600" rel="stylesheet"
     = stylesheet_link_tag    'application', media: 'all', 'data-nitrolinks-track': 'reload'
     = yield :stylesheets
+    script src="/homescreen.js"
     = javascript_include_tag 'application', 'data-nitrolinks-track': 'reload'
     - unless Rails.env == 'production'
       = javascript_include_tag 'testing', 'data-nitrolinks-track': 'reload'
