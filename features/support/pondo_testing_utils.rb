@@ -43,6 +43,20 @@ module PondoTestingUtils
     expect_script("pondoTesting.loadCount", :to_i)
   end
 
+  def safe_date_fill_in(finder, date)
+    field = find_field(finder)
+    # Test out all possible formats and see what works
+    [
+      "%m/%d/%Y",
+      "%d/%m/%Y",
+      "%Y/%m/%d"
+    ].each do |format|
+      fill_in finder, with: date.strftime(format)
+      field.native.send_keys :tab # Force blur
+      break if field.value == date.strftime("%Y-%m-%d")
+    end
+  end
+
   private
 
   def expect_nitro_page(name, function)

@@ -9,7 +9,7 @@ end
 When(/^I set the (income|expense) date to ([\d\/]+)$/) do |kind, date|
   @income_date = Date.parse(date)
   within ('#add-income-section') do
-    fill_in "Date", with: date
+    safe_date_fill_in "Date", @income_date
   end
 end
 
