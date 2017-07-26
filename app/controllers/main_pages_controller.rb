@@ -16,10 +16,6 @@ class MainPagesController < ApplicationController
     current_user.preferred_currency || location_currency
   end
 
-  def current_ledger
-    current_user.current_ledger
-  end
-
   private
 
   def location_currency

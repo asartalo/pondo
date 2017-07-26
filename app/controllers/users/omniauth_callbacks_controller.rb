@@ -22,7 +22,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     sign_in user
     ledger = user.owned_ledgers.first
     if ledger
-      redirect_to ledger_url(id: ledger.id)
+      redirect_to ledger_url(ledger)
     else
       redirect_to welcome_url
     end

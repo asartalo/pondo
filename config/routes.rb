@@ -11,7 +11,9 @@ Rails.application.routes.draw do
   root to: 'home#index'
   get 'welcome', to: 'welcome#index'
 
-  resources :ledgers, only: [:create, :show] do
+  resources :ledgers, only: [:create, :show], param: :ledger_id
+
+  resources :ledgers, only: [] do
     resources :incomes
   end
 
