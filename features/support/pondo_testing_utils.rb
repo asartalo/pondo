@@ -45,16 +45,8 @@ module PondoTestingUtils
 
   def safe_date_fill_in(finder, date)
     field = find_field(finder)
-    # Test out all possible formats and see what works
-    [
-      "%m/%d/%Y",
-      "%d/%m/%Y",
-      "%Y/%m/%d"
-    ].each do |format|
-      fill_in finder, with: date.strftime(format)
-      field.native.send_keys :tab # Force blur
-      break if field.value == date.strftime("%Y-%m-%d")
-    end
+    date_formatted = date.strftime("%Y-%m-%d")
+    jscript("document.evaluate('#{field.path}', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.value='#{date_formatted}'")
   end
 
   private
