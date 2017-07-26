@@ -42,6 +42,9 @@
 
   .main-action {
     flex: 1;
+    .primary {
+      @extend %btn-hero;
+    }
   }
 
 }
