@@ -124,6 +124,22 @@
         result += Math.floor(Math.random() * 15).toString(16)
     result
 
+  doc = document
+  docEl = doc.documentElement
+  requestFullScreenFn = docEl.requestFullscreen or docEl.mozRequestFullScreen or docEl.webkitRequestFullScreen or docEl.msRequestFullscreen
+  cancelFullScreenFn = doc.exitFullscreen or doc.mozCancelFullScreen or doc.webkitExitFullscreen or doc.msExitFullscreen
+
+  isFullScreen = ->
+    doc.fullscreenElement || doc.mozFullScreenElement || doc.webkitFullscreenElement || doc.msFullscreenElement
+
+  requestFullScreen = ->
+    unless isFullScreen()
+      requestFullScreenFn.call docEl
+
+  cancelFullScreen = ->
+    if isFullScreen()
+      cancelFullScreenFn.call doc
+
   return {
     getContentOfElement: getContentOfElement
     ifElseFn: ifElseFn
@@ -145,6 +161,8 @@
     selectAnd: selectAnd
     selectAndEach: selectAndEach
     hide: hide
+    requestFullScreen: requestFullScreen
+    cancelFullScreen: cancelFullScreen
   }
 )(document, window)
 
