@@ -1,4 +1,7 @@
 class LedgersController < MainPagesController
+  include Concerns::LedgerPagesConcern
+  skip_before_action :set_ledger, only: [:create, :new]
+
   def create
     ledger = LedgerBuilder.new(current_user).create_ledger(ledger_params)
     redirect_to ledger_url(ledger)
@@ -6,7 +9,6 @@ class LedgersController < MainPagesController
 
   def show
     # TODO: Make sure this is only visible to viewables
-    @ledger = Ledger.find(params[:ledger_id])
     @income = @ledger.incomes.new
   end
 

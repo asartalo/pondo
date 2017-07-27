@@ -1,19 +1,16 @@
 class IncomesController < MainPagesController
-  before_action :authenticate_user!
+  include Concerns::LedgerPagesConcern
 
   def index
-    @ledger = Ledger.find(params[:ledger_id])
-    redirect_to ledger_url(id: @ledger.id)
+    redirect_to current_ledger_url
   end
 
   def create
-    @ledger = Ledger.find(params[:ledger_id])
-    manager = LedgerManager.new(@ledger, current_user)
-    @income = manager.add_income(income_params)
-    if @income.errors.empty?
-      redirect_to ledger_url(id: @ledger.id)
+    @income = ledger_manager.add_income(income_params)
+    if @income.valid?
+      redirect_to current_ledger_url
     else
-      response.headers["Nitrolinks-Location"] = ledger_url(id: @ledger.id) + "#add-income-section"
+      nitrolinks_location current_ledger_url(hash: "add-income-section")
       render template: 'ledgers/show'
     end
   end

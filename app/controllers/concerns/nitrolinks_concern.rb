@@ -17,15 +17,21 @@ module Concerns::NitrolinksConcern
     end
   end
 
+  protected
+
+  def nitrolinks_location(location)
+    response.headers["Nitrolinks-Location"] = location
+  end
+
   private
 
-    def store_nitrolinks_location_in_session(location)
-      session[:nitrolinks_location] = location if session
-    end
+  def store_nitrolinks_location_in_session(location)
+    session[:nitrolinks_location] = location if session
+  end
 
-    def set_nitrolinks_location_header_from_session
-      if session && session[:nitrolinks_location]
-        response.headers["Nitrolinks-Location"] = session.delete(:nitrolinks_location)
-      end
+  def set_nitrolinks_location_header_from_session
+    if session && session[:nitrolinks_location]
+      nitrolinks_location(session.delete(:nitrolinks_location))
     end
+  end
 end
