@@ -1,0 +1,30 @@
+@mixin keyframes($animation-name) {
+  @-webkit-keyframes #{$animation-name} {
+    @content;
+  }
+
+  @keyframes #{$animation-name} {
+    @content;
+  }
+}
+
+@mixin transform($property) {
+  -webkit-transform: $property;
+          transform: $property;
+}
+
+@mixin animation-name($animation-name) {
+  -webkit-animation-name: $animation-name;
+          animation-name: $animation-name;
+}
+
+@mixin set-animation($animation-name) {
+  @include keyframes($animation-name) {
+    @content;
+  }
+
+  .#{$animation-name} {
+    @include animation-name($animation-name);
+  }
+}
+
