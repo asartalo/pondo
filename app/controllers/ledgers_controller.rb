@@ -10,6 +10,7 @@ class LedgersController < MainPagesController
   def show
     # TODO: Make sure this is only visible to viewables
     @income = @ledger.incomes.new
+    @expense = @ledger.expenses.new
   end
 
   private

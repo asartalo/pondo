@@ -88,7 +88,8 @@
 }
 
 .js {
-  #add-income-section {
+  #add-income-section,
+  #deduct-expense-section {
     position: fixed;
     left: 0;
     right: 0;
@@ -100,10 +101,12 @@
     transition: 0.3s;
     -webkit-transform: translate3d(0, 100%, 0);
     transform: translate3d(0, 100%, 0);
+    transition-timing-function: ease-in;
 
     &.active {
       -webkit-transform: translate3d(0, 0, 0);
       transform: translate3d(0, 0, 0);
+      transition-timing-function: ease-out;
     }
 
     .close-button {

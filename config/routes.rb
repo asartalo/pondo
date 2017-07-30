@@ -15,6 +15,7 @@ Rails.application.routes.draw do
 
   resources :ledgers, only: [] do
     resources :incomes
+    resources :expenses
   end
 
   if Rails.env != 'production'

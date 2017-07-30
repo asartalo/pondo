@@ -29,6 +29,14 @@
                   url: ledger_incomes_path(@ledger),
                   categories: @ledger.income_categories,
                   submit_text: "Add Income",
+                  type_label: "Source",
         }
 
     #deduct-expense-section.deduct-expense
+      = render partial: 'ledgers/money_move_form',
+        locals: { move: (@expense || @ledger.expenses.new),
+                  url: ledger_expenses_path(@ledger),
+                  categories: @ledger.expense_categories,
+                  submit_text: "Deduct Expense",
+                  type_label: "Type",
+        }

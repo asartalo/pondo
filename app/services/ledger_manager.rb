@@ -10,7 +10,7 @@ class LedgerManager
     for_recorders_only { incomes.create(params) }
   end
 
-  def add_expense(params)
+  def deduct_expense(params)
     for_recorders_only { expenses.create(params) }
   end
 

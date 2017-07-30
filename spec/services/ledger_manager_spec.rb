@@ -15,10 +15,11 @@ RSpec.describe LedgerManager do
     income: ["Active Income", "Salary"],
     expense: ["Living Expenses", "Groceries"]
   }.each do |move, type_args|
-    describe "#add_#{move}" do
+    describe (move == :income ? "#add_income" : "#deduct_expense") do
+      let(:method) { (move == :income ? :add_income : :deduct_expense) }
       let(:type) { ledger.send("#{move}_type", *type_args) }
       subject(:added) do
-        manager.send("add_#{move}",
+        manager.send(method,
           amount: 300, date: Time.now, notes: "Crackers",
           money_move_type_id: type.id
         )
