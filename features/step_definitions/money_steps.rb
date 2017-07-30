@@ -65,7 +65,9 @@ When(/^I set the expense source to "([^"]*)"$/) do |arg1|
 end
 
 Then(/^I should see the (income|expense) (.+) error$/) do |kind, field|
-  pending # Write code here that turns the phrase above into concrete actions
+  within section_id(kind) do
+    expect(find_field(field.titleize).query_scope.has_css?(".field_with_errors")).to eql(true)
+  end
 end
 
 Then(/^the (income|expense) form should reset$/) do |kind|
