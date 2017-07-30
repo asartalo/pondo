@@ -26,4 +26,8 @@ class IncomeCategory < Category
   def create_income_type(name)
     income_types.create(name: name, ledger: ledger)
   end
+
+  def move_types
+    income_types
+  end
 end

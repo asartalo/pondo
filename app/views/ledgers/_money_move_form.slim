@@ -1,0 +1,14 @@
+= simple_form_for move, url: url do |f|
+  = f.input :amount, label: "Amount", html5: true, input_html: { step: "1.00", min: "0.00" }
+  .form-row
+    = f.input :date, as: :date, html5: true, input_html: { max: Date.current }
+    = f.input :money_move_type_id, collection: categories,
+                                  as: :grouped_select,
+                                  group_method: :move_types,
+                                  prompt: " -- Choose --",
+                                  label: "Source"
+
+  = f.input :notes, as: :text
+  .main-action
+    = f.submit submit_text, class: "primary"
+

@@ -8,7 +8,7 @@ class IncomesController < MainPagesController
   def create
     @income = ledger_manager.add_income(income_params)
     if @income.valid?
-      redirect_to current_ledger_url
+      redirect_to current_ledger_url(hash: "add-income-section")
     else
       nitrolinks_location current_ledger_url(hash: "add-income-section")
       render template: 'ledgers/show'

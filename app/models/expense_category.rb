@@ -26,4 +26,8 @@ class ExpenseCategory < Category
   def create_expense_type(name)
     expense_types.create(name: name, ledger: ledger)
   end
+
+  def move_types
+    expense_types
+  end
 end

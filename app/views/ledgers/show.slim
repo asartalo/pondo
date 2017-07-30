@@ -8,7 +8,7 @@
             i> +
             span Add Income
         li.tab
-          a(href="#")
+          a(href="#deduct-expense-section")
             i> ="-"
             span Deduct Expense
 
@@ -17,23 +17,18 @@
       table.moves-list
         tbody
           - @ledger.money_moves.limit(10).each do |move|
-            tr(id="moves-list-#{move.id}" class="#{move.class.to_s.downcase}")
+            tr(data-key="moves-list-#{move.id}" class="#{move.class.to_s.downcase}")
               td.move = move.move_char
               td.amount = move.amount_display
               td.type = move.move_type.name
               td.date = move.date.strftime("%D")
 
     #add-income-section.add-income
-      = simple_form_for (@income || @ledger.incomes.new), url: ledger_incomes_path(ledger_id: @ledger.id) do |f|
-        = f.input :amount, label: "Amount", html5: true, input_html: { step: "1.00", min: "0.00" }
-        .form-row
-          = f.input :date, as: :date, html5: true, input_html: { max: Date.current }
-          = f.input :money_move_type_id, collection: @ledger.income_categories,
-                                        as: :grouped_select,
-                                        group_method: :income_types,
-                                        prompt: " -- Choose --",
-                                        label: "Source"
+      = render partial: 'ledgers/money_move_form',
+        locals: { move: (@income || @ledger.incomes.new),
+                  url: ledger_incomes_path(@ledger),
+                  categories: @ledger.income_categories,
+                  submit_text: "Add Income",
+        }
 
-        = f.input :notes, as: :text
-        .main-action
-          = f.submit "Add Income", class: "primary"
+    #deduct-expense-section.deduct-expense

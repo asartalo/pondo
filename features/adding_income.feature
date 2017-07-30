@@ -16,5 +16,12 @@ Feature: Adding Income
     And I add an income note to say "Work"
     And I submit the income
     Then I should see the income added to my own ledger
+    And the income form should reset
 
+  Scenario: I am able to see errors
+    When I select the add income section
+    And I submit the income
+    Then I should see the income amount error
+    And I should see the income source error
+    And I should see the income date error
 

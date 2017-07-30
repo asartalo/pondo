@@ -36,6 +36,10 @@ class MoneyMove < ApplicationRecord
     send("#{move_kind}_type")
   end
 
+  def money_move_categories
+    send("#{move_kind}_categories")
+  end
+
   def amount_display
     Money.new(amount * 100, ledger.currency).format
   end
