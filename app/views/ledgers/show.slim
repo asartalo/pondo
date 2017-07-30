@@ -12,31 +12,31 @@
             i> ="-"
             span Deduct Expense
 
-    #money-moves
-      h2 Latest Entries
-      table.moves-list
-        tbody
-          - @ledger.money_moves.limit(10).each do |move|
-            tr(data-key="moves-list-#{move.id}" class="#{move.class.to_s.downcase}")
-              td.move = move.move_char
-              td.amount = move.amount_display
-              td.type = move.move_type.name
-              td.date = move.date.strftime("%D")
+  #money-moves
+    h2 Latest Entries
+    table.moves-list
+      tbody
+        - @ledger.money_moves.limit(10).each do |move|
+          tr(data-key="moves-list-#{move.id}" class="#{move.class.to_s.downcase}")
+            td.move = move.move_char
+            td.amount = move.amount_display
+            td.type = move.move_type.name
+            td.date = move.date.strftime("%D")
 
-    #add-income-section.add-income
-      = render partial: 'ledgers/money_move_form',
-        locals: { move: (@income || @ledger.incomes.new),
-                  url: ledger_incomes_path(@ledger),
-                  categories: @ledger.income_categories,
-                  submit_text: "Add Income",
-                  type_label: "Source",
-        }
+  #add-income-section.add-income
+    = render partial: 'ledgers/money_move_form',
+      locals: { move: (@income || @ledger.incomes.new),
+                url: ledger_incomes_path(@ledger),
+                categories: @ledger.income_categories,
+                submit_text: "Add Income",
+                type_label: "Source",
+      }
 
-    #deduct-expense-section.deduct-expense
-      = render partial: 'ledgers/money_move_form',
-        locals: { move: (@expense || @ledger.expenses.new),
-                  url: ledger_expenses_path(@ledger),
-                  categories: @ledger.expense_categories,
-                  submit_text: "Deduct Expense",
-                  type_label: "Type",
-        }
+  #deduct-expense-section.deduct-expense
+    = render partial: 'ledgers/money_move_form',
+      locals: { move: (@expense || @ledger.expenses.new),
+                url: ledger_expenses_path(@ledger),
+                categories: @ledger.expense_categories,
+                submit_text: "Deduct Expense",
+                type_label: "Type",
+      }
