@@ -93,21 +93,18 @@
     position: fixed;
     left: 0;
     right: 0;
-    bottom: 50px;
-    top: 66px;
+    top: calc(100vh - 55px);
     overflow: auto;
     padding: 30px 20px 20px;
     background-color: $white;
-    // border-top: 2px solid $green;
     box-shadow: 0 0 4px $medium-gray;
     transition: 0.3s;
-    -webkit-transform: translate3d(0, 100%, 0);
-    transform: translate3d(0, 100%, 0);
+    @include transform( translate3d(0, 55px, 0) );
     transition-timing-function: ease-in;
+    max-height: calc(100vh - 66px - 55px);
 
     &.active {
-      -webkit-transform: translate3d(0, 0, 0);
-      transform: translate3d(0, 0, 0);
+      @include transform( translate3d(0, -100%, 0) );
       transition-timing-function: ease-out;
     }
 
