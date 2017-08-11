@@ -32,12 +32,36 @@ cucumber_options = {
   notification: true
 }
 
+def filter_step_lines(spec_file)
+  File.new(spec_file).each_line do |line|
+    m = line.match(/\s+(Given|When|Then|And)\s(.+)$/)
+    result = yield m[2].strip if m
+    break if result
+  end
+end
+
 guard "cucumber", cucumber_options do
   watch(%r{^features/.+\.feature$})
   watch(%r{^features/support/.+$}) { "features" }
 
-  watch(%r{^features/step_definitions/(.+)_steps\.rb$}) do |m|
-    Dir[File.join("**/#{m[1]}.feature")][0] || "features"
+  watch(%r{^features/step_definitions/.+_steps\.rb$}) do |m|
+    puts "Looking for matching featues..."
+    contents = File.read(m[0])
+    dir = File.dirname(m[0])
+    steps = contents.scan(/^(Then|When)\(\/(.+)\/\)\sdo/).collect { |l| Regexp.new(l[1]) }
+    targets = {}
+    Dir.glob("features/**/*.feature") do |spec_file|
+      next if targets[spec_file]
+      steps.each do |step|
+        filter_step_lines(spec_file) do |line|
+          if line.match(step)
+            targets[spec_file] = true
+          end
+        end
+      end
+    end
+    puts "Found #{targets.keys.size}"
+    targets.keys
   end
 end
 
@@ -120,7 +144,6 @@ guard :rspec, cmd: "bundle exec rspec", all_after_pass: true do
   end
 
   watch(%r{^app/services/(.+)\.rb$}) do |m|
-    puts m[0], m[1]
     [
       rspec.spec.call("services/#{m[1]}")
     ]
