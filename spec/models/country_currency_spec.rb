@@ -1,3 +1,19 @@
+# == Schema Information
+#
+# Table name: country_currencies
+#
+#  id           :integer          not null, primary key
+#  country_code :string
+#  currency     :string
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#
+# Indexes
+#
+#  index_country_currencies_on_country_code  (country_code)
+#  index_country_currencies_on_currency      (currency)
+#
+
 require 'rails_helper'
 
 class PondoFakeRestCountry

@@ -14,10 +14,6 @@
 #
 #  index_ledgers_on_user_id  (user_id)
 #
-# Foreign Keys
-#
-#  fk_rails_f7b494f4c3  (user_id => users.id)
-#
 
 require 'rails_helper'
 
@@ -81,21 +77,24 @@ RSpec.describe Ledger, type: :model do
         edit: true,
         delete: true,
         view: true,
-        record: true
+        record: true,
+        invite: true
       },
 
       "subscriber" => {
         edit: false,
         delete: false,
         view: true,
-        record: true
+        record: true,
+        invite: false
       },
 
       "other_user" => {
         edit: false,
         delete: false,
         view: false,
-        record: false
+        record: false,
+        invite: false
       }
 
     }.each do |the_user, data|

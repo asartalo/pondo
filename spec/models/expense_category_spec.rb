@@ -16,7 +16,7 @@
 #
 # Foreign Keys
 #
-#  fk_rails_35644bee2c  (ledger_id => ledgers.id)
+#  fk_rails_...  (ledger_id => ledgers.id)
 #
 
 require 'rails_helper'

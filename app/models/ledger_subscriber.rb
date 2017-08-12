@@ -16,8 +16,8 @@
 #
 # Foreign Keys
 #
-#  fk_rails_288d7a0866  (user_id => users.id)
-#  fk_rails_8a5ebb28c1  (ledger_id => ledgers.id)
+#  fk_rails_...  (ledger_id => ledgers.id)
+#  fk_rails_...  (user_id => users.id)
 #
 
 class LedgerSubscriber < ApplicationRecord

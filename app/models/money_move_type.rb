@@ -17,8 +17,8 @@
 #
 # Foreign Keys
 #
-#  fk_rails_7b3f6e061c  (category_id => categories.id)
-#  fk_rails_e4c0fd2ac8  (ledger_id => ledgers.id)
+#  fk_rails_...  (category_id => categories.id)
+#  fk_rails_...  (ledger_id => ledgers.id)
 #
 
 class MoneyMoveType < ApplicationRecord
