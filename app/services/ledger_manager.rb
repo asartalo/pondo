@@ -14,6 +14,13 @@ class LedgerManager
     for_recorders_only { expenses.create(params) }
   end
 
+  def invite(email_address)
+    subscription = Subscription.create(ledger: @ledger, email: email_address)
+    invitation = SubscriptionMailer.invite(subscription, @user)
+    invitation.deliver_later
+    invitation
+  end
+
   protected
 
   def incomes

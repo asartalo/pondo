@@ -1,0 +1,5 @@
+= simple_form_for '', url: ledger_subscribers_path(@ledger) do |f|
+  = f.input :email, label: "Email", html5: true
+  .main-action
+    = f.submit "Send Invitation", class: "primary"
+

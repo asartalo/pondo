@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe LedgerManager do
+  include ActiveJob::TestHelper
+
   let(:user) { create(:user) }
   let(:owner) { user }
   let(:builder) { LedgerBuilder.make(owner) }
@@ -9,6 +11,31 @@ RSpec.describe LedgerManager do
 
   it "has ledger" do
     expect(manager.ledger).to eql(ledger)
+  end
+
+  describe "#invite" do
+    let(:email) { 'foo@somewhere.com' }
+    subject(:invitation) do
+      manager.invite(email)
+    end
+
+    before do
+      clear_enqueued_jobs
+      perform_enqueued_jobs { invitation }
+    end
+
+    it "sends invite email" do
+      mail = ActionMailer::Base.deliveries.last
+      expect(mail).not_to be_blank
+    end
+
+    it "sends invite email to correct address" do
+      expect(invitation.to).to eql([email])
+    end
+
+    it "sends invite link" do
+      expect(invitation.body.to_s).to match(%r{https?://.+/subscriptions/[\w-]{36}})
+    end
   end
 
   {

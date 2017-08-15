@@ -40,3 +40,8 @@
                 submit_text: "Deduct Expense",
                 type_label: "Type",
       }
+
+  #invite-section.invite.modal-form
+    .modal-content
+      h2 Invite Subscribers
+      = render partial: 'ledgers/invite_form', locals: { ledger: @ledger }

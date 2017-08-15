@@ -93,15 +93,15 @@
     position: fixed;
     left: 0;
     right: 0;
-    top: calc(100vh - 55px);
+    top: calc(100vh + 5px);
     overflow: auto;
-    padding: 30px 20px 20px;
+    padding: 30px 20px 75px;
     background-color: $white;
     box-shadow: 0 0 4px $medium-gray;
     transition: 0.3s;
     @include transform( translate3d(0, 55px, 0) );
     transition-timing-function: ease-in;
-    max-height: calc(100vh - 66px - 55px);
+    max-height: calc(100vh - 155px);
 
     &.active {
       @include transform( translate3d(0, -100%, 0) );

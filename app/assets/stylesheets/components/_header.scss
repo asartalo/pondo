@@ -47,6 +47,9 @@ header {
 
   }
 
+  hr {
+    margin: .5em;
+  }
 
   .header-navigation {
     > a {
@@ -83,7 +86,11 @@ header {
     }
 
     > ul {
-      margin-top: 60px;
+      margin: 0;
+    }
+
+    > .ledger-nav {
+      margin: 60px 0 0;
     }
 
     .menu-button {

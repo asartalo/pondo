@@ -16,7 +16,10 @@ Rails.application.routes.draw do
   resources :ledgers, only: [] do
     resources :incomes
     resources :expenses
+    resources :subscribers
   end
+
+  resources :subscriptions, only: [:show]
 
   if Rails.env != 'production'
     resources :nitrolinks, only: [:index] do

@@ -117,3 +117,13 @@ Before('@nitrolinks') do
   @initial_page_loads = jscript('pondoTesting.domLoadCount()').to_i
 end
 
+Around('@email') do |scenario, block|
+  ActionMailer::Base.delivery_method = :test
+  ActionMailer::Base.perform_deliveries = true
+  ActionMailer::Base.deliveries.clear
+
+  old_adapter = ActiveJob::Base.queue_adapter
+  ActiveJob::Base.queue_adapter = :inline
+  block.call
+  ActiveJob::Base.queue_adapter = old_adapter
+end

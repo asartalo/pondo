@@ -58,3 +58,4 @@ module PondoTestingUtils
 end
 
 World(PondoTestingUtils)
+World(ActiveJob::TestHelper)
