@@ -57,12 +57,13 @@ Rails.application.configure do
   # Use a different cache store in production.
   config.cache_store = :dalli_store,
                        (ENV["MEMCACHIER_SERVERS"] || "").split(","),
-                       {:username => ENV["MEMCACHIER_USERNAME"],
-                        :password => ENV["MEMCACHIER_PASSWORD"],
-                        :failover => true,
-                        :socket_timeout => 1.5,
-                        :socket_failure_delay => 0.2,
-                        :down_retry_delay => 60
+                       {
+                          username: ENV["MEMCACHIER_USERNAME"],
+                          password: ENV["MEMCACHIER_PASSWORD"],
+                          failover: true,
+                          socket_timeout: 1.5,
+                          socket_failure_delay: 0.2,
+                          down_retry_delay: 60
                        }
 
   # Use a real queuing backend for Active Job (and separate queues per environment)
@@ -97,4 +98,15 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  # SendGrid
+  ActionMailer::Base.smtp_settings = {
+    user_name: ENV['SENDGRID_USERNAME'],
+    password: ENV['SENDGRID_PASSWORD'],
+    domain: ENV['APP_HOST'],
+    address: 'smtp.sendgrid.net',
+    port: 587,
+    authentication: :plain,
+    enable_starttls_auto: true
+  }
 end
