@@ -3,8 +3,10 @@ class SubscriptionsController < MainPagesController
   before_action :subscription
 
   def show
-    if subscription
+    if subscription && subscription.available?
       session[:subscription] = subscription.id
+    else
+      redirect_to root_url
     end
   end
 
