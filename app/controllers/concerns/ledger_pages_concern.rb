@@ -3,6 +3,7 @@ module Concerns::LedgerPagesConcern
 
   included do
     before_action :set_ledger
+    before_action :set_invites
   end
 
   protected
@@ -13,6 +14,10 @@ module Concerns::LedgerPagesConcern
 
   def set_ledger
     @ledger = Ledger.find(params[:ledger_id])
+  end
+
+  def set_invites
+    @invites = Subscription.where(email: current_user.email)
   end
 
   def ledger_manager

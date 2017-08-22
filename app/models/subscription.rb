@@ -23,4 +23,19 @@ class Subscription < ApplicationRecord
 
   validates_presence_of :ledger
   validates_presence_of :email
+
+  def subscribe(user)
+    if user.email == email
+      user.subscribed_ledgers << ledger
+      user.save
+      update(done: true)
+      true
+    else
+      false
+    end
+  end
+
+  def available?
+    !done?
+  end
 end

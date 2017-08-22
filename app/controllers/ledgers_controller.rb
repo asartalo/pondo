@@ -1,6 +1,7 @@
 class LedgersController < MainPagesController
   include Concerns::LedgerPagesConcern
   skip_before_action :set_ledger, only: [:create, :new]
+  skip_before_action :set_invites, only: [:create, :new]
 
   def create
     ledger = LedgerBuilder.new(current_user).create_ledger(ledger_params)

@@ -28,6 +28,7 @@ class Ledger < ApplicationRecord
   has_many :expenses, class_name: 'Expense', dependent: :destroy
   has_many :income_categories, dependent: :destroy
   has_many :expense_categories, dependent: :destroy
+  has_many :subscriptions, dependent: :destroy
 
   default_scope { order(updated_at: 'DESC' ) }
 

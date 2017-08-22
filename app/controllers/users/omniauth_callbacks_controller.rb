@@ -20,7 +20,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def sign_in_user(user)
     flash[:notice] = I18n.t "devise.omniauth_callbacks.success", kind: "Google"
     sign_in user
-    ledger = user.owned_ledgers.first
+    apply_invite(user)
+    ledger = user.viewable_ledgers.first
     if ledger
       redirect_to ledger_url(ledger)
     else
@@ -31,6 +32,17 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def auth_fail
     session["devise.google_data"] = request.env["omniauth.auth"]
     failure
+  end
+
+  def apply_invite(user)
+    subscription = subscription_from_session
+    if subscription && subscription.available?
+      subscription.subscribe(user)
+    end
+  end
+
+  def subscription_from_session
+    Subscription.find(session.delete (:subscription)) if session[:subscription]
   end
 end
 

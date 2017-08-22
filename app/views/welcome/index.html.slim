@@ -3,11 +3,25 @@
   #first-time
     .welcome
       h1 Welcome to Pondo!
-      p You first need a Ledger<br> to work with.
+      - if @invites.size > 0
+        p You have been invited to contribute to:
+        ul.subscription-list
+          - @invites.each do |subscription|
+            li
+              h2
+                strong> = subscription.ledger.name
+                = " "
+                small
+                  a.button.primary(
+                    href="#{subscribe_subscription_path(subscription)}"
+                  ) Subscribe
+        hr
+      - else
+        p You first need a Ledger<br> to work with.
     .first-time-actions
-      p
-        a.button.primary(href="#create-ledger") Create a Ledger
-      p
-        | or
-      p
-        a.button(href="#") Subscribe<br> to an Existing Ledger
+      - if @invites.size > 0
+        p
+          a.button(href="#create-ledger") Create a Ledger instead
+      - else
+        p
+          a.button.primary(href="#create-ledger") Create a Ledger

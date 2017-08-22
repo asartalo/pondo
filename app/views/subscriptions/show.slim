@@ -1,0 +1,13 @@
+- page('home')
+.container
+  .body
+    .branding-element
+      h1.logo
+        = image_tag 'logo.svg', alt: "Pondo Logo", title: "Pondo"
+      p Sign in to contribute to #{@subscription.ledger.name}
+
+  .main-action
+    a.button.primary(
+      href="#{user_google_oauth2_omniauth_authorize_path}"
+    ) Sign in With Google
+

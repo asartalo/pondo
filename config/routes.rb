@@ -19,7 +19,11 @@ Rails.application.routes.draw do
     resources :subscribers
   end
 
-  resources :subscriptions, only: [:show]
+  resources :subscriptions, only: [:show] do
+    member do
+      get :subscribe
+    end
+  end
 
   if Rails.env != 'production'
     resources :nitrolinks, only: [:index] do

@@ -37,7 +37,6 @@ When(/^I log in$/) do
 end
 
 When(/^I log in for the first time$/) do
-  User.all.destroy_all
   step "I am logged in"
 end
 

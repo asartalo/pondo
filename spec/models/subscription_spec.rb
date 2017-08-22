@@ -27,5 +27,48 @@ RSpec.describe Subscription, type: :model do
 
   it { is_expected.to validate_presence_of(:ledger) }
   it { is_expected.to validate_presence_of(:email) }
+
+  describe "#subscribe" do
+    let(:user) { create(:user, email: email) }
+    subject(:subscribe) { subscription.subscribe(user)  }
+
+    before { subscribe }
+
+    it "subscribes user to the ledger" do
+      expect(user.subscribed_ledgers.find(ledger.id)).not_to be_blank
+    end
+
+    it "returns true" do
+      expect(subscribe).to eql(true)
+    end
+
+    it "marks it as done" do
+      expect(subscription).to be_done
+    end
+
+    context "if the user's email does not match subscribed email" do
+      let(:user) { create(:user, email: "bar@gmail.com") }
+
+      it "does not subscribe user to the ledger" do
+        expect(user.subscribed_ledgers.where(id: ledger.id)).to be_blank
+      end
+
+      it "returns false" do
+        expect(subscribe).to eql(false)
+      end
+    end
+  end
+
+  describe "#available?" do
+    context "when subscription is not done" do
+      it { is_expected.to be_available }
+    end
+
+    context "when subscription is done" do
+      before { subscription.update(done: true) }
+
+      it { is_expected.not_to be_available }
+    end
+  end
 end
 
