@@ -108,7 +108,7 @@
   fetchComplete = (url, theOptions = {}) ->
     options = pu.merge({method: 'get', pushState: true}, theOptions)
     (response) ->
-      return unless response.ok
+      # return unless response.ok
       method = options.method
       pushState = options.pushState
       response.text().then (contents) ->

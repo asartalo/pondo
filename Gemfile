@@ -17,7 +17,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'devise'
 gem 'devise', git: 'https://github.com/gogovan/devise.git', branch: 'rails-5.1'
 gem 'omniauth-google-oauth2', '0.5.0'
-gem 'slim-rails'
+gem 'slim-rails', git: 'https://github.com/yasaichi/slim-rails.git', branch: 'pass-context-object-to-render'
 # gem 'bootstrap', '~> 4.0.0.alpha5'
 gem 'bourbon'
 gem 'neat'
@@ -31,6 +31,7 @@ gem 'sidekiq'
 gem "sidekiq-cron", "~> 0.4.0"
 gem 'bcrypt'
 gem 'dalli'
+gem 'gakubuchi'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password

@@ -4,9 +4,12 @@
 @import "layout";
 @import "notifications";
 @import "forms";
-@import "home";
-@import "welcome";
-@import "ledger";
 @import "header";
 @import "overlay";
 @import "modal";
+
+// Pages
+@import "home";
+@import "welcome";
+@import "ledger";
+@import "errors";

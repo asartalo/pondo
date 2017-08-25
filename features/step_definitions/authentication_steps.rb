@@ -16,14 +16,19 @@ Given(/^I am a user$/) do
   step "I have a google account"
 end
 
-Given(/^I have a google account$/) do
+Given(/^I have (a|a different) google account$/) do |account|
+  if account == "a"
+    email = "john.doe@gmail.com"
+  else
+    email = "jd@gmail.com"
+  end
   OmniAuth.config.test_mode = true
   OmniAuth.config.mock_auth[:default] = {
     "provider"=>"google_oauth2",
     "uid"=>"999999999999999999999",
     "info"=> {
       "name"=>"John Doe",
-      "email"=>"john.doe@gmail.com",
+      "email"=> email,
       "first_name"=>"John",
       "last_name"=>"Doe",
       "image"=>"https://example.com/photo.jpg"

@@ -62,3 +62,10 @@ end
 Then(/^the nitro load event should fire (\d+) times?$/) do |times|
   expect_nitro_load_count.to eql(times.to_i)
 end
+
+Then(/^I should see the "(\d+)" page?$/) do |the_page|
+  if the_page == "404"
+    # suppress_warnings
+    expect(page).to have_content("The page you were looking for does not exist")
+  end
+end

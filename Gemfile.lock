@@ -34,6 +34,16 @@ GIT
     shoulda-matchers (3.1.2)
       activesupport (>= 4.2.0)
 
+GIT
+  remote: https://github.com/yasaichi/slim-rails.git
+  revision: 49cca41b67392b3d5b1d996b632ab285182baa0b
+  branch: pass-context-object-to-render
+  specs:
+    slim-rails (3.1.2)
+      actionpack (>= 3.1)
+      railties (>= 3.1)
+      slim (~> 3.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -167,9 +177,14 @@ GEM
       multipart-post (>= 1.2, < 3)
     ffi (1.9.18)
     formatador (0.2.5)
+    gakubuchi (1.4.0)
+      grease (~> 0.3.0)
+      railties (>= 4.0.0)
+      sprockets-rails (>= 2.0.0)
     gherkin (4.1.3)
     globalid (0.4.0)
       activesupport (>= 4.2.0)
+    grease (0.3.1)
     guard (2.14.1)
       formatador (>= 0.2.4)
       listen (>= 2.7, < 4.0)
@@ -370,10 +385,6 @@ GEM
     slim (3.0.8)
       temple (>= 0.7.6, < 0.9)
       tilt (>= 1.3.3, < 2.1)
-    slim-rails (3.1.2)
-      actionpack (>= 3.1)
-      railties (>= 3.1)
-      slim (~> 3.0)
     slop (3.6.0)
     spring (2.0.2)
       activesupport (>= 4.2)
@@ -438,6 +449,7 @@ DEPENDENCIES
   devise!
   dotenv-rails
   factory_girl_rails
+  gakubuchi
   guard
   guard-cucumber
   guard-livereload
@@ -467,7 +479,7 @@ DEPENDENCIES
   sidekiq-cron (~> 0.4.0)
   simple_form!
   simplecov
-  slim-rails
+  slim-rails!
   spring
   spring-commands-rspec
   spring-watcher-listen (~> 2.0.0)

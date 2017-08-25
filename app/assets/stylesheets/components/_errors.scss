@@ -1,0 +1,25 @@
+.errors-page {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  min-height: 520px;
+
+  .container {
+    text-align: center;
+    min-height: 0;
+    padding: 20px;
+  }
+
+  .body {
+    align-items: center;
+    justify-content: center;
+    min-height: 500px;
+
+    @media only screen and (max-height: 736px) {
+      height: calc(100vh - 40px);
+    }
+
+  }
+}
+

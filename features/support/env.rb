@@ -127,3 +127,10 @@ Around('@email') do |scenario, block|
   block.call
   ActiveJob::Base.queue_adapter = old_adapter
 end
+
+Around('@allow-rescue') do |scenario, block|
+  Pondo::Application.config.consider_all_requests_local = false
+  block.call
+  Pondo::Application.config.consider_all_requests_local = true
+end
+
