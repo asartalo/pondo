@@ -28,5 +28,9 @@ class NitrolinksController < ApplicationController
 
   def blank
   end
+
+  def error_500
+    raise "Sample error"
+  end
 end
 

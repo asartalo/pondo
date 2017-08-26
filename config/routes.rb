@@ -32,6 +32,7 @@ Rails.application.routes.draw do
         get 'redirecting'
         get 'redirected'
         get 'changing'
+        get 'error_500'
         post 'changing_post'
         post 'blank'
       end
