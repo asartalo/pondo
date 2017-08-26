@@ -24,6 +24,9 @@
 # Coverage files
 coverage
 
+# Ignore public/assets - 'cause sometimes we precompile
+/public/assets/*
+
 .DS_Store
 
 # Ignore Byebug command history file.
