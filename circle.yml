@@ -1,3 +1,7 @@
+machine:
+  ruby:
+    version:
+      2.3.4
 test:
   post:
     - bundle exec rails coveralls:push
@@ -5,32 +9,6 @@ test:
 general:
   artifacts:
     - "coverage"
-
-machine:
-  post:
-    - "mv ~/$CIRCLE_PROJECT_REPONAME/.ruby-version ~/$CIRCLE_PROJECT_REPONAME/.ruby-version.ci"
-    - "mv ~/$CIRCLE_PROJECT_REPONAME/.ruby-gemset ~/$CIRCLE_PROJECT_REPONAME/.ruby-gemset.ci"
-    - |
-      RUBY_VERSION=`cat ~/$CIRCLE_PROJECT_REPONAME/.ruby-version.ci`
-      if [[ -e ~/rvm_binaries/ruby-$RUBY_VERSION.tar.bz2 ]]
-      then
-        echo "YAS! We already have $RUBY_VERSION"
-        rvm mount ~/rvm_binaries/ruby-$RUBY_VERSION.tar.bz2
-      else
-        echo "Okay installing ruby"
-        mkdir ~/rvm_binaries || true
-        rvm install $RUBY_VERSION
-        gem install bundler
-        cd ~/rvm_binaries && rvm prepare $RUBY_VERSION
-        ls ~/rvm_binaries
-      fi
-    # - |
-    #   RUBY_GEMSET=`cat ~/$CIRCLE_PROJECT_REPONAME/.ruby-gemset.ci`
-    #   mkdir ~/rvm_gems || true
-    #   rvm gemset create $RUBY_GEMSET
-    #   rvm gemset use $RUBY_GEMSET
-    #   echo "rvm gemset use $RUBY_GEMSET" > .rvmrc
-    #   rvm rvmrc trust
 
 dependencies:
   cache_directories:
