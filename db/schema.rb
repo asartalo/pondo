@@ -14,10 +14,9 @@ ActiveRecord::Schema.define(version: 20170811200730) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "uuid-ossp"
   enable_extension "pgcrypto"
 
-  create_table "categories", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+  create_table "categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "type"
     t.string "name"
     t.text "description"
@@ -46,7 +45,7 @@ ActiveRecord::Schema.define(version: 20170811200730) do
     t.index ["user_id"], name: "index_ledger_subscribers_on_user_id"
   end
 
-  create_table "ledgers", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+  create_table "ledgers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.string "currency"
     t.integer "savings_target"
@@ -56,7 +55,7 @@ ActiveRecord::Schema.define(version: 20170811200730) do
     t.index ["user_id"], name: "index_ledgers_on_user_id"
   end
 
-  create_table "money_move_types", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+  create_table "money_move_types", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "ledger_id"
     t.uuid "category_id"
     t.string "name"
@@ -67,7 +66,7 @@ ActiveRecord::Schema.define(version: 20170811200730) do
     t.index ["ledger_id"], name: "index_money_move_types_on_ledger_id"
   end
 
-  create_table "money_moves", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+  create_table "money_moves", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.date "date"
     t.decimal "amount", precision: 14, scale: 4
     t.text "notes"
