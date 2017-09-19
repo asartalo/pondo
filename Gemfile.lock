@@ -27,14 +27,6 @@ GIT
       rails (>= 3.2)
 
 GIT
-  remote: https://github.com/thoughtbot/shoulda-matchers.git
-  revision: 0b2e0da6035b9c45b0430bc6eb9a8bab4aeba50e
-  branch: rails-5
-  specs:
-    shoulda-matchers (3.1.2)
-      activesupport (>= 4.2.0)
-
-GIT
   remote: https://github.com/yasaichi/slim-rails.git
   revision: 49cca41b67392b3d5b1d996b632ab285182baa0b
   branch: pass-context-object-to-render
@@ -370,6 +362,8 @@ GEM
       childprocess (~> 0.5)
       rubyzip (~> 1.0)
     shellany (0.0.1)
+    shoulda-matchers (3.1.1)
+      activesupport (>= 4.0.0)
     sidekiq (5.0.4)
       concurrent-ruby (~> 1.0)
       connection_pool (~> 2.2, >= 2.2.0)
@@ -477,7 +471,7 @@ DEPENDENCIES
   scout_apm
   selenium-webdriver
   sextant!
-  shoulda-matchers!
+  shoulda-matchers
   sidekiq
   sidekiq-cron (~> 0.4.0)
   simple_form!
