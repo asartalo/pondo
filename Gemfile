@@ -5,13 +5,13 @@ def os_is(re)
   RbConfig::CONFIG['host_os'] =~ re
 end
 
-gem 'rails', '~> 5.1.0', '< 5.2'
+gem 'rails', '~> 5.1.2'
 gem 'pg', '~> 0.18'
 gem 'puma', '~> 3.7'
-gem 'sass-rails', '~> 5.0'
+gem 'sass-rails', '~> 5.0', '>= 5.0.6'
 gem 'uglifier', '>= 1.3.0'
-gem 'coffee-rails', '~> 4.2'
-gem 'jquery-rails'
+gem 'coffee-rails', '~> 4.2', '>= 4.2.2'
+gem 'jquery-rails', '>= 4.3.1'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 # gem 'devise'
@@ -31,8 +31,8 @@ gem 'sidekiq'
 gem "sidekiq-cron", "~> 0.4.0"
 gem 'bcrypt'
 gem 'dalli'
-gem 'gakubuchi'
-gem "nitrolinks-rails"
+gem 'gakubuchi', '>= 1.4.0'
+gem "nitrolinks-rails", ">= 0.1.0"
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
@@ -40,10 +40,10 @@ gem "nitrolinks-rails"
 # gem 'therubyracer', platforms: :ruby
 
 group :development, :test do
-  gem 'dotenv-rails'
+  gem 'dotenv-rails', '>= 2.2.1'
   gem 'byebug', platform: :mri
-  gem 'nokogiri', "~> 1.7.1"
-  gem 'jasmine-rails'
+  gem 'nokogiri', '~> 1.8.1'
+  gem 'jasmine-rails', '>= 0.14.1'
 end
 
 group :development do
@@ -60,20 +60,20 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'spring-commands-rspec'
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
-  gem 'web-console'
+  gem 'web-console', '>= 3.5.1'
 end
 
 group :test do
   gem 'codeclimate-test-reporter', require: false
   gem 'simplecov', require:  false
-  gem 'factory_girl_rails'
+  gem 'factory_girl_rails', '>= 4.8.0'
   gem 'database_cleaner'
-  gem 'api_matchers'
-  gem 'rspec-rails'
+  gem 'api_matchers', '>= 0.6.2'
+  gem 'rspec-rails', '>= 3.6.0'
   # gem 'poltergeist'
   gem 'selenium-webdriver'
-  gem 'chromedriver-helper'
-  gem 'cucumber-rails', require: false
+  gem 'chromedriver-helper', '>= 1.1.0'
+  gem 'cucumber-rails', '>= 1.5.0', require: false
   gem 'shoulda-matchers'
 end
 
