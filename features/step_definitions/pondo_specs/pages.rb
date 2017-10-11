@@ -2,7 +2,6 @@ module PondoSpecs
   module Pages
     module_function
 
-
     {
       home: {
         path: '/'
@@ -10,32 +9,6 @@ module PondoSpecs
 
       welcome: {
         path: '/welcome'
-      },
-
-      # NITRONLINKS TESTING ONLY
-      nitrolinks: {
-        path: '/nitrolinks',
-        content: 'Nitrolinks Testing Home'
-      },
-
-      nitrolinks_debugging: {
-        path: '/nitrolinks#nitro-debugging',
-        content: 'Nitrolinks Testing Home'
-      },
-
-      nitrolinks_hash: {
-        path: '/nitrolinks#',
-        content: 'Nitrolinks Testing Home'
-      },
-
-      nitrolinks_1: {
-        path: '/nitrolinks/link1',
-        content: 'Link 1'
-      },
-
-      redirected: {
-        path: '/nitrolinks/redirected',
-        content: 'Redirected'
       },
 
     }.each do |page_name, data|
