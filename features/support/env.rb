@@ -6,8 +6,6 @@
 require 'simplecov'
 
 require 'cucumber/rails'
-# require 'capybara/poltergeist'
-# require 'capybara-webkit'
 # require Rails.root.join('features', 'step_definitions', 'constants').to_s
 
 # Capybara defaults to CSS3 selectors rather than XPath.
@@ -59,78 +57,4 @@ end
 # The :transaction strategy is faster, but might give you threading problems.
 # See https://github.com/cucumber/cucumber-rails/blob/master/features/choose_javascript_database_strategy.feature
 Cucumber::Rails::Database.javascript_strategy = :truncation
-
-# Capybara.default_driver = :poltergeist
-
-# Change server port
-Capybara.app_host = 'http://localhost:3030'
-Capybara.server_port = 3030
-
-# Capybara.default_driver = :poltergeist
-# Capybara.register_driver :poltergeist do |app|
-#     options = {
-#         :js_errors => true,
-#         :timeout => 120,
-#         :debug => false,
-#         :phantomjs_options => ['--load-images=no', '--disk-cache=false'],
-#         :inspector => true,
-#     }
-#     Capybara::Poltergeist::Driver.new(app, options)
-# end
-# Capybara.default_driver = :webkit
-# Capybara::Webkit.configure do |config|
-#   # config.allow_url("https://fonts.googleapis.com/*")
-#   # config.debug = true
-#   config.block_unknown_urls
-# end
-
-Capybara.default_driver = :selenium
-Capybara.register_driver :selenium do |app|
-  Capybara::Selenium::Driver.new(app, browser: :chrome)
-end
-# Capybara.register_driver :selenium do |app|
-#   Capybara::Selenium::Driver.new(
-#     app,
-#     browser: :firefox,
-#     desired_capabilities: Selenium::WebDriver::Remote::Capabilities.firefox(marionette: false)
-#   )
-# end
-
-# Hooks
-Before do |scenario|
-  # Set test to true and mock the OAuth response
-  OmniAuth.config.test_mode = true
-end
-
-After do |scenario|
-  Capybara.use_default_driver
-  OmniAuth.config.mock_auth[:default] = nil
-  OmniAuth.config.test_mode = false
-  if scenario.failed?
-    save_screenshot
-  end
-end
-
-Before('@nitrolinks') do
-  visit pondo_page("nitrolinks")
-  jscript('pondoTesting.clearDomLoads()')
-  @initial_page_loads = jscript('pondoTesting.domLoadCount()').to_i
-end
-
-Around('@email') do |scenario, block|
-  ActionMailer::Base.delivery_method = :test
-  ActionMailer::Base.perform_deliveries = true
-  ActionMailer::Base.deliveries.clear
-
-  old_adapter = ActiveJob::Base.queue_adapter
-  ActiveJob::Base.queue_adapter = :inline
-  block.call
-  ActiveJob::Base.queue_adapter = old_adapter
-end
-
-Around('@allow-rescue') do |scenario, block|
-  Pondo::Application.config.consider_all_requests_local = false
-  block.call
-  Pondo::Application.config.consider_all_requests_local = true
-end
 

@@ -18,7 +18,7 @@ end
 
 Then(/^I can save the ledger$/) do
   find_button('Save Ledger').click
-  wait_for_remote_request
+  wait_for_page_load
   expect(User.first.owned_ledgers.size).to eql(1)
 end
 

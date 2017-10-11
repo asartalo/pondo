@@ -32,7 +32,7 @@ gem "sidekiq-cron", "~> 0.4.0"
 gem 'bcrypt'
 gem 'dalli'
 gem 'gakubuchi', '>= 1.4.0'
-gem "nitrolinks-rails", ">= 0.2.0"
+gem "nitrolinks-rails", ">= 0.3.0"
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password

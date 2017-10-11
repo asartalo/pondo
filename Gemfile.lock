@@ -248,7 +248,7 @@ GEM
     nenv (0.3.0)
     newrelic_rpm (4.2.0.334)
     nio4r (2.1.0)
-    nitrolinks-rails (0.2.0)
+    nitrolinks-rails (0.3.0)
       coffee-rails (~> 4.2)
       rails (~> 5.1)
     nokogiri (1.8.1)
@@ -461,7 +461,7 @@ DEPENDENCIES
   money
   neat
   newrelic_rpm
-  nitrolinks-rails (>= 0.2.0)
+  nitrolinks-rails (>= 0.3.0)
   nokogiri (~> 1.8.1)
   omniauth-google-oauth2 (= 0.5.0)
   pg (~> 0.18)

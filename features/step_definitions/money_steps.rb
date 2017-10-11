@@ -42,7 +42,7 @@ end
 
 When(/^I select the (add income|deduct expense) section$/) do |section|
   find_link(section.titleize).click
-  wait_for_remote_request
+  wait_for_page_load
 end
 
 Then(/^I should see the add income section$/) do
