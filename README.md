@@ -16,4 +16,4 @@ Requirements
 
 Development Notes
 -----------------
-- This app uses turbolinks
+- This app uses [Nitrolinks](https://github.com/asartalo/nitrolinks-rails)
