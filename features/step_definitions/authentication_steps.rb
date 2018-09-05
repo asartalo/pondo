@@ -17,10 +17,10 @@ Given(/^I am a user$/) do
 end
 
 Given(/^I have (a|a different) google account$/) do |account|
-  if account == "a"
-    email = "john.doe@gmail.com"
-  else
+  if account == "a different"
     email = "jd@gmail.com"
+  else
+    email = "john.doe@gmail.com"
   end
   OmniAuth.config.test_mode = true
   OmniAuth.config.mock_auth[:default] = {
