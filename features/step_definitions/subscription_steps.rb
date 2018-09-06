@@ -37,10 +37,6 @@ When(/^I follow the ledger subscription link$/) do
   visit(subscription_path(@subscription))
 end
 
-Then(/^I should see a link to sign up$/) do
-  find_link("Sign in With Google").click
-end
-
 Then(/^I should see the ledger$/) do
   expect(page).to have_content(@invited_ledger.name)
 end

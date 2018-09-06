@@ -11,8 +11,11 @@ class SubscriptionsController < MainPagesController
   end
 
   def subscribe
-    subscription.subscribe(current_user)
-    redirect_to ledger_path(subscription.ledger)
+    if subscription.subscribe(current_user)
+      redirect_to ledger_path(subscription.ledger)
+    else
+      redirect_to welcome_path
+    end
   end
 
   protected

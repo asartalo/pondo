@@ -15,14 +15,15 @@ Feature: Subscribing
   Scenario: I am able to subscribe as a non-user
     Given I have a google account
     When I follow the ledger subscription link
-    Then I should see a link to sign up
+    Then I click link to sign up
     And I should see the ledger
 
-  Scenario: I am able to subscribe as a non-user even with a different email
+  Scenario: I am unable to subscribe as a non-user if I have a different email
     Given I have a different google account
     When I follow the ledger subscription link
-    Then I should see a link to sign up
-    And I should see the ledger
+    Then I click link to sign up
+    Then I should see the 'welcome' page
+
 
   Scenario: I am unable to subscribe with a used subscription
     Given the invite is used

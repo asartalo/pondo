@@ -16,16 +16,11 @@ Given(/^I am a user$/) do
   step "I have a google account"
 end
 
-Given(/^I have (a|a different) google account$/) do |account|
-  if account == "a different"
-    email = "jd@gmail.com"
-  else
-    email = "john.doe@gmail.com"
-  end
+def stub_auth_response(email, uid)
   OmniAuth.config.test_mode = true
   OmniAuth.config.mock_auth[:default] = {
     "provider"=>"google_oauth2",
-    "uid"=>"999999999999999999999",
+    "uid"=>uid,
     "info"=> {
       "name"=>"John Doe",
       "email"=> email,
@@ -34,6 +29,14 @@ Given(/^I have (a|a different) google account$/) do |account|
       "image"=>"https://example.com/photo.jpg"
     }
   }.with_indifferent_access
+end
+
+Given(/^I have (a|a different) google account$/) do |account|
+  if account == "a different"
+    stub_auth_response("jd@gmail.com", "888888888888888888888")
+  else
+    stub_auth_response("john.doe@gmail.com", "999999999999999999999")
+  end
 end
 
 When(/^I log in$/) do
@@ -56,5 +59,9 @@ end
 
 When(/^I log in from home$/) do
   step 'I am logged in'
+end
+
+When(/^I click link to sign up$/) do
+  find_link("Sign in With Google").click
 end
 
