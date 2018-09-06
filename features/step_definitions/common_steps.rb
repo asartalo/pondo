@@ -29,6 +29,10 @@ When(/^I pause$/) do
   pause_pls
 end
 
+When(/^I wait (\d+) seconds$/) do |duration|
+  sleep duration.to_i.seconds
+end
+
 Then(/^I should see the '([^']*)' page$/) do |name|
   expect(page).to have_current_path(pondo_page(name))
 end
