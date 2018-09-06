@@ -10,8 +10,8 @@ An experiment. A finance management web app. [Demo](https://pondomo.herokuapp.co
 Requirements
 ------------
 
-- Ruby 2.3.1
-- Rails 5.0.0.1
+- Ruby 2.3.4
+- Rails 5.1.2
 - PostgreSQL
 
 Development Notes
