@@ -13,6 +13,7 @@ html
     = stylesheet_link_tag    'application', media: 'all', 'data-nitrolinks-track': 'reload'
     = yield :stylesheets
     = javascript_include_tag 'application', 'data-nitrolinks-track': 'reload'
+    = javascript_pack_tag 'application'
     - unless Rails.env == 'production'
       = javascript_include_tag 'testing', 'data-nitrolinks-track': 'reload'
 
