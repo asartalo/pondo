@@ -11,10 +11,4 @@
 // about supported directives.
 //
 //= require jquery
-//= require pu
-//= require assets
 //= require nitrolinks
-//= require global
-//= require app
-//= require_tree .
-//= stub 'testing'

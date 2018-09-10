@@ -1,2 +1,0 @@
-app.modal "invite-section"
-
