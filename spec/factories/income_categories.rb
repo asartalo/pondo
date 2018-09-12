@@ -1,6 +1,6 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :income_category do
-    name "Active Income"
+    name { "Active Income" }
   end
 end
 

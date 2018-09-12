@@ -1,6 +1,6 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :income_type do
-    name "Salary"
+    name { "Salary" }
   end
 end
 

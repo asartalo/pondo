@@ -68,7 +68,7 @@ end
 group :test do
   gem 'codeclimate-test-reporter', require: false
   gem 'simplecov', require:  false
-  gem 'factory_girl_rails', '>= 4.8.0'
+  gem 'factory_bot_rails'
   gem 'database_cleaner'
   gem 'api_matchers', '>= 0.6.2'
   gem 'rspec-rails', '>= 3.6.0'

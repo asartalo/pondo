@@ -15,9 +15,9 @@
 #  index_ledgers_on_user_id  (user_id)
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :ledger do
-    name "My Ledger"
-    currency "USD"
+    name { "My Ledger" }
+    currency { "USD" }
   end
 end

@@ -1,6 +1,6 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :expense_type do
-    name "Groceries"
+    name { "Groceries" }
   end
 end
 

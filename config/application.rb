@@ -35,7 +35,7 @@ module Pondo
       generate.controller_specs false
 
       # Generate factories under spec/ directories
-      generate.fixture_replacement :factory_girl, dir: 'spec/factories'
+      generate.fixture_replacement :factory_bot, dir: 'spec/factories'
     end
 
     # Don't generate system test files.
