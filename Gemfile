@@ -45,6 +45,7 @@ group :development, :test do
   gem 'byebug', platform: :mri
   gem 'nokogiri', '~> 1.8.1'
   gem 'jasmine-rails', '>= 0.14.1'
+  gem 'cypress-on-rails', '~> 1.0'
 end
 
 group :development do
