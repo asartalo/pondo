@@ -14,8 +14,16 @@
 // ***********************************************************
 
 // Import commands.js using ES2015 syntax:
-import './commands'
-import './on-rails'
+import './commands';
+import './on-rails';
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
+beforeEach(() => {
+  cy.app('clean');
+  cy.app('omni_auth_test_mode');
+});
+
+afterEach(() => {
+  cy.app('omni_auth_test_mode_end');
+});

@@ -1,11 +1,23 @@
-Given("I'm a regular visitor", (e) => {
-	console.log("Nothing to do here")
-})
+const pages = {
+  home: {
+    path: '/',
+    content: 'Expense Tracking for the Masses',
+  },
 
-When("I visit the {string} page", (page) => {
-	cy.visit("/")
-})
+  welcome: {
+    path: '/welcome',
+    content: 'Welcome to Pondo!',
+  },
+};
 
-Then("I should see {string} page", (page) => {
-	cy.contains("Expense Tracking for the Masses")
-})
+Given("I'm a regular visitor", () => {
+  console.log("Nothing to do here");
+});
+
+When("I visit the {string} page", page => {
+  cy.visit(pages[page].path);
+});
+
+Then("I should see {string} page", page => {
+  cy.contains(pages[page].content);
+});
