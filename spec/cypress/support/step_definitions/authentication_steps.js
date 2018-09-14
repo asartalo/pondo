@@ -1,31 +1,36 @@
 import Pending from 'mocha/lib/pending';
+import { visitPage } from './common';
+import users from '../../fixtures/users';
 
-const users = {
-  john: {
-    name: "John Doe",
-    email: "john.doe@gmail.com",
-    uid: "999999999999999999999",
-  },
-  jane: {
-    name: "Jane Doe",
-    email: "jd@gmail.com",
-    uid: "888888888888888888888",
-  }
+export function logIn() {
+  cy.get('.button.primary').click();
 };
+
+export function iAmLoggedIn() {
+  visitPage('home');
+  logIn();
+}
 
 Given("I am not logged in", () => {
   // nothing to do here
 });
 
-Given(/^I have (a|a different) google account$/, (account) => {
+Given("I am logged in", iAmLoggedIn);
+
+Given(/^I have (a|a different) google account$/, account => {
   const user = (account == 'a different') ? users.john : users.jane;
   cy.app('stub_auth_response', user);
 });
 
-When("I log in", () => {
-  cy.get('.button.primary').click();
+Given("I don't have a google account", () => {
+  cy.app('stub_auth_response', { no_account: true });
 });
 
-Then("I should see the {string} page", page => {
-  cy.contains('Welcome to Pondo!');
+Given("I am a user", () => {
+  cy.app('create_user', users.jane)
+  cy.app('stub_auth_response', users.jane)
 });
+
+When("I log in", logIn);
+
+When("I log in from home", iAmLoggedIn);

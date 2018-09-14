@@ -29,7 +29,19 @@ Cypress.Commands.add('appFactories', function (options) {
 Cypress.Commands.add('appFixtures', function (options) {
   cy.app('activerecord_fixtures', options)
 });
+
 // CypressDev: end
+
+Cypress.Commands.add('pondoTest', function (item, params) {
+  cy.log("PONDO_TEST: " + item)
+  cy.request({
+    method: 'GET',
+    url: `/test/${item}`,
+    body: params,
+    log: true,
+    failOnStatusCode: true
+  }).then(response => response.body);
+});
 
 // The next is optional
 // beforeEach(() => {

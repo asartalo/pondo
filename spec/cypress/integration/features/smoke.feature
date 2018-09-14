@@ -6,4 +6,4 @@ Feature: Homepage is accessible
 	Scenario: I can visit the homepage
 		Given I'm a regular visitor
 		When I visit the 'home' page
-		Then I should see 'home' page
+		Then I should see the 'home' page
