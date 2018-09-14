@@ -41,5 +41,6 @@ Rails.application.routes.draw do
 
   if Rails.env == 'test'
     get 'test/ledger', to: 'test#ledger'
+    post 'test/run', to: 'test#run'
   end
 end

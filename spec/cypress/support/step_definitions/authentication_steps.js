@@ -32,5 +32,5 @@ Given("I am a user", () => {
 });
 
 When("I log in", logIn);
-
+When("I log in for the first time", iAmLoggedIn);
 When("I log in from home", iAmLoggedIn);

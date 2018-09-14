@@ -43,6 +43,16 @@ Cypress.Commands.add('pondoTest', function (item, params) {
   }).then(response => response.body);
 });
 
+Cypress.Commands.add('pondoRun', function (code) {
+  cy.log("PONDO_RUN: " + code)
+  cy.request({
+    method: 'POST',
+    url: '/test/run',
+    body: { code },
+    log: true,
+    failOnStatusCode: true
+  }).then(response => response.body);
+});
 // The next is optional
 // beforeEach(() => {
 //  cy.app('clean') // have a look at cypress/app_commands/clean.rb

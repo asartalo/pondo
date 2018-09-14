@@ -2622,6 +2622,10 @@ cyclist@~0.2.2:
   version "0.2.2"
   resolved "https://registry.yarnpkg.com/cyclist/-/cyclist-0.2.2.tgz#1b33792e11e914a2fd6d6ed6447464444e5fa640"
 
+cypress-capybara@^0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/cypress-capybara/-/cypress-capybara-0.0.2.tgz#bb7ef8b680b4ddf5b63738141369e0efcae83f55"
+
 cypress-cucumber-preprocessor@^1.5.0:
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/cypress-cucumber-preprocessor/-/cypress-cucumber-preprocessor-1.5.0.tgz#b670eb00d240d6e15062c747ed1a6df48fd11de7"
