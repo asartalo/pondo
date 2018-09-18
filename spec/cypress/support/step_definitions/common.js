@@ -26,7 +26,7 @@ Given("I'm a regular visitor", () => {
 });
 
 Given("I own a ledger", () => {
-  cy.app('create_ledger', users.jane);
+  cy.pondoScript('create_ledger', users.jane).as('ownLedger');
 });
 
 When("I visit the {string} page", visitPage);
@@ -36,7 +36,6 @@ When("I choose to create a ledger on the welcome page", () => {
 });
 
 Then("I should see the {string} page", page => {
-  // cy.contains(pages[page].content);
   hasContentFor(page);
 });
 
@@ -45,11 +44,10 @@ Then("I should be greeted with a welcome", () => {
 });
 
 Then("I should see the UI to create my first ledger", () => {
-  cy.get('#create-ledger');
+  cy.get('#create-ledger').contains('Create Ledger');
 });
 
 Then(/^I can set my first ledger's name to '([^']*)'$/, name => {
-  // const el = cy.get('label').contains('Ledger Name')
   cy.findField('Ledger Name')
     .clear()
     .type(name);
@@ -59,11 +57,15 @@ Then(/^I can set the currency to '([^']*)'$/, currency => {
   cy.findField('Currency').select('PHP');
 });
 
+function queryLedgerSize(user, then) {
+  return cy.pondoRun(`User.find_by(email: "${user.email}").owned_ledgers.size`)
+    .then(then);
+}
+
 Then("I can save the ledger", () => {
+  queryLedgerSize(users.jane, size => expect(size).to.equal(0));
   cy.findButton('Save Ledger').click();
-  cy.pondoRun('User.first.owned_ledgers.size').then(size => {
-    expect(size).to.equal(1);
-  });
+  queryLedgerSize(users.jane, size => expect(size).to.equal(1));
 });
 
 Then(/I can see the '([^']*)' ledger on the header/, name => {

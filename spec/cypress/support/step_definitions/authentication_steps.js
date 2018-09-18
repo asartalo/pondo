@@ -9,6 +9,7 @@ export function logIn() {
 export function iAmLoggedIn() {
   visitPage('home');
   logIn();
+  cy.url().should('not.eql', Cypress.config().baseUrl + '/');
 }
 
 Given("I am not logged in", () => {
@@ -34,3 +35,7 @@ Given("I am a user", () => {
 When("I log in", logIn);
 When("I log in for the first time", iAmLoggedIn);
 When("I log in from home", iAmLoggedIn);
+When("I click link to sign up", () => {
+  cy.findLink("Sign in With Google").click();
+  cy.url().should('not.eql', Cypress.config().baseUrl + '/');
+});

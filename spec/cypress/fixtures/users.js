@@ -10,6 +10,12 @@ const users = {
     email: "jd@gmail.com",
     uid: "888888888888888888888",
     image: "https://example.com/photo2.jpg"
+  },
+  jessy: {
+    name: "Jessy Doe",
+    email: "jessyd@gmail.com",
+    uid: "777777777777777777777",
+    image: "https://example.com/photo3.jpg"
   }
 };
 

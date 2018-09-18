@@ -45,7 +45,7 @@ Cypress.Commands.add('pondoTest', function (item, params) {
 
 Cypress.Commands.add('pondoRun', function (code) {
   cy.log("PONDO_RUN: " + code)
-  cy.request({
+  return cy.request({
     method: 'POST',
     url: '/test/run',
     body: { code },
@@ -53,6 +53,30 @@ Cypress.Commands.add('pondoRun', function (code) {
     failOnStatusCode: true
   }).then(response => response.body);
 });
+
+Cypress.Commands.add('pondoScript', function (script, args) {
+  cy.log("PONDO_SCRIPT: " + script)
+  return cy.request({
+    method: 'POST',
+    url: `/test/run?script_name=${script}`,
+    body: args,
+    log: true,
+    failOnStatusCode: true
+  }).then(response => response.body);
+});
+
+//*********
+// GET MULTI
+//*********
+
+Cypress.Commands.add('getMulti', function(...args) {
+  const all = args.reduce((results, arg, i) => {
+    cy.get(arg).then(result => results[i] = result);
+    return results;
+  }, []);
+  return cy.wrap(all);
+});
+
 // The next is optional
 // beforeEach(() => {
 //  cy.app('clean') // have a look at cypress/app_commands/clean.rb
