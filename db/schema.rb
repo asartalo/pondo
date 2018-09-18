@@ -14,9 +14,10 @@ ActiveRecord::Schema.define(version: 20170811200730) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "uuid-ossp"
   enable_extension "pgcrypto"
 
-  create_table "categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "categories", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.string "type"
     t.string "name"
     t.text "description"
@@ -26,7 +27,7 @@ ActiveRecord::Schema.define(version: 20170811200730) do
     t.index ["ledger_id"], name: "index_categories_on_ledger_id"
   end
 
-  create_table "country_currencies", force: :cascade do |t|
+  create_table "country_currencies", id: :serial, force: :cascade do |t|
     t.string "country_code"
     t.string "currency"
     t.datetime "created_at", null: false
@@ -35,7 +36,7 @@ ActiveRecord::Schema.define(version: 20170811200730) do
     t.index ["currency"], name: "index_country_currencies_on_currency"
   end
 
-  create_table "ledger_subscribers", force: :cascade do |t|
+  create_table "ledger_subscribers", id: :serial, force: :cascade do |t|
     t.integer "user_id"
     t.uuid "ledger_id"
     t.datetime "created_at", null: false
@@ -45,17 +46,17 @@ ActiveRecord::Schema.define(version: 20170811200730) do
     t.index ["user_id"], name: "index_ledger_subscribers_on_user_id"
   end
 
-  create_table "ledgers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "ledgers", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.string "name"
     t.string "currency"
     t.integer "savings_target"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "user_id"
+    t.integer "user_id"
     t.index ["user_id"], name: "index_ledgers_on_user_id"
   end
 
-  create_table "money_move_types", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "money_move_types", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.uuid "ledger_id"
     t.uuid "category_id"
     t.string "name"
@@ -66,7 +67,7 @@ ActiveRecord::Schema.define(version: 20170811200730) do
     t.index ["ledger_id"], name: "index_money_move_types_on_ledger_id"
   end
 
-  create_table "money_moves", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "money_moves", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.date "date"
     t.decimal "amount", precision: 14, scale: 4
     t.text "notes"
@@ -89,7 +90,7 @@ ActiveRecord::Schema.define(version: 20170811200730) do
     t.index ["ledger_id"], name: "index_subscriptions_on_ledger_id"
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", id: :serial, force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "name", default: "", null: false
     t.string "provider", default: "", null: false
@@ -103,6 +104,7 @@ ActiveRecord::Schema.define(version: 20170811200730) do
   add_foreign_key "categories", "ledgers"
   add_foreign_key "ledger_subscribers", "ledgers"
   add_foreign_key "ledger_subscribers", "users"
+  add_foreign_key "ledgers", "users"
   add_foreign_key "money_move_types", "categories"
   add_foreign_key "money_move_types", "ledgers"
   add_foreign_key "money_moves", "ledgers"
