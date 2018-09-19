@@ -8,7 +8,7 @@ jobs:
       CIRCLE_ARTIFACTS: /tmp/circleci-artifacts
       CIRCLE_TEST_REPORTS: /tmp/circleci-test-results
     docker:
-    - image: circleci/ruby:2.3.7-stretch-node-browsers
+    - image: circleci/ruby:2.3.4-stretch-node-browsers
     # - image: circleci/build-image:ubuntu-14.04-XXL-upstart-1189-5614f37
     #  command: /sbin/init
     steps:
@@ -19,26 +19,26 @@ jobs:
     #    command: rm -f asartalo/pondo/.rvmrc; echo 2.3.4 > asartalo/pondo/.ruby-version; rvm use 2.3.4 --default
     - restore_cache:
         keys:
-        - v2-rails-{{ checksum "Gemfile.lock" }}
-        - v2-rails-
+        - v1-rails-{{ checksum "Gemfile.lock" }}
+        - v1-rails-
     #- run: ruby circle_ci_dependencies.rb
     - run:
         name: Bundle Install
         command: bundle check || bundle install
     - save_cache:
-        key: v2-rails-{{ checksum "Gemfile.lock" }}
+        key: v1-rails-{{ checksum "Gemfile.lock" }}
         paths:
         - vendor/bundle
 
     - restore_cache:
         keys:
-        - v2-yarn-{{ checksum "yarn.lock" }}
-        - v2-yarn-
+        - v1-yarn-{{ checksum "yarn.lock" }}
+        - v1-yarn-
     - run:
         name: Yarn Install
         command: yarn install --cache-folder ~/.cache/yarn
     - save_cache:
-        key: v2-yarn-{{ checksum "yarn.lock" }}
+        key: v1-yarn-{{ checksum "yarn.lock" }}
         paths:
         - ~/.cache/yarn
 
