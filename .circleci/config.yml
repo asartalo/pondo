@@ -24,6 +24,7 @@ jobs:
     - run: ruby circle_ci_dependencies.rb
     - run: gem install bundle
     - run: bundle install
+    - run: NODE_ENV=test bundle exec rails webpacker:compile
     - save_cache:
         key: v1-dep-{{ .Branch }}-{{ epoch }}
         paths:
