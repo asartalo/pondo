@@ -1,12 +1,7 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/asartalo/pondo
-    parallelism: 1
-    shell: /bin/bash --login
-    environment:
-      CIRCLE_ARTIFACTS: /tmp/circleci-artifacts
-      CIRCLE_TEST_REPORTS: /tmp/circleci-test-results
+    parallelism: 3
     docker:
     - image: circleci/ruby:2.3.7-stretch-node-browsers
       environment:
@@ -16,6 +11,8 @@ jobs:
         PGHOST: 127.0.0.1
         PGUSER: circleci-demo-ruby
         RAILS_ENV: test
+        CIRCLE_ARTIFACTS: /tmp/circleci-artifacts
+        CIRCLE_TEST_REPORTS: /tmp/circleci-test-results
     - image: circleci/postgres:9.5-alpine
       environment:
         POSTGRES_USER: circleci-demo-ruby
@@ -31,26 +28,26 @@ jobs:
     #    command: rm -f asartalo/pondo/.rvmrc; echo 2.3.4 > asartalo/pondo/.ruby-version; rvm use 2.3.4 --default
     - restore_cache:
         keys:
-        - v4-rails-{{ checksum "Gemfile.lock" }}
-        - v4-rails-
+        - v5-rails-{{ checksum "Gemfile.lock" }}
+        - v5-rails-
     #- run: ruby circle_ci_dependencies.rb
     - run:
         name: Bundle Install
         command: bundle check || bundle install
     - save_cache:
-        key: v4-rails-{{ checksum "Gemfile.lock" }}
+        key: v5-rails-{{ checksum "Gemfile.lock" }}
         paths:
         - vendor/bundle
 
     - restore_cache:
         keys:
-        - v4-yarn-{{ checksum "yarn.lock" }}
-        - v4-yarn-
+        - v5-yarn-{{ checksum "yarn.lock" }}
+        - v5-yarn-
     - run:
         name: Yarn Install
         command: yarn install --cache-folder ~/.cache/yarn
     - save_cache:
-        key: v2-yarn-{{ checksum "yarn.lock" }}
+        key: v5-yarn-{{ checksum "yarn.lock" }}
         paths:
         - ~/.cache/yarn
 
