@@ -14,9 +14,9 @@ jobs:
     steps:
     - checkout
     - run: mkdir -p $CIRCLE_ARTIFACTS $CIRCLE_TEST_REPORTS/cucumber
-    - run:
-        working_directory: ~/asartalo/pondo
-        command: rm -f asartalo/pondo/.rvmrc; echo 2.3.4 > asartalo/pondo/.ruby-version; rvm use 2.3.4 --default
+    #- run:
+    #    working_directory: ~/asartalo/pondo
+    #    command: rm -f asartalo/pondo/.rvmrc; echo 2.3.4 > asartalo/pondo/.ruby-version; rvm use 2.3.4 --default
     - restore_cache:
         keys:
         - v1-dep-{{ .Branch }}-
