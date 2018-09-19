@@ -9,7 +9,7 @@ jobs:
         BUNDLE_RETRY: 3
         BUNDLE_PATH: vendor/bundle
         PGHOST: 127.0.0.1
-        PGUSER: circleci-demo-ruby
+        PGUSER: root
         RAILS_ENV: test
         CIRCLE_ARTIFACTS: /tmp/circleci-artifacts
         CIRCLE_TEST_REPORTS: /tmp/circleci-test-results
