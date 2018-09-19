@@ -19,18 +19,29 @@ jobs:
     #    command: rm -f asartalo/pondo/.rvmrc; echo 2.3.4 > asartalo/pondo/.ruby-version; rvm use 2.3.4 --default
     - restore_cache:
         keys:
-        - v1-dep-{{ .Branch }}-
-        - v1-dep-master-
-        - v1-dep-
-    - run: ruby circle_ci_dependencies.rb
-    - run: gem install bundle
-    - run: bundle install
-    - run: NODE_ENV=test bundle exec rails webpacker:compile
+        - v2-rails-{{ checksum "Gemfile.lock" }}
+        - v2-rails-
+    #- run: ruby circle_ci_dependencies.rb
+    - run:
+        name: Bundle Install
+        command: bundle check || bundle install
     - save_cache:
-        key: v1-dep-{{ .Branch }}-{{ epoch }}
+        key: v2-rails-{{ checksum "Gemfile.lock" }}
         paths:
-        - ~/rvm_binaries
-        - /opt/circleci/.rvm/gems/
+        - vendor/bundle
+
+    - restore_cache:
+        keys:
+        - v2-yarn-{{ checksum "yarn.lock" }}
+        - v2-yarn-
+    - run:
+        name: Yarn Install
+        command: yarn install --cache-folder ~/.cache/yarn
+    - save_cache:
+        key: v2-yarn-{{ checksum "yarn.lock" }}
+        paths:
+        - ~/.cache/yarn
+
     - run: |-
         mkdir -p config && echo 'test:
           database: circle_ruby_test
@@ -39,7 +50,7 @@ jobs:
           pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
           username: ubuntu
           host: localhost
-        t >< jj' > c onfig/database.yml
+        t >< jj' > config/database.yml
     - run:
         command: bundle exec rake db:create db:schema:load --trace
         environment:
