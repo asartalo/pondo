@@ -18,19 +18,13 @@ jobs:
         POSTGRES_USER: root
         POSTGRES_DB: pondo_test
         POSTGRES_PASSWORD: ""
-    # - image: circleci/build-image:ubuntu-14.04-XXL-upstart-1189-5614f37
-    #  command: /sbin/init
     steps:
     - checkout
     - run: mkdir -p $CIRCLE_ARTIFACTS $CIRCLE_TEST_REPORTS/cucumber
-    #- run:
-    #    working_directory: ~/asartalo/pondo
-    #    command: rm -f asartalo/pondo/.rvmrc; echo 2.3.4 > asartalo/pondo/.ruby-version; rvm use 2.3.4 --default
     - restore_cache:
         keys:
         - v5-rails-{{ checksum "Gemfile.lock" }}
         - v5-rails-
-    #- run: ruby circle_ci_dependencies.rb
     - run:
         name: Bundle Install
         command: bundle check || bundle install
