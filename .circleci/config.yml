@@ -12,7 +12,7 @@ jobs:
       command: /sbin/init
     steps:
     - checkout
-    - run: mkdir -p $CIRCLE_ARTIFACTS $CIRCLE_TEST_REPORTS
+    - run: mkdir -p $CIRCLE_ARTIFACTS $CIRCLE_TEST_REPORTS/cucumber
     - run:
         working_directory: ~/asartalo/pondo
         command: rm -f asartalo/pondo/.rvmrc; echo 2.3.4 > asartalo/pondo/.ruby-version; rvm use 2.3.4 --default
@@ -37,7 +37,7 @@ jobs:
           pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
           username: ubuntu
           host: localhost
-        ' > config/database.yml
+        t >< jj' > c onfig/database.yml
     - run:
         command: bundle exec rake db:create db:schema:load --trace
         environment:
