@@ -54,7 +54,7 @@ jobs:
     - run:
         name: Preemptively start rails test server
         # We do this so that by the time cypress runs, the server is available
-        command: yarn run rails_cypress_server
+        command: 'RAILS_ENV=test bundle exec rails s -p 5002 &'
 
     - run:
         name: Database setup
