@@ -58,7 +58,8 @@ jobs:
     - run:
         name: Rails test server
         # We do this so that by the time cypress runs, the server is available
-        command: 'RAILS_ENV=test bundle exec rails s -p 5002 &'
+        command: 'RAILS_ENV=test bundle exec rails s -p 5002'
+        background: true
 
     - run:
         name: RSpec
