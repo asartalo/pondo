@@ -1,4 +1,3 @@
-import Pending from 'mocha/lib/pending';
 import { visitPage } from './common';
 import users from '../../fixtures/users';
 
