@@ -85,7 +85,14 @@ jobs:
         name: Stop rails test server
         command: kill -9 $(cat tmp/pids/server.pid)
 
-    - run: bundle exec rails coveralls:push
+    - run:
+        name: Prepare coverage results
+        command: ruby ./cresult.rb
+
+    - run:
+        name: Coveralls
+        command: bundle exec rails coveralls:push
+
     - store_test_results:
         path: /tmp/circleci-test-results
     - store_artifacts:
