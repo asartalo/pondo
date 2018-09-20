@@ -13,8 +13,8 @@ jobs:
         RAILS_ENV: test
         CIRCLE_ARTIFACTS: /tmp/circleci-artifacts
         CIRCLE_TEST_REPORTS: /tmp/circleci-test-results
-        CYPRESS_VIDEOS_FOLDER: /tmp/circleci-test-results/videos
-        CYPRESS_SCREENSHOTS_FOLDER: /tmp/circleci-test-results/screenshots
+        CYPRESS_VIDEOS_FOLDER: /tmp/circleci-test-artifacts/videos
+        CYPRESS_SCREENSHOTS_FOLDER: /tmp/circleci-test-artifacts/screenshots
 
     - image: circleci/postgres:9.5-alpine
       environment:
