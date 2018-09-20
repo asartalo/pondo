@@ -87,7 +87,7 @@ jobs:
 
     - run:
         name: Prepare coverage results
-        command: ruby ./cresult.rb
+        command: bundle exec ruby ./cresult.rb
 
     - run:
         name: Coveralls
