@@ -37,13 +37,13 @@ jobs:
 
     - restore_cache:
         keys:
-        - v5-yarn-{{ checksum "yarn.lock" }}
-        - v5-yarn-
+        - v6-yarn-{{ checksum "yarn.lock" }}
+        - v6-yarn-
     - run:
         name: Yarn Install
         command: yarn install --cache-folder ~/.cache/yarn
     - save_cache:
-        key: v5-yarn-{{ checksum "yarn.lock" }}
+        key: v6-yarn-{{ checksum "yarn.lock" }}
         paths:
         - ~/.cache/yarn
 
