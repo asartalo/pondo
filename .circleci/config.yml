@@ -52,20 +52,31 @@ jobs:
         command: dockerize -wait tcp://localhost:5432 -timeout 1m
 
     - run:
+        name: Preemptively start rails test server
+        # We do this so that by the time cypress runs, the server is available
+        command: yarn run rails_cypress_server
+
+    - run:
         name: Database setup
         command: bundle exec rails db:schema:load --trace
 
     - run:
+        name: RSpec
         command: bundle exec rspec --color --require spec_helper --format progress spec
         environment:
           RAILS_ENV: test
           RACK_ENV: test
 
     - run:
-        command: yarn run cypressci
+        name: Cypress
+        command: yarn run cypressrun
         environment:
           RAILS_ENV: test
           RACK_ENV: test
+
+    - run:
+        name: Stop rails test server
+        command: kill -9 $(cat tmp/pids/server.pid)
 
     - run: bundle exec rails coveralls:push
     - store_test_results:

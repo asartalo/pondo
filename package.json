@@ -2,8 +2,7 @@
   "scripts": {
     "rails_cypress_server": "RAILS_ENV=test bundle exec rails s -p 5002",
     "cypressspec": "cd ./spec && ../node_modules/.bin/cypress open",
-    "cypressrun": "cd ./spec && ../node_modules/.bin/cypress run --parallel --record",
-    "cypressci": "npm-run-all --parallel rails_cypress_server cypressrun"
+    "cypressrun": "cd ./spec && ../node_modules/.bin/cypress run --parallel --record"
   },
   "dependencies": {
     "@rails/webpacker": "3.5",
