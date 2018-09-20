@@ -56,6 +56,12 @@ jobs:
         command: bundle exec rails db:schema:load --trace
 
     - run:
+        name: Precompile assets
+        # Asset on-the-fly compilation is currently slow
+        # Precompile for faster test server response
+        command: bundle exec rails assets:precompile
+
+    - run:
         name: Rails test server
         # We do this so that by the time cypress runs, the server is available
         command: 'RAILS_ENV=test bundle exec rails s -p 5002'
