@@ -1,7 +1,3 @@
-if ENV['PONDO_CYPRESS_RUN']
-  puts "FEATURES"
-  SimpleCov.command_name "features"
-end
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 

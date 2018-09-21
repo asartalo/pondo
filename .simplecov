@@ -1,4 +1,7 @@
 require 'coveralls'
-SimpleCov.configure do
-end
-Coveralls.wear_merged! 'rails'
+
+SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
+  SimpleCov::Formatter::HTMLFormatter,
+  Coveralls::SimpleCov::Formatter
+]
+SimpleCov.start 'rails'

@@ -25,7 +25,8 @@ jobs:
     - checkout
     - restore_cache:
         keys:
-        - v5-rails-{{ checksum "Gemfile.lock" }}
+        - v5-rails-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+        - v5-rails-{{ .Branch }}-
         - v5-rails-
     - run:
         name: Bundle Install
@@ -37,13 +38,14 @@ jobs:
 
     - restore_cache:
         keys:
-        - v5-yarn-{{ checksum "yarn.lock" }}
+        - v5-yarn-{{ .Branch }}-{{ checksum "yarn.lock" }}
+        - v5-yarn-{{ .Branch }}-
         - v5-yarn-
     - run:
         name: Yarn Install
         command: yarn install --cache-folder ~/.cache/yarn
     - save_cache:
-        key: v5-yarn-{{ checksum "yarn.lock" }}
+        key: v5-yarn-{{ .Branch }}-{{ checksum "yarn.lock" }}
         paths:
         - ~/.cache/yarn
 
