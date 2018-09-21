@@ -29,6 +29,10 @@ coverage
 
 .DS_Store
 
+# Ignore test artifacts
+/spec/cypress/screenshots
+/spec/cypress/videos
+
 # Ignore Byebug command history file.
 .byebug_history
 /public/packs
