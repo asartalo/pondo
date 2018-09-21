@@ -1,7 +1,7 @@
 {
   "scripts": {
     "cypressspec": "cd ./spec && ../node_modules/.bin/cypress open",
-    "cypressrun": "PONDO_CYPRESS_RUN=yes cd ./spec && ../node_modules/.bin/cypress run --record"
+    "cypressrun": "cd ./spec && ../node_modules/.bin/cypress run --record"
   },
   "dependencies": {
     "@rails/webpacker": "3.5",
