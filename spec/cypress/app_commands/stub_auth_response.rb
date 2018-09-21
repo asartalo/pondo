@@ -1,4 +1,4 @@
-user = command_options.with_indifferent_access
+user = params
 if user[:name]
   name = user[:name]
   first_name, last_name = name.split(" ")

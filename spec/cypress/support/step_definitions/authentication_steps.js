@@ -19,16 +19,16 @@ Given("I am logged in", iAmLoggedIn);
 
 Given(/^I have (a|a different) google account$/, account => {
   const user = (account == 'a different') ? users.john : users.jane;
-  cy.app('stub_auth_response', user);
+  cy.pondoScript('stub_auth_response', user);
 });
 
 Given("I don't have a google account", () => {
-  cy.app('stub_auth_response', { no_account: true });
+  cy.pondoScript('stub_auth_response', { no_account: true });
 });
 
 Given("I am a user", () => {
-  cy.app('create_user', users.jane)
-  cy.app('stub_auth_response', users.jane)
+  cy.pondoScript('create_user', users.jane)
+  cy.pondoScript('stub_auth_response', users.jane)
 });
 
 When("I log in", logIn);
