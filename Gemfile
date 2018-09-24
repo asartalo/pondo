@@ -53,7 +53,6 @@ group :development do
   gem 'guard'
   gem 'guard-rspec', require: false
   gem 'guard-livereload', require: false
-  gem 'guard-cucumber', require: false
   gem 'listen', '~> 3.0.5'
   gem 'rack-livereload'
   gem 'terminal-notifier-guard', platforms: :ruby, install_if: os_is(/darwin/)
@@ -72,10 +71,6 @@ group :test do
   gem 'database_cleaner'
   gem 'api_matchers', '>= 0.6.2'
   gem 'rspec-rails', '>= 3.6.0'
-  # gem 'poltergeist'
-  gem 'selenium-webdriver'
-  gem 'chromedriver-helper', '>= 1.1.0'
-  gem 'cucumber-rails', '>= 1.5.0', require: false
   gem 'shoulda-matchers'
 end
 

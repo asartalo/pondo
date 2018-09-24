@@ -15,53 +15,11 @@
 #
 # and, you'll have to watch "config/Guardfile" instead of "Guardfile"
 
-cucumber_options = {
-  # Below are examples overriding defaults
-
-  cmd: 'bin/cucumber',
-  # cmd: 'bundle exec cucumber',
-  cmd_additional_args: '--format pretty',
-
-  # all_after_pass: false,
-  # all_on_start: false,
-  # keep_failed: false,
-  # feature_sets: ['features/frontend', 'features/experimental'],
-
-  # run_all: { cmd_additional_args: '--profile guard_all' },
-  focus_on: 'focus', # @wip
-  notification: true
-}
-
 def filter_step_lines(spec_file)
   File.new(spec_file).each_line do |line|
     m = line.match(/\s+(Given|When|Then|And)\s(.+)$/)
     result = yield m[2].strip if m
     break if result
-  end
-end
-
-guard "cucumber", cucumber_options do
-  watch(%r{^features/.+\.feature$})
-  watch(%r{^features/support/.+$}) { "features" }
-
-  watch(%r{^features/step_definitions/.+_steps\.rb$}) do |m|
-    puts "Looking for matching featues..."
-    contents = File.read(m[0])
-    dir = File.dirname(m[0])
-    steps = contents.scan(/^(Then|When)\(\/(.+)\/\)\sdo/).collect { |l| Regexp.new(l[1]) }
-    targets = {}
-    Dir.glob("features/**/*.feature") do |spec_file|
-      next if targets[spec_file]
-      steps.each do |step|
-        filter_step_lines(spec_file) do |line|
-          if line.match(step)
-            targets[spec_file] = true
-          end
-        end
-      end
-    end
-    puts "Found #{targets.keys.size}"
-    targets.keys
   end
 end
 
