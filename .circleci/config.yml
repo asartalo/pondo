@@ -95,9 +95,14 @@ jobs:
         name: Coveralls
         command: bundle exec rails coveralls:push
 
+    - run:
+        name: Coveralls webhook
+        command: >
+          curl -i -H "Accept: application/json" -H "Content: application/json"
+          -X GET https://coveralls.io/webhook?repo_token=$COVERALLS_REPO_TOKEN
+
     - store_test_results:
         path: /tmp/circleci-test-results
 
     - store_artifacts:
         path: /tmp/circleci-artifacts
-
