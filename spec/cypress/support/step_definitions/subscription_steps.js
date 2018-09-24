@@ -34,7 +34,7 @@ When('the invite is used', () => {
 
 Then(/^the system should send an invite to '(.+)'$/, emailAddress => {
   cy.contains('Invitation Sent');
-  cy.pondoRun('ActionMailer::Base.deliveries.last.to.first').then(email => {
+  cy.pondoScript('last_email_delivery').then(email => {
     cy.wrap(email).should('eql', emailAddress);
   });
 });
