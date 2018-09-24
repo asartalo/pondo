@@ -11,24 +11,24 @@ class TestController < ApplicationController
   end
 
   def run
-    puts "\n\n============================================="
+    puts "\n============================================="
     print_script_or_code
     code = params[:code] || read_file(params.require(:script_name))
-    pretty_error_wrap do
-      render json: Kernel.eval(code, binding())
-    end
+    render json: (pretty_error_wrap { Kernel.eval(code, binding()) })
   end
 
   private
 
   def pretty_error_wrap
     begin
-      yield
+      result = yield
+      puts "\n"
     rescue Exception => e
       puts " ERROR!\nParams:"
       pp params.as_json
       raise e
     end
+    result
   end
 
   def print_script_or_code
