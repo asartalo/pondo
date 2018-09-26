@@ -43,12 +43,12 @@ jobs:
         - v8-yarn-
 
     - run:
-        name: Clean Yarn Cache
-        command: NODE_ENV=development yarn cache clean --cache-folder ~/.cache/yarn
-
-    - run:
         name: Yarn Install
         command: NODE_ENV=development yarn install --cache-folder ~/.cache/yarn
+    - run:
+        name: List scripts
+        command: ls -la ./node_modules/.bin/ && ls -ld ./node_modules/cypress/bin
+
     - save_cache:
         key: v8-yarn-{{ .Branch }}-{{ checksum "yarn.lock" }}
         paths:
