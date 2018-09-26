@@ -14,7 +14,7 @@ Rails.application.config.assets.paths << Rails.root.join('node_modules')
 Rails.application.config.assets.precompile = %w(
 	application.js
 	arrow_downward.svg
-	arrow_downward.svg
+	arrow_forward.svg
 	close.svg
 	logo.svg
 	menu.svg
