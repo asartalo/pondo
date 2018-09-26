@@ -38,15 +38,19 @@ jobs:
 
     - restore_cache:
         keys:
-        - v7-yarn-{{ .Branch }}-{{ checksum "yarn.lock" }}
-        - v7-yarn-{{ .Branch }}-
-        - v7-yarn-
+        - v8-yarn-{{ .Branch }}-{{ checksum "yarn.lock" }}
+        - v8-yarn-{{ .Branch }}-
+        - v8-yarn-
+
+    - run:
+        name: Clean Yarn Cache
+        command: NODE_ENV=development yarn cache clean --cache-folder ~/.cache/yarn
 
     - run:
         name: Yarn Install
-        command: yarn install --cache-folder ~/.cache/yarn
+        command: NODE_ENV=development yarn install --cache-folder ~/.cache/yarn
     - save_cache:
-        key: v7-yarn-{{ .Branch }}-{{ checksum "yarn.lock" }}
+        key: v8-yarn-{{ .Branch }}-{{ checksum "yarn.lock" }}
         paths:
         - ~/.cache/yarn
 
@@ -57,11 +61,6 @@ jobs:
     - run:
         name: Database setup
         command: bundle exec rails db:schema:load --trace
-
-    - run:
-        name: Yarn Install again
-        # Because sometimes we can't find cypress
-        command: yarn install
 
     - run:
         name: Precompile assets
@@ -84,7 +83,7 @@ jobs:
 
     - run:
         name: Cypress
-        command: yarn run cypressrun
+        command: NODE_ENV=development yarn run cypressrun
         environment:
           RAILS_ENV: test
           RACK_ENV: test
