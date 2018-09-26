@@ -12,5 +12,5 @@ Rails.application.config.assets.paths << Rails.root.join('node_modules')
 # application.js, application.css, and all non-JS/CSS in the app/assets
 # folder are already added.
 Rails.application.config.assets.precompile = %w(
-	application.js close.svg logo.svg arrow_downward.svg
+	application.js arrow_downward.svg close.svg logo.svg menu.svg
 )
