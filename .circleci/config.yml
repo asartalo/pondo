@@ -36,11 +36,11 @@ jobs:
         paths:
         - vendor/bundle
 
-    # - restore_cache:
-    #     keys:
-    #     - v7-yarn-{{ .Branch }}-{{ checksum "yarn.lock" }}
-    #     - v7-yarn-{{ .Branch }}-
-    #     - v7-yarn-
+    - restore_cache:
+        keys:
+        - v7-yarn-{{ .Branch }}-{{ checksum "yarn.lock" }}
+        - v7-yarn-{{ .Branch }}-
+        - v7-yarn-
 
     - run:
         name: Yarn Install
@@ -57,6 +57,11 @@ jobs:
     - run:
         name: Database setup
         command: bundle exec rails db:schema:load --trace
+
+    - run:
+        name: Yarn Install again
+        # Because sometimes we can't find cypress
+        command: yarn install
 
     - run:
         name: Precompile assets
