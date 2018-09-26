@@ -7,6 +7,7 @@
 // To reference this file, add <%= javascript_pack_tag 'application' %> to the appropriate
 // layout file, like app/views/layouts/application.html.erb
 
+import '../src/styles/application.scss';
 import $ from 'jquery';
 import '../../assets/javascripts/pu';
 import '../../assets/javascripts/global';

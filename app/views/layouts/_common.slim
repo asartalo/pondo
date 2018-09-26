@@ -10,8 +10,7 @@ html
     link rel="manifest" href="/manifest.json"
     = csrf_meta_tags
     link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,600" rel="stylesheet"
-    = stylesheet_link_tag    'application', media: 'all', 'data-nitrolinks-track': 'reload'
-    = yield :stylesheets
+    = stylesheet_pack_tag 'application'
     = javascript_include_tag 'application', 'data-nitrolinks-track': 'reload'
     = javascript_pack_tag 'assets'
     = javascript_pack_tag 'application'
