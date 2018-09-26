@@ -57,11 +57,11 @@ jobs:
         name: Database setup
         command: bundle exec rails db:schema:load --trace
 
-    - run:
-        name: Precompile assets
-        # Asset on-the-fly compilation is currently slow
-        # Precompile for faster test server response
-        command: NODE_ENV=production bundle exec rails assets:precompile
+    # - run:
+    #     name: Precompile assets
+    #     # Asset on-the-fly compilation is currently slow
+    #     # Precompile for faster test server response
+    #     command: NODE_ENV=production bundle exec rails assets:precompile
 
     - run:
         name: Rails test server
