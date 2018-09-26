@@ -44,7 +44,7 @@ jobs:
 
     - run:
         name: Yarn Install
-        command: NODE_ENV=development yarn install --cache-folder ~/.cache/yarn
+        command: yarn install --cache-folder ~/.cache/yarn
     - run:
         name: List scripts
         command: ls -la ./node_modules/.bin/ && ls -ld ./node_modules/cypress/bin
@@ -82,16 +82,8 @@ jobs:
           RACK_ENV: test
 
     - run:
-        name: Yarn Install again
-        command: NODE_ENV=development yarn install --cache-folder ~/.cache/yarn
-
-    - run:
-        name: List scripts again again
-        command: ls -la ./node_modules/.bin/ && ls -ld ./node_modules/cypress/bin
-
-    - run:
         name: Cypress
-        command: NODE_ENV=development yarn run cypressrun
+        command: yarn run cypressrun
         environment:
           RAILS_ENV: test
           RACK_ENV: test
@@ -99,10 +91,6 @@ jobs:
     - run:
         name: Stop rails test server
         command: bundle exec ruby ./stop_test_server.rb
-
-    - run:
-        name: Prepare coverage results
-        command: bundle exec ruby ./cresult.rb
 
     - run:
         name: Coveralls
