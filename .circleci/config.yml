@@ -36,16 +36,17 @@ jobs:
         paths:
         - vendor/bundle
 
-    - restore_cache:
-        keys:
-        - v6-yarn-{{ .Branch }}-{{ checksum "yarn.lock" }}
-        - v6-yarn-{{ .Branch }}-
-        - v6-yarn-
+    # - restore_cache:
+    #     keys:
+    #     - v7-yarn-{{ .Branch }}-{{ checksum "yarn.lock" }}
+    #     - v7-yarn-{{ .Branch }}-
+    #     - v7-yarn-
+
     - run:
         name: Yarn Install
         command: yarn install --cache-folder ~/.cache/yarn
     - save_cache:
-        key: v6-yarn-{{ .Branch }}-{{ checksum "yarn.lock" }}
+        key: v7-yarn-{{ .Branch }}-{{ checksum "yarn.lock" }}
         paths:
         - ~/.cache/yarn
 
