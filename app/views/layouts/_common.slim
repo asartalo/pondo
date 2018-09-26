@@ -14,8 +14,6 @@ html
     = javascript_include_tag 'application', 'data-nitrolinks-track': 'reload'
     = javascript_pack_tag 'assets'
     = javascript_pack_tag 'application'
-    - unless Rails.env == 'production'
-      = javascript_include_tag 'testing', 'data-nitrolinks-track': 'reload'
 
   body(class=(yield :page))
     - if alert || notice
