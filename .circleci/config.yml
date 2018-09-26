@@ -61,7 +61,7 @@ jobs:
         name: Precompile assets
         # Asset on-the-fly compilation is currently slow
         # Precompile for faster test server response
-        command: bundle exec rails assets:precompile
+        command: NODE_ENV=production bundle exec rails assets:precompile
 
     - run:
         name: Rails test server
