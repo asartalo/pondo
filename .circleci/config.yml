@@ -82,11 +82,7 @@ jobs:
           RACK_ENV: test
 
     - run:
-        name: List scripts again
-        command: ls -la ./node_modules/.bin/ && ls -ld ./node_modules/cypress/bin
-
-    - run:
-        name: Yarn Install Again
+        name: Yarn Install again
         command: NODE_ENV=development yarn install --cache-folder ~/.cache/yarn
 
     - run:
