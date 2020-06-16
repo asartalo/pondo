@@ -5,13 +5,13 @@ def os_is(re)
   RbConfig::CONFIG['host_os'] =~ re
 end
 
-gem 'rails', '~> 5.2.4', '>= 5.2.4.2'
+gem 'rails', '~> 5.1.6'
 gem 'pg', '~> 0.18'
 gem 'puma', '~> 3.7'
 gem 'sass-rails', '~> 5.0', '>= 5.0.6'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2', '>= 4.2.2'
-gem 'jquery-rails', '>= 4.3.1'
+gem 'jquery-rails', '>= 4.4.0'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 # gem 'devise'
@@ -27,8 +27,8 @@ gem 'coveralls', '>= 0.8.19', require: false
 gem 'simple_form', git: 'https://github.com/elsurudo/simple_form.git', branch: 'rails-5.1.0'
 gem 'typhoeus'
 gem 'restcountry', '>= 0.5.2'
-gem 'sidekiq'
-gem "sidekiq-cron", "~> 0.4.0"
+gem 'sidekiq', '>= 5.0.4'
+gem "sidekiq-cron", "~> 0.4.5"
 gem 'bcrypt'
 gem 'dalli'
 gem 'gakubuchi', '>= 1.4.0'
@@ -41,11 +41,11 @@ gem "nitrolinks-rails", ">= 0.3.0"
 # gem 'therubyracer', platforms: :ruby
 
 group :development, :test do
-  gem 'dotenv-rails', '>= 2.2.2'
+  gem 'dotenv-rails', '>= 2.2.1'
   gem 'byebug', platform: :mri
   gem 'nokogiri', '~> 1.8.1'
   gem 'jasmine-rails', '>= 0.14.2'
-  gem 'cypress-on-rails', '~> 1.0'
+  gem 'cypress-on-rails', '~> 1.1', '>= 1.1.1'
 end
 
 group :development do
@@ -54,7 +54,7 @@ group :development do
   gem 'guard-rspec', require: false
   gem 'guard-livereload', require: false
   gem 'listen', '~> 3.0.5'
-  gem 'rack-livereload'
+  gem 'rack-livereload', '>= 0.3.16'
   gem 'terminal-notifier-guard', platforms: :ruby, install_if: os_is(/darwin/)
   gem 'sextant', git: 'https://github.com/mpakus/sextant.git'
   gem 'spring'
