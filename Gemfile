@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby "2.3.7"
+ruby "2.7.1"
 
 def os_is(re)
   RbConfig::CONFIG['host_os'] =~ re
@@ -23,8 +23,8 @@ gem 'bourbon'
 gem 'neat'
 gem 'money'
 gem 'coveralls', '>= 0.8.19', require: false
-# gem 'simple_form'
-gem 'simple_form', git: 'https://github.com/elsurudo/simple_form.git', branch: 'rails-5.1.0'
+gem 'simple_form'
+# gem 'simple_form', git: 'https://github.com/elsurudo/simple_form.git', branch: 'rails-5.1.0'
 gem 'typhoeus'
 gem 'restcountry', '>= 0.5.2'
 gem 'sidekiq'
