@@ -43,7 +43,7 @@ gem "nitrolinks-rails", ">= 0.3.0"
 group :development, :test do
   gem 'dotenv-rails', '>= 2.2.1'
   gem 'byebug', platform: :mri
-  gem 'nokogiri', '~> 1.8.1'
+  gem 'nokogiri', '~> 1.10.8'
   gem 'jasmine-rails', '>= 0.14.2'
   gem 'cypress-on-rails', '~> 1.1', '>= 1.1.1'
 end
