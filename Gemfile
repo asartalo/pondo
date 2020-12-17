@@ -27,8 +27,8 @@ gem 'simple_form', '>= 5.0.2'
 # gem 'simple_form', git: 'https://github.com/elsurudo/simple_form.git', branch: 'rails-5.1.0'
 gem 'typhoeus'
 gem 'restcountry', '>= 0.5.2'
-gem 'sidekiq'
-gem "sidekiq-cron", "~> 0.4.0"
+gem 'sidekiq', '>= 5.0.4'
+gem "sidekiq-cron", "~> 0.4.5"
 gem 'bcrypt'
 gem 'dalli'
 gem 'gakubuchi', '>= 1.4.0'
@@ -43,9 +43,9 @@ gem "nitrolinks-rails", ">= 0.3.0"
 group :development, :test do
   gem 'dotenv-rails', '>= 2.7.6'
   gem 'byebug', platform: :mri
-  gem 'nokogiri', '~> 1.8.1'
+  gem 'nokogiri', '~> 1.10.8'
   gem 'jasmine-rails', '>= 0.15.0'
-  gem 'cypress-on-rails', '~> 1.0'
+  gem 'cypress-on-rails', '~> 1.1', '>= 1.1.1'
 end
 
 group :development do
@@ -54,7 +54,7 @@ group :development do
   gem 'guard-rspec', require: false
   gem 'guard-livereload', require: false
   gem 'listen', '~> 3.0.5'
-  gem 'rack-livereload'
+  gem 'rack-livereload', '>= 0.3.16'
   gem 'terminal-notifier-guard', platforms: :ruby, install_if: os_is(/darwin/)
   gem 'sextant', git: 'https://github.com/mpakus/sextant.git'
   gem 'spring'
