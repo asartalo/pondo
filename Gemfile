@@ -13,7 +13,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2', '>= 4.2.2'
 gem 'jquery-rails', '>= 4.4.0'
 gem 'turbolinks', '~> 5'
-gem 'jbuilder', '~> 2.5'
+gem 'jbuilder', '~> 2.7', '>= 2.7.0'
 # gem 'devise'
 gem 'devise', git: 'https://github.com/plataformatec/devise.git', branch: 'master'
 gem 'omniauth-google-oauth2', '0.5.0'
@@ -49,7 +49,7 @@ group :development, :test do
 end
 
 group :development do
-  gem 'annotate'
+  gem 'annotate', '>= 2.7.2'
   gem 'guard'
   gem 'guard-rspec', require: false
   gem 'guard-livereload', require: false
@@ -57,9 +57,9 @@ group :development do
   gem 'rack-livereload', '>= 0.3.16'
   gem 'terminal-notifier-guard', platforms: :ruby, install_if: os_is(/darwin/)
   gem 'sextant', git: 'https://github.com/mpakus/sextant.git'
-  gem 'spring'
-  gem 'spring-watcher-listen', '~> 2.0.0'
-  gem 'spring-commands-rspec'
+  gem 'spring', '>= 2.0.2'
+  gem 'spring-watcher-listen', '~> 2.0.1'
+  gem 'spring-commands-rspec', '>= 1.0.4'
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'web-console', '>= 3.7.0'
 end
@@ -71,7 +71,7 @@ group :test do
   gem 'database_cleaner'
   gem 'api_matchers', '>= 0.6.2'
   gem 'rspec-rails', '>= 4.0.1'
-  gem 'shoulda-matchers'
+  gem 'shoulda-matchers', '>= 3.1.1'
 end
 
 group :production do
