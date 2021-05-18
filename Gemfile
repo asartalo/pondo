@@ -5,7 +5,7 @@ def os_is(re)
   RbConfig::CONFIG['host_os'] =~ re
 end
 
-gem 'rails', '~> 5.2.4', '>= 5.2.4.6'
+gem 'rails', '~> 5.2.4', '>= 5.2.4.3'
 gem 'pg', '~> 0.18'
 gem 'puma', '~> 3.12', '>= 3.12.6'
 gem 'sass-rails', '~> 5.1', '>= 5.1.0'
@@ -43,7 +43,7 @@ gem "nitrolinks-rails", ">= 0.3.0"
 group :development, :test do
   gem 'dotenv-rails', '>= 2.7.6'
   gem 'byebug', platform: :mri
-  gem 'nokogiri', '~> 1.10.8'
+  gem 'nokogiri', '~> 1.11.4'
   gem 'jasmine-rails', '>= 0.15.0'
   gem 'cypress-on-rails', '~> 1.1', '>= 1.1.1'
 end
