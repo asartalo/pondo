@@ -7,7 +7,7 @@ end
 
 gem 'rails', '~> 5.2.4', '>= 5.2.4.6'
 gem 'pg', '~> 0.18'
-gem 'puma', '~> 3.12', '>= 3.12.6'
+gem 'puma', '~> 4.3', '>= 4.3.9'
 gem 'sass-rails', '~> 5.1', '>= 5.1.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2', '>= 4.2.2'
