@@ -5,9 +5,9 @@ def os_is(re)
   RbConfig::CONFIG['host_os'] =~ re
 end
 
-gem 'rails', '~> 5.2.4', '>= 5.2.4.6'
+gem 'rails', '~> 5.2.6', '>= 5.2.6.2'
 gem 'pg', '~> 0.18'
-gem 'puma', '~> 3.12', '>= 3.12.6'
+gem 'puma', '~> 4.3', '>= 4.3.11'
 gem 'sass-rails', '~> 5.1', '>= 5.1.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2', '>= 4.2.2'
