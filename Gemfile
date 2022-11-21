@@ -30,7 +30,7 @@ gem 'restcountry', '>= 0.5.2'
 gem 'sidekiq', '>= 5.0.4'
 gem "sidekiq-cron", "~> 0.4.5"
 gem 'bcrypt'
-gem 'dalli'
+gem 'dalli', '>= 3.2.3'
 gem 'gakubuchi', '>= 1.4.0'
 gem 'webpacker', '~> 3.6', '>= 3.6.0'
 gem "nitrolinks-rails", ">= 0.3.0"
