@@ -5,15 +5,15 @@ def os_is(re)
   RbConfig::CONFIG['host_os'] =~ re
 end
 
-gem 'rails', '~> 5.2.4', '>= 5.2.4.6'
+gem 'rails', '~> 6.1.7', '>= 6.1.7.3'
 gem 'pg', '~> 0.18'
-gem 'puma', '~> 3.12', '>= 3.12.6'
-gem 'sass-rails', '~> 5.1', '>= 5.1.0'
+gem 'puma', '~> 4.3', '>= 4.3.12'
+gem 'sass-rails', '~> 6.0', '>= 6.0.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2', '>= 4.2.2'
 gem 'jquery-rails', '>= 4.4.0'
 gem 'turbolinks', '~> 5'
-gem 'jbuilder', '~> 2.7', '>= 2.7.0'
+gem 'jbuilder', '~> 2.10', '>= 2.10.0'
 # gem 'devise'
 gem 'devise', git: 'https://github.com/plataformatec/devise.git', branch: 'master'
 gem 'omniauth-google-oauth2', '0.5.0'
@@ -27,10 +27,10 @@ gem 'simple_form', '>= 5.0.2'
 # gem 'simple_form', git: 'https://github.com/elsurudo/simple_form.git', branch: 'rails-5.1.0'
 gem 'typhoeus'
 gem 'restcountry', '>= 0.5.2'
-gem 'sidekiq', '>= 5.0.4'
+gem 'sidekiq', '>= 7.0.0'
 gem "sidekiq-cron", "~> 0.4.5"
 gem 'bcrypt'
-gem 'dalli'
+gem 'dalli', '>= 3.2.3'
 gem 'gakubuchi', '>= 1.4.0'
 gem 'webpacker', '~> 3.6', '>= 3.6.0'
 gem "nitrolinks-rails", ">= 0.3.0"
@@ -43,9 +43,9 @@ gem "nitrolinks-rails", ">= 0.3.0"
 group :development, :test do
   gem 'dotenv-rails', '>= 2.7.6'
   gem 'byebug', platform: :mri
-  gem 'nokogiri', '~> 1.10.8'
+  gem 'nokogiri', '~> 1.13.9'
   gem 'jasmine-rails', '>= 0.15.0'
-  gem 'cypress-on-rails', '~> 1.1', '>= 1.1.1'
+  gem 'cypress-on-rails', '~> 1.7', '>= 1.7.0'
 end
 
 group :development do
