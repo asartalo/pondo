@@ -27,7 +27,7 @@ gem 'simple_form', '>= 5.0.2'
 # gem 'simple_form', git: 'https://github.com/elsurudo/simple_form.git', branch: 'rails-5.1.0'
 gem 'typhoeus'
 gem 'restcountry', '>= 0.5.2'
-gem 'sidekiq', '>= 5.0.4'
+gem 'sidekiq', '>= 7.0.8'
 gem "sidekiq-cron", "~> 0.4.5"
 gem 'bcrypt'
 gem 'dalli'
