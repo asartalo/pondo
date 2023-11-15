@@ -5,13 +5,13 @@ def os_is(re)
   RbConfig::CONFIG['host_os'] =~ re
 end
 
-gem 'rails', '~> 5.2.4', '>= 5.2.4.6'
+gem 'rails', '~> 5.2.4', '>= 5.2.4.4'
 gem 'pg', '~> 0.18'
 gem 'puma', '~> 3.12', '>= 3.12.6'
-gem 'sass-rails', '~> 5.1', '>= 5.1.0'
+gem 'sass-rails', '~> 6.0', '>= 6.0.0'
 gem 'uglifier', '>= 1.3.0'
-gem 'coffee-rails', '~> 4.2', '>= 4.2.2'
-gem 'jquery-rails', '>= 4.4.0'
+gem 'coffee-rails', '~> 5.0', '>= 5.0.0'
+gem 'jquery-rails', '>= 4.5.0'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.7', '>= 2.7.0'
 # gem 'devise'
@@ -23,7 +23,7 @@ gem 'bourbon'
 gem 'neat'
 gem 'money'
 gem 'coveralls', '>= 0.8.19', require: false
-gem 'simple_form', '>= 5.0.2'
+gem 'simple_form', '>= 5.0.3'
 # gem 'simple_form', git: 'https://github.com/elsurudo/simple_form.git', branch: 'rails-5.1.0'
 gem 'typhoeus'
 gem 'restcountry', '>= 0.5.2'
@@ -32,7 +32,7 @@ gem "sidekiq-cron", "~> 0.4.5"
 gem 'bcrypt'
 gem 'dalli'
 gem 'gakubuchi', '>= 1.4.0'
-gem 'webpacker', '~> 3.6', '>= 3.6.0'
+gem 'webpacker', '~> 4.0', '>= 4.0.0'
 gem "nitrolinks-rails", ">= 0.3.0"
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
@@ -41,9 +41,9 @@ gem "nitrolinks-rails", ">= 0.3.0"
 # gem 'therubyracer', platforms: :ruby
 
 group :development, :test do
-  gem 'dotenv-rails', '>= 2.7.6'
+  gem 'dotenv-rails', '>= 2.8.0'
   gem 'byebug', platform: :mri
-  gem 'nokogiri', '~> 1.10.8'
+  gem 'nokogiri', '~> 1.11.4'
   gem 'jasmine-rails', '>= 0.15.0'
   gem 'cypress-on-rails', '~> 1.1', '>= 1.1.1'
 end
@@ -61,16 +61,16 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.1'
   gem 'spring-commands-rspec', '>= 1.0.4'
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
-  gem 'web-console', '>= 3.7.0'
+  gem 'web-console', '>= 4.0.0'
 end
 
 group :test do
   gem 'codeclimate-test-reporter', '>= 1.0.8', require: false
   gem 'simplecov', '>= 0.12.0', require:  false
-  gem 'factory_bot_rails', '>= 6.1.0'
+  gem 'factory_bot_rails', '>= 6.2.0'
   gem 'database_cleaner'
   gem 'api_matchers', '>= 0.6.2'
-  gem 'rspec-rails', '>= 4.0.1'
+  gem 'rspec-rails', '>= 4.0.2'
   gem 'shoulda-matchers', '>= 3.1.1'
 end
 
