@@ -28,7 +28,7 @@ gem 'simple_form', '>= 5.0.2'
 gem 'typhoeus'
 gem 'restcountry', '>= 0.5.2'
 gem 'sidekiq', '>= 5.0.4'
-gem "sidekiq-cron", "~> 0.4.5"
+gem "sidekiq-cron", "~> 2.0.0"
 gem 'bcrypt'
 gem 'dalli'
 gem 'gakubuchi', '>= 1.4.0'
