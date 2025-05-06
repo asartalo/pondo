@@ -70,7 +70,7 @@ group :test do
   gem 'factory_bot_rails', '>= 6.1.0'
   gem 'database_cleaner'
   gem 'api_matchers', '>= 0.6.2'
-  gem 'rspec-rails', '>= 4.0.1'
+  gem 'rspec-rails', '>= 8.0.0'
   gem 'shoulda-matchers', '>= 3.1.1'
 end
 
