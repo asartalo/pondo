@@ -5,10 +5,10 @@ def os_is(re)
   RbConfig::CONFIG['host_os'] =~ re
 end
 
-gem 'rails', '~> 5.2.4', '>= 5.2.4.6'
+gem 'rails', '~> 7.0.0'
 gem 'pg', '~> 0.18'
 gem 'puma', '~> 3.12', '>= 3.12.6'
-gem 'sass-rails', '~> 5.1', '>= 5.1.0'
+gem 'sass-rails', '~> 6.0', '>= 6.0.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2', '>= 4.2.2'
 gem 'jquery-rails', '>= 4.4.0'
@@ -27,7 +27,7 @@ gem 'simple_form', '>= 5.0.2'
 # gem 'simple_form', git: 'https://github.com/elsurudo/simple_form.git', branch: 'rails-5.1.0'
 gem 'typhoeus'
 gem 'restcountry', '>= 0.5.2'
-gem 'sidekiq', '>= 5.0.4'
+gem 'sidekiq', '>= 8.0.0'
 gem "sidekiq-cron", "~> 0.4.5"
 gem 'bcrypt'
 gem 'dalli'
@@ -54,7 +54,7 @@ group :development do
   gem 'guard-rspec', require: false
   gem 'guard-livereload', require: false
   gem 'listen', '~> 3.0.5'
-  gem 'rack-livereload', '>= 0.3.16'
+  gem 'rack-livereload', '>= 0.6.0'
   gem 'terminal-notifier-guard', platforms: :ruby, install_if: os_is(/darwin/)
   gem 'sextant', git: 'https://github.com/mpakus/sextant.git'
   gem 'spring', '>= 2.0.2'
