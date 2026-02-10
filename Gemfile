@@ -16,7 +16,7 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.7', '>= 2.7.0'
 # gem 'devise'
 gem 'devise', git: 'https://github.com/plataformatec/devise.git', branch: 'master'
-gem 'omniauth-google-oauth2', '0.5.0'
+gem 'omniauth-google-oauth2', '0.5.1'
 gem 'slim-rails', git: 'https://github.com/yasaichi/slim-rails.git', branch: 'pass-context-object-to-render'
 # gem 'bootstrap', '~> 4.0.0.alpha5'
 gem 'bourbon'
@@ -69,7 +69,7 @@ group :test do
   gem 'simplecov', '>= 0.12.0', require:  false
   gem 'factory_bot_rails', '>= 6.1.0'
   gem 'database_cleaner'
-  gem 'api_matchers', '>= 0.6.2'
+  gem 'api_matchers', '>= 1.0.0'
   gem 'rspec-rails', '>= 4.0.1'
   gem 'shoulda-matchers', '>= 3.1.1'
 end
